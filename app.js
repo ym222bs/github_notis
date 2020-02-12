@@ -1,32 +1,40 @@
-const express = require('express')
+const bodyParser = require('body-parser')
 const cors = require('cors')
+const express = require('express')
 const passport = require('passport')
 const GitHubStrategy = require('passport-github2')
-// const GitHubStrategy= require('passport-github')
-const bodyParser = require('body-parser')
-const github = require('octonode')
-
+const DBconnect = require('./db_config.js')
+const cookieSession = require('cookie-session')
+const fetch = require('node-fetch')
+const rp = require('request-promise')
 require('dotenv').config()
-
-const port = process.env.PORT || 8000
+const app = express()
+app.use(cors())
+DBconnect()
+const secret = process.env.SECRET
+app.use(cookieSession({
+	maxAge: 24 * 60 * 60 * 1000,
+	keys: [secret]
+}))
 
 const clientID = process.env.GITHUB_CLIENT_ID
 const clientSecret = process.env.GITHUB_CLIENT_SECRET
 
+
 let user = {}
+let acess_token
 
-
-const app = express()
-app.use(cors())
 app.use(passport.initialize())
 
 passport.serializeUser((user, cb) => {
-	// console.log(user)
-	cb(null, user.id)
+	cb(null, user)
 })
 passport.deserializeUser((user, cb) => {
 	cb(null, user)
 })
+
+
+
 
 
 passport.use(new GitHubStrategy({
@@ -34,11 +42,32 @@ passport.use(new GitHubStrategy({
 	clientSecret: clientSecret,
 	callbackURL: "/auth/github/callback"
 },
-	function (accessToken, refreshToken, profile, done) {
-		// console.log('accesstoken: ', accessToken)
-		// console.log('ref token: ', refreshToken)
-		// console.log('profile: ', profile)
+	async function (accessToken, refreshToken, profile, done) {
+		console.log('accesstoken: ', accessToken)
+		// Save accesstoken to make requests
+		// access_token = accessToken
 
+
+
+		var options = {
+			uri: 'https://api.github.com/user/orgs',
+			qs: {
+				access_token: `${accessToken}` // -> uri + '?access_token=xxxxx%20xxxxx'
+			},
+			headers: {
+				'User-Agent': 'Request-Promise'
+			},
+			json: true // Automatically parses the JSON string in the response
+		}
+		// console.log('profile: ', profile)
+		rp(options).then(function (repos) {
+			console.log(repos);
+		})
+		.catch(function (err) {
+			console.log(err)
+		});
+		// let data = await organizations
+		// console.log(organizations)
 
 		user = { ...profile }
 		// User.findOrCreate({ githubId: profile.id }, function (err, user) {
@@ -84,7 +113,9 @@ app.get('/login', (req, res) => {
 	res.send('login failed')
 })
 
+const port = process.env.PORT || 8000
 
 app.listen(port, () => {
 	console.log(`Hello port ${port}.`)
 })
+
