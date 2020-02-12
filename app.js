@@ -44,12 +44,11 @@ passport.use(new GitHubStrategy({
 },
 	async function (accessToken, refreshToken, profile, done) {
 		console.log('accesstoken: ', accessToken)
+		// console.log('profile: ', profile)
 		// Save accesstoken to make requests
-		// access_token = accessToken
+		access_token = accessToken
 
-
-
-		var options = {
+		const options = {
 			uri: 'https://api.github.com/user/orgs',
 			qs: {
 				access_token: `${accessToken}` // -> uri + '?access_token=xxxxx%20xxxxx'
@@ -59,24 +58,20 @@ passport.use(new GitHubStrategy({
 			},
 			json: true // Automatically parses the JSON string in the response
 		}
-		// console.log('profile: ', profile)
-		rp(options).then(function (repos) {
-			console.log(repos);
+
+		rp(options).then(async function (orgs) {
+			console.log(orgs);
+			user = { ...profile, ...orgs }
 		})
 		.catch(function (err) {
 			console.log(err)
-		});
-		// let data = await organizations
-		// console.log(organizations)
+		})
 
-		user = { ...profile }
 		// User.findOrCreate({ githubId: profile.id }, function (err, user) {
 		return done(null, profile)
 		// })
 	}
 ))
-
-// scope: ['user:email', 'admin:org_hook', 'repo', 'user']
 
 app.get('/auth/github',
 	passport.authenticate('github', { scope: ['user:email', 'admin:org_hook', 'repo', 'user', 'read:org'] }))
