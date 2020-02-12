@@ -13,14 +13,14 @@ function App() {
 	// Sidebar has all the navigation while logged in
 	// mac has all the userinformation while logged in
 
+
 	return (
 		<Router history={history}>
 			<UserProvider>
 				<Route path='/' component={Sidebar}></Route>
 				<Route path='/dashboard' component={Mac}></Route>
-				<Profile></Profile>
+				<Route path='/' exact component={Home}></Route>
 			</UserProvider>
-			<Route path='/' exact component={Home}></Route>
 		</Router>
 	)
 }

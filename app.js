@@ -43,7 +43,7 @@ passport.use(new GitHubStrategy({
 	callbackURL: "/auth/github/callback"
 },
 	async function (accessToken, refreshToken, profile, done) {
-		console.log('accesstoken: ', accessToken)
+		// console.log('accesstoken: ', accessToken)
 		// console.log('profile: ', profile)
 		// Save accesstoken to make requests
 		access_token = accessToken
@@ -60,7 +60,7 @@ passport.use(new GitHubStrategy({
 		}
 
 		rp(options).then(async function (orgs) {
-			console.log(orgs);
+			// console.log(orgs);
 			user = { ...profile, ...orgs }
 		})
 		.catch(function (err) {
@@ -76,11 +76,10 @@ passport.use(new GitHubStrategy({
 app.get('/auth/github',
 	passport.authenticate('github', { scope: ['user:email', 'admin:org_hook', 'repo', 'user', 'read:org'] }))
 
-app.get('/auth/github/callback',
+app.get('/auth/github/callback', 
 	passport.authenticate('github', { failureRedirect: '/login' }),
 	function (req, res) {
 		// Successful authentication, redirect home.
-		
 		res.redirect('/')
 	})
 
