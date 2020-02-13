@@ -1,5 +1,6 @@
 import React,  { useContext } from 'react'
 import Mac from './mac'
+import Profile from './profile'
 import _ from 'lodash'
 
 import UserProvider from '../contexts/UserProvider'
@@ -19,7 +20,8 @@ const Home = () => {
     const userData = useContext(UserProvider.context)
     return (
         <div>
-            { !_.isEmpty(userData) ? <Menu /> :
+            { !_.isEmpty(userData) ? <Profile /> 
+            :
                 <div className='page' style={{ textAlign: 'center' }}>
                     <p className='page-title'>
                         Github Notifications

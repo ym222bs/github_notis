@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route } from 'react-router-dom'
 import UserProvider from './contexts/UserProvider'
 import Home from './components/home'
-import Sidebar from './components/sidebar'
 import Mac from './components/mac'
 import history from './history'
 import Profile from './components/profile'
@@ -17,7 +16,6 @@ function App() {
 	return (
 		<Router history={history}>
 			<UserProvider>
-				<Route path='/' component={Sidebar}></Route>
 				<Route path='/dashboard' component={Mac}></Route>
 				<Route path='/' exact component={Home}></Route>
 			</UserProvider>

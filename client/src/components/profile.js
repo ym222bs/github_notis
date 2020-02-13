@@ -7,17 +7,25 @@ const LoginMsg = 'You have to log in to see info!'
 const Profile = () => {
     const [selected, setSelected] = useState('All')
     const userData = useContext(UserProvider.context)
+    // console.log(userData)
+    // Object.keys(userData).map((item, index)=> console.log(item.id))
 
+        Object.values(userData).map(x => console.log(x))
     const text = _.isEmpty(userData) ? LoginMsg : 'Explore Your Data'
-    const options = Object.keys(userData).filter(key => {
-        return userData[key] !== null
-    })
-
+    // render keys from ibject
+    // const options = Object.keys(userData).filter(key => {
+    //     return userData[key] !== null
+    // })
     return (
-        <div className='page'>
+        <div className='container'>
             <p className='page-title' style={{ textAlign: 'center' }}>
                 {text}
-            </p>
+                </p>
+                {
+                        Object.values(userData).map((item, index)=> 
+                <div key={index}>{item.id}</div>
+                        )
+                }
 
             <div style={{ marginBottom: 20 }} />
         </div>
