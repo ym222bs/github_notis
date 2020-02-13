@@ -10,25 +10,36 @@ const Profile = () => {
     // console.log(userData)
     // Object.keys(userData).map((item, index)=> console.log(item.id))
 
-        Object.values(userData).map(x => console.log(x))
+    // Object.values(userData).map(x => console.log(x))
+
     const text = _.isEmpty(userData) ? LoginMsg : 'Explore Your Data'
     // render keys from ibject
     // const options = Object.keys(userData).filter(key => {
     //     return userData[key] !== null
     // })
+
     return (
-        <div className='container'>
-            <p className='page-title' style={{ textAlign: 'center' }}>
-                {text}
-                </p>
+        <div className='container m-5'>
+
+            <div className='jumbotron'>
+                <h1 className='display-4'>{text}</h1>
+                <div className='lead' style={{ textAlign: 'center' }}>
+
+                </div>
+                <hr className='my-4' />
                 {
-                        Object.values(userData).map((item, index)=> 
-                <div key={index}>{item.id}</div>
-                        )
+                    Object.values(userData).map((item, index) =>
+                        <div key={index}>
+                            {item.id}
+                            {item.login}
+                        </div>
+                    )
                 }
 
-            <div style={{ marginBottom: 20 }} />
+                <div style={{ marginBottom: 20 }} />
+            </div>
         </div>
+
     )
 }
 

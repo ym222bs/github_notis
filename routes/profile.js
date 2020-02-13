@@ -31,27 +31,25 @@ passport.use(new GitHubStrategy({
 		// console.log('profile: ', profile)
 		// Save accesstoken to make requests
 		access_token = accessToken
-        userObject = { ...profile }
-
-		// const options = {
-		// 	uri: 'https://api.github.com/user/orgs',
-		// 	qs: {
-		// 		access_token: `${accessToken}` // -> uri + '?access_token=xxxxx%20xxxxx'
-		// 	},
-		// 	headers: {
-		// 		'User-Agent': 'Request-Promise'
-		// 	},
-		// 	json: true // Automatically parses the JSON string in the response
-		// }
-
-		// rp(options)
-		// 	.then((orgs) => {
-		// 		console.log(orgs)
-        //         console.log(userObject)
-		// 	})
-		// 	.catch(function (err) {
-		// 		console.log(err)
-		// 	})
+        
+		const options = {
+            uri: 'https://api.github.com/user/orgs',
+			qs: {
+                access_token: accessToken
+			},
+			headers: {
+                'User-Agent': 'Request-Promise'
+			},
+			json: true // Automatically parses the JSON string in the response
+		}
+        try {
+            const orgs = await rp(options)
+            // console.log(orgs)
+            userObject = { ...profile, ...orgs }
+        } catch (error) {
+				console.log(error)
+            
+        }
 
 		// User.findOrCreate({ githubId: profile.id }, function (err, user) {
 		return done(null, profile)
@@ -71,7 +69,7 @@ const authCheck = (req, res, next) => {
 }
 
 router.get('/', authCheck, (req, res) => {
-	console.log('/ user')
+	console.log(req.user)
 	res.send(userObject)
 })
 
