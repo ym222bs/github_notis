@@ -14,19 +14,14 @@ const Menu = () => {
     // !_.isEmpty(userData) ? _.find(data, d => d.id === userData.provider) : {}
 
     return (
-        <div className='menu-bar'>
+        <div className='jumbotron'>
+
+            
             {
                 !_.isEmpty(userData) &&
                 <a className='btn-primary' href={'/auth/logout'} title='Logout' style={{ float: 'right' }}>
                 </a>
             }
-            <nav aria-label='breadcrumb'>
-                <ol className='breadcrumb'>
-                    <li className='breadcrumb-item'><a href='#'>Home</a></li>
-                    <li className='breadcrumb-item'><a href='#'>Library</a></li>
-                    <li className='breadcrumb-item'>Data</li>
-                </ol>
-            </nav>
 
         </div>
     )

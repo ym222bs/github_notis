@@ -16,9 +16,9 @@ function App() {
 	return (
 		<Router history={history}>
 			<UserProvider>
-				<Route path='/dashboard' component={Mac}></Route>
-				<Route path='/' exact component={Home}></Route>
+				<Route path='/profile' component={Profile}></Route>
 			</UserProvider>
+				<Route path='/' exact component={Home}></Route>
 		</Router>
 	)
 }

@@ -10,8 +10,8 @@ const style = {
 // TODO: Do fetch here to select data, organizations for example, filter out the type of data that is needed, 
 // Hooks may be here as well
 const Mac = ({ userData, selected }) => {
-    const selectedData = selected === 'All' ? userData : userData[selected]
-    const jsonData = JSON.stringify(selectedData, null, 4)
+    // const selectedData = selected === 'All' ? userData : userData[selected]
+    // const jsonData = JSON.stringify(selectedData, null, 4)
     return (
         <div className='window'>
             <div className='title-bar'>CommandoMaster
@@ -21,7 +21,7 @@ const Mac = ({ userData, selected }) => {
                 </div>
             </div>
             <div style={style} className='content'>
-                <pre>{jsonData}</pre>
+Hello
             </div>
 
         </div>

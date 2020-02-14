@@ -12,7 +12,7 @@ const Profile = () => {
 
     // Object.values(userData).map(x => console.log(x))
 
-    const text = _.isEmpty(userData) ? LoginMsg : 'Explore Your Data'
+    const text = _.isEmpty(userData) ? LoginMsg : 'Explore Your Orgs'
     // render keys from ibject
     // const options = Object.keys(userData).filter(key => {
     //     return userData[key] !== null
@@ -23,19 +23,32 @@ const Profile = () => {
 
             <div className='jumbotron'>
                 <h1 className='display-4'>{text}</h1>
-                <div className='lead' style={{ textAlign: 'center' }}>
 
-                </div>
-                <hr className='my-4' />
-                {
-                    Object.values(userData).map((item, index) =>
-                        <div key={index}>
-                            {item.id}
-                            {item.login}
-                        </div>
-                    )
+                {!_.isEmpty(userData) &&
+
+                    <div className='lead'>
+                        <ul class='nav '>
+                            <li className='nav-item'>
+                                <a className='nav-link' href='/profile'>Active</a>
+                            </li>
+                            <li className='nav-item'>
+                                <a className='nav-link' href='#'>Link</a>
+                            </li>
+                            <li className='nav-item'>
+                                <a className='nav-link' href='#'>Link</a>
+                            </li>
+                        </ul>
+                        <hr className='my-4' />
+                    </div>
                 }
-
+                            {
+                                Object.values(userData).map((item, index) =>
+                                    <div key={index}>
+                                        {item.id}
+                                        {item.login}
+                                    </div>
+                                )
+                            }
                 <div style={{ marginBottom: 20 }} />
             </div>
         </div>
