@@ -16,8 +16,6 @@ const data = {
 }
 
 const Home = () => {
-    let curl = "$ curl -H 'Authorization: token ACCESS_TOKEN https://api.github.com/user"
-    // const userData = useContext(UserProvider.context)
     return (
         <div>
             <div className='page' style={{ textAlign: 'center' }}>
@@ -27,8 +25,8 @@ const Home = () => {
                 <p>
                     <span style={{ color: 'var(--primary-red)' }}>Login: </span>
                 </p>
-                <Mac userData={curl} selected='All' />
-                <div className='card' style={{ border: `1xp solid`, borderRadius: 2 }} onClick={() => window.location = data.href}>
+                <Mac />
+                <div className='card-g' style={{ border: `1xp solid`, borderRadius: 2 }} onClick={() => window.location = data.href}>
                     <div>
                         <p>{data.name}</p>
                     </div>

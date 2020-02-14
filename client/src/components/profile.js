@@ -1,3 +1,4 @@
+import Card from './card'
 import React, { useContext, useState } from 'react'
 import UserProvider from '../contexts/UserProvider'
 import _ from 'lodash'
@@ -39,16 +40,9 @@ const Profile = () => {
                             </li>
                         </ul>
                         <hr className='my-4' />
+                        <Card />
                     </div>
                 }
-                            {
-                                Object.values(userData).map((item, index) =>
-                                    <div key={index}>
-                                        {item.id}
-                                        {item.login}
-                                    </div>
-                                )
-                            }
                 <div style={{ marginBottom: 20 }} />
             </div>
         </div>

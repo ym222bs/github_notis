@@ -17,7 +17,7 @@ pre {
     white-space: break-word;
 }
 
-.card {
+.card-g {
     background: white;
     border-radius: 2px;
     display: inline-block;
@@ -27,7 +27,7 @@ pre {
     transition: all ease-in-out 0.6s;
 }
 
-.card:hover {
+.card-g:hover {
     transform: translateY(-10px);
 }
 
@@ -84,17 +84,13 @@ pre {
 }
 
 .card {
+    font-size: small;
     background: white;
     border-radius: 2px;
     display: inline-block;
     margin-right: 2em;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
-    transition: all ease-in-out 0.6s;
 }
 
-.card:hover {
-    transform: translateY(-10px);
-}
 
 .page {
     width: 50%;
@@ -142,17 +138,7 @@ pre {
     border: 1px solid #ff5c5c;
 }
 
-.minimize {
-    background: #ffbd4c;
-    border: 1px solid #ffbd4c;
-    margin-left: 4px;
-}
 
-.zoom {
-    background: #00ca56;
-    border: 1px solid #00ca56;
-    margin-left: 4px;
-}
 
 .content {
     background-color: #EEEEEE;
@@ -160,6 +146,7 @@ pre {
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
 }
+
 
 .col {
     display: inline-block;
