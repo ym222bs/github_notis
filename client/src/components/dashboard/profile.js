@@ -7,10 +7,10 @@ const LoginMsg = 'You have to log in to see info!'
 
 const Profile = () => {
     const userData = useContext(UserProvider.context)
+    console.log(userData)
     const { displayName, username, id } = userData
     let count = 0
 
-    // console.log(displayName)
 
     // Object.keys(userData).map((item, index)=> console.log(item.id))
 
@@ -28,7 +28,7 @@ const Profile = () => {
             <div className='d-flex justify-content-between'>
 
                 <h2 className='display-4'>{text}</h2>
-                <div>{image}</div>
+                <img></img>
             </div>
             {!_.isEmpty(userData) &&
 

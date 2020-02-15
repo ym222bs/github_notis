@@ -1,8 +1,6 @@
 import React from 'react'
 import Mac from './mac'
 
-// import UserProvider from '../contexts/UserProvider'
-// import Menu from './menu'
 
 import githubIcon from '../github.png'
 
@@ -32,7 +30,6 @@ const Home = () => {
                 </div>
             </div>
         </div>
-
     )
 }
 
