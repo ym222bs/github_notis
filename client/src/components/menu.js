@@ -15,8 +15,6 @@ const Menu = () => {
 
     return (
         <div className='jumbotron'>
-
-            
             {
                 !_.isEmpty(userData) &&
                 <a className='btn-primary' href={'/auth/logout'} title='Logout' style={{ float: 'right' }}>

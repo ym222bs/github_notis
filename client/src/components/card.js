@@ -1,42 +1,54 @@
-import React, { useContext, useState } from 'react'
-import UserProvider from '../contexts/UserProvider'
-import _ from 'lodash'
+import React, { useContext, useState, useEffect } from 'react'
+import OrgsProvider from '../contexts/OrgsProvider'
+// import _ from 'lodash'
 
 
 
 const Card = () => {
+    // const orgs = useContext(OrgsProvider.context)
+    // console.log('ooorgs', orgs)
+    const [orgs, setOrgs] = useState('')
 
-    const userData = useContext(UserProvider.context)
-    // console.log(userData)
-    // Object.keys(userData).map((item, index)=> console.log(item.id))
 
-    // Object.values(userData).map(x => console.log(x))
+    useEffect(() => {
+        const fetchData = async () => {
+            const orgRequest = await fetch('/profile/orgs')
+            const orgObject = await orgRequest.json()
 
-    // render keys from ibject
-    // const options = Object.keys(userData).filter(key => {
-    //     return userData[key] !== null
-    // })
+            console.log('org: ', orgRequest)
+            console.log('orgObjecdssssst: ', orgObject)
+            setOrgs(orgs)
+        }
+        fetchData()
+    }, [])
 
     return (
         <div>
-            <div className='card' style={{width: '18rem;'}}>
+            <div className='card' style={{width: '18rem'}}>
                 <div className='card-header'>
                     Featured
                 </div>
                 <ul className='list-group list-group-flush'>
-                    {
-                        Object.values(userData).map((item, index) =>
-                            <li className='list-group-item' key={index}>
-                                {item.id}
-                                {item.login}
-                            </li>
-                        )
+                { 
+                    Object.entries(orgs).map(function ([key, value]) {
+                        return (<div>{`${key}:${value}`}</div>)
+                    })
                     }
+                    {/* {
+                        orgs.map((item, index) => {
+
+                            Object.values(orgs =>
+                                <li className='list-group-item' key={index}>
+                                    {item.id}
+                                    {item.login}
+                                </li>
+                            )
+                        })
+                    }  */}
                 </ul>
             </div>
             <div style={{ marginBottom: 20 }} />
         </div>
-
     )
 }
 

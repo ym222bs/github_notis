@@ -1,10 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Mac from './mac'
-import Profile from './profile'
-import _ from 'lodash'
 
-import UserProvider from '../contexts/UserProvider'
-import Menu from './menu'
+// import UserProvider from '../contexts/UserProvider'
+// import Menu from './menu'
 
 import githubIcon from '../github.png'
 

@@ -8,17 +8,17 @@ const authRoutes = require('./routes/auth.js')
 const profileRoutes = require('./routes/profile.js')
 require('dotenv').config()
 const app = express()
-app.use(cors())
-DBconnect()
 const secret = process.env.SECRET
 app.use(cookieSession({
 	maxAge: 24 * 60 * 60 * 1000,
 	keys: [secret]
 }))
 
+DBconnect()
+app.use(cors())
+
 app.use(passport.initialize())
 app.use(passport.session())
-
 
 app.use('/auth', authRoutes)
 app.use('/profile', profileRoutes)

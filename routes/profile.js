@@ -30,30 +30,21 @@ passport.use(new GitHubStrategy({
 		// console.log('accesstoken: ', accessToken)
 		// console.log('profile: ', profile)
 		// Save accesstoken to make requests
-		access_token = accessToken
-        
-		const options = {
-            uri: 'https://api.github.com/user/orgs',
-			qs: {
-                access_token: accessToken
-			},
-			headers: {
-                'User-Agent': 'Request-Promise'
-			},
-			json: true // Automatically parses the JSON string in the response
-		}
-        try {
-            const orgs = await rp(options)
-            // console.log(orgs)
-            userObject = { ...profile, ...orgs }
-        } catch (error) {
-				console.log(error)
-            
-        }
+		// Select get relevant data:
+		const { 
+			displayName, 
+			username, 
+			id, 
+			avatar_url 
+		} = profile 
 
-		// User.findOrCreate({ githubId: profile.id }, function (err, user) {
+		// userObject = {displayName, username, id, avatar_url}
+		userObject = {...profile}
+
+		access_token = accessToken
+
 		return done(null, profile)
-		// })
+
 	}
 ))
 
@@ -70,8 +61,29 @@ const authCheck = (req, res, next) => {
 
 router.get('/', authCheck, (req, res) => {
 	console.log(req.user)
-	res.send(userObject)
+	res.send(req.user)
 })
 
+
+router.get('/orgs', authCheck, async (req, res) => {
+	const options = {
+		uri: 'https://api.github.com/user/orgs',
+		qs: {
+			access_token: access_token
+		},
+		headers: {
+			'User-Agent': 'Request-Promise'
+		},
+		json: true // Automatically parses the JSON string in the response
+	}
+	try {
+		const orgs = await rp(options)
+		console.log(orgs)
+		res.send({ orgs })
+
+	} catch (error) {
+		console.log(error)
+	}
+})
 
 module.exports = router
