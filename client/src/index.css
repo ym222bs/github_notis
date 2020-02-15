@@ -31,6 +31,13 @@ pre {
     transform: translateY(-10px);
 }
 
+
+.flex {
+    display: flex; /* equal height of the children */
+  }
+  
+
+
 .page-style {
     font-weight: 400;
     font-size: 35px;
@@ -147,6 +154,10 @@ pre {
     border-bottom-right-radius: 6px;
 }
 
+img {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
 
 .col {
     display: inline-block;

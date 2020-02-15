@@ -1,6 +1,6 @@
 // Component to render data from selected Organizations
 import React, { useContext, useState, useEffect } from 'react'
-import OrgsProvider from '../../contexts/OrgsProvider'
+import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 // import _ from 'lodash'
 
 

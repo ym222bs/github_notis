@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import OrgsProvider from '../contexts/OrgsProvider'
+import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 // import _ from 'lodash'
 
 
@@ -19,13 +19,18 @@ const Card = () => {
         <div>
             <div className='card' style={{ width: '18rem' }}>
                 <div className='card-header'>
-                    Organizations: 
+                    Organizations:
                 </div>
                 <ul className='list-group list-group-flush' key={count++}>
                     {
                         Object.entries(userOrganizations).map(([key, value]) => {
-                            return(
-                            <li className='list-group-item' key={userOrganizations[key].login}><a target='_blank' href={userOrganizations[key].url}>{userOrganizations[key].login}</a></li>
+                            return (
+                                <li className='list-group-item' key={userOrganizations[key].login}>
+                                    <a target='_blank' href={userOrganizations[key].url}>
+                                        <img style={{ width: '2rem', marginRight: '5px' }} src={userOrganizations[key].avatar_url} />
+                                        {userOrganizations[key].login}
+                                    </a>
+                                </li>
                             )
                         })
                     }
@@ -35,19 +40,6 @@ const Card = () => {
         </div>
     )
 }
-// {
-//                                 Object.entries(userOrganizations).map( ([keys, value]) => {
-//                                     return (
-//                                         <li className='list-group-item' key={count++}>{keys}: {value}</li>
-//                                     )
-//                                 })
-//                             }
-// {
-//         Object.entries(userOrganizations).map( [key, value] (
-//             return (
-//                 <li className='list-group-item' key={count++}>{keys}: {value}</li>
-//             )
-//         ))
-// }
+
 
 export default Card

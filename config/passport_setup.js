@@ -4,7 +4,7 @@ const rp = require('request-promise')
 
 require('dotenv').config()
 
-let userObject = {}
+let returnObject = {}
 let organizations = {}
 let accessToken = ''
 
@@ -24,24 +24,11 @@ passport.use(new GitHubStrategy({
 	callbackURL: '/auth/github/callback'
 },
 	async (token, refreshToken, profile, done) => {
-		// console.log('accesstoken: ', accessToken)
-		// console.log('profile: ', profile)
-		// Save accesstoken to make requests
-		// Select get relevant data:
-		const { 
-			displayName, 
-			username, 
-			id, 
-			avatar_url 
-		} = profile 
-
-		// userObject = {displayName, username, id, avatar_url}
-		userObject = { ...profile }
-
+		console.log('accesstoken: ', token)
+		returnObject = profile._json
 		accessToken = token
 
-		return done(null, profile)
-
+		return done(null, {...profile._json})
 	}
 ))
 
