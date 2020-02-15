@@ -3,18 +3,15 @@ const context = createContext(null)
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState([])
-
     useEffect(() => {
-        async function fetchData() {
-            const userObject = await fetch('/profile')
-            const jsonObject = await userObject.json()
+      fetch('/profile')
+          .then(res => res.json())
+          .then(res => setUser(res))
+          .catch(err => {
+              console.log(err)
+          })
 
-            // console.log('userObject: ', userObject)
-            // console.log('jsonObject: ', jsonObject)
-            setUser(jsonObject)
-        }
-        fetchData()
-    }, []) // Empty array forces useEffect to only run Once when the component is mounted
+    }, [])
 
     return (
         <context.Provider value={ user }>

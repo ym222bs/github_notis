@@ -7,20 +7,16 @@ import OrgsProvider from '../contexts/OrgsProvider'
 const Card = () => {
     // const orgs = useContext(OrgsProvider.context)
     // console.log('ooorgs', orgs)
-    const [orgs, setOrgs] = useState('')
+    // const [orgs, setOrgs] = useState('')
     let count = 0
+    const userOrganizations = useContext(OrgsProvider.contexto)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const orgRequest = await fetch('/profile/orgs').catch(err => console.log(err.message))
-            const orgObject = await orgRequest.json()
+    // console.log('organizations: ', Array.isArray(userOrganizations))
+    // userOrganizations.map(x => console.log(x))
+    const iterateOrganizations = () => {
 
-            console.log('org: ', orgRequest)
-            console.log('orgObjecdssssst: ', orgObject)
-            setOrgs(orgs)
-        }
-        fetchData()
-    }, [])
+    }
+    Object.entries(userOrganizations).map(([key, value]) => console.log(userOrganizations[key].login))
 
     return (
         <div>
@@ -29,18 +25,25 @@ const Card = () => {
                     Featured
                 </div>
                 <ul className='list-group list-group-flush' key={count++}>
-                    {
-                        Object.entries(orgs).map(function ([keys, value]) {
-                            return (
-                            <li className='list-group-item'key={count++}>{keys}: {value}</li>
-                            )
-                        })
-                    }
                 </ul>
             </div>
             <div style={{ marginBottom: 20 }} />
         </div>
     )
 }
+// {
+//                                 Object.entries(userOrganizations).map( ([keys, value]) => {
+//                                     return (
+//                                         <li className='list-group-item' key={count++}>{keys}: {value}</li>
+//                                     )
+//                                 })
+//                             }
+// {
+//         Object.entries(userOrganizations).map( [key, value] (
+//             return (
+//                 <li className='list-group-item' key={count++}>{keys}: {value}</li>
+//             )
+//         ))
+// }
 
 export default Card

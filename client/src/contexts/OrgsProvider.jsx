@@ -1,28 +1,24 @@
 import React, { createContext, useState, useEffect } from 'react'
-const context = createContext(null)
+const contexto = createContext(null)
 
 const OrgsProvider = ({ children }) => {
     const [orgs, setOrgs] = useState([])
-
+    let array = []
     useEffect(() => {
-        async function fetchData() {
-            const orgRequest = await fetch('/profile/orgs')
-            const orgObject = await orgRequest.json()
-
-            console.log('org: ', orgRequest)
-            console.log('orgObject: ', orgObject)
-            setOrgs(orgs)
-        }
-        fetchData()
+      fetch('/profile/orgs')
+          .then(res => res.json())
+          .then(res => setOrgs(res))
+          .catch(err => {
+              console.log(err)
+          })
     }, [])
 
     return (
-        <context.Provider value={ orgs }>
+        <contexto.Provider value={ orgs }>
             { children }
-        </context.Provider>
+        </contexto.Provider>
     )
 }
 
-
-OrgsProvider.context = context
+OrgsProvider.contexto = contexto
 export default OrgsProvider

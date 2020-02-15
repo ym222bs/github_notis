@@ -6,18 +6,15 @@ import _ from 'lodash'
 const LoginMsg = 'You have to log in to see info!'
 
 const Profile = () => {
-    // const [selected, setSelected] = useState('All')
     const userData = useContext(UserProvider.context)
-    // console.log('usaaaaaaaa', userData)
-
-    const { displayName, username } = userData
+    const { displayName, username, id } = userData
     let count = 0
-    let num = 10
+
     // console.log(displayName)
 
     // Object.keys(userData).map((item, index)=> console.log(item.id))
 
-    Object.values(userData).map(x => console.log(x))
+    // Object.values(userData).map(x => console.log(x))
     const img = 'empty'
     const text = _.isEmpty(userData) ? LoginMsg : 'Explore Your Orgs'
     const image = _.isEmpty(userData) ? img : 'Image'
@@ -49,13 +46,9 @@ const Profile = () => {
                     </ul>
                     <hr className='my-4' />
                     <Card />
-                    {
-                        Object.entries(userData).map(function ([key, value]) {
-                            return (
-                                <div key={count++}>{`${count++}:${value}`}</div>
-                            )
-                        })
-                    }
+                    <p>{displayName}</p>
+                    <p>{username}</p>
+                    <p>{id}</p>
                 </div>
             }
             <div style={{ marginBottom: 20 }} />
@@ -63,5 +56,13 @@ const Profile = () => {
 
     )
 }
+
+// {
+//     Object.entries(userData).map(function ([key, value]) {
+//         return (
+//             <div key={count++}>{`${count++}:${value}`}</div>
+//         )
+//     })
+// }
 
 export default Profile
