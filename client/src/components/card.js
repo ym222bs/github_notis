@@ -5,26 +5,29 @@ import OrgsProvider from '../contexts/OrgsProvider'
 
 
 const Card = () => {
-    // const orgs = useContext(OrgsProvider.context)
-    // console.log('ooorgs', orgs)
-    // const [orgs, setOrgs] = useState('')
-    let count = 0
+
     const userOrganizations = useContext(OrgsProvider.contexto)
+    let count = 0
 
-    // console.log('organizations: ', Array.isArray(userOrganizations))
-    // userOrganizations.map(x => console.log(x))
     const iterateOrganizations = () => {
-
+        Object.entries(userOrganizations).map(([key, value]) => console.log(userOrganizations[key].login))
     }
-    Object.entries(userOrganizations).map(([key, value]) => console.log(userOrganizations[key].login))
+
 
     return (
         <div>
             <div className='card' style={{ width: '18rem' }}>
                 <div className='card-header'>
-                    Featured
+                    Organizations: 
                 </div>
                 <ul className='list-group list-group-flush' key={count++}>
+                    {
+                        Object.entries(userOrganizations).map(([key, value]) => {
+                            return(
+                            <li className='list-group-item' key={userOrganizations[key].login}><a target='_blank' href={userOrganizations[key].url}>{userOrganizations[key].login}</a></li>
+                            )
+                        })
+                    }
                 </ul>
             </div>
             <div style={{ marginBottom: 20 }} />

@@ -35,13 +35,13 @@ const Profile = () => {
                 <div className='lead'>
                     <ul className='nav ' key={count++}>
                         <li className='nav-item'>
-                            <a className='nav-link' href='/profile'>{count}Active</a>
+                            <a className='nav-link' href='/profile'>Active</a>
                         </li>
                         <li className='nav-item'>
-                            <a className='nav-link' href='#'>{count}Link</a>
+                            <a className='nav-link' href='#'>Link</a>
                         </li>
                         <li className='nav-item'>
-                            <a className='nav-link' href='#'>{count}Link</a>
+                            <a className='nav-link' href='#'>Link</a>
                         </li>
                     </ul>
                     <hr className='my-4' />
