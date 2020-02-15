@@ -1,5 +1,6 @@
 
 const router = require('express').Router()
+// Associated with the Strategy object/middleware.
 const passport = require('passport')
 
 
@@ -11,7 +12,7 @@ router.get('/logout', (req, res) => {
 
 
 router.get('/login', (req, res) => {
-	res.send('login failed')
+	res.send('login failed, go back')
 })
 
 

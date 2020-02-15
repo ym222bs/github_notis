@@ -11,7 +11,8 @@ const Profile = () => {
     // console.log('usaaaaaaaa', userData)
 
     const { displayName, username } = userData
-
+    let count = 0
+    let num = 10
     // console.log(displayName)
 
     // Object.keys(userData).map((item, index)=> console.log(item.id))
@@ -35,22 +36,26 @@ const Profile = () => {
             {!_.isEmpty(userData) &&
 
                 <div className='lead'>
-                    <ul className='nav '>
+                    <ul className='nav ' key={count++}>
                         <li className='nav-item'>
-                            <a className='nav-link' href='/profile'>Active</a>
+                            <a className='nav-link' href='/profile'>{count}Active</a>
                         </li>
                         <li className='nav-item'>
-                            <a className='nav-link' href='#'>Link</a>
+                            <a className='nav-link' href='#'>{count}Link</a>
                         </li>
                         <li className='nav-item'>
-                            <a className='nav-link' href='#'>Link</a>
+                            <a className='nav-link' href='#'>{count}Link</a>
                         </li>
                     </ul>
                     <hr className='my-4' />
                     <Card />
-                    {Object.entries(userData).map(function ([key, value]) {
-                        return (<div>{`${key}:${value}`}</div>)
-                    })}
+                    {
+                        Object.entries(userData).map(function ([key, value]) {
+                            return (
+                                <div key={count++}>{`${count++}:${value}`}</div>
+                            )
+                        })
+                    }
                 </div>
             }
             <div style={{ marginBottom: 20 }} />

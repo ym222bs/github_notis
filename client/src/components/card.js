@@ -8,11 +8,11 @@ const Card = () => {
     // const orgs = useContext(OrgsProvider.context)
     // console.log('ooorgs', orgs)
     const [orgs, setOrgs] = useState('')
-
+    let count = 0
 
     useEffect(() => {
         const fetchData = async () => {
-            const orgRequest = await fetch('/profile/orgs')
+            const orgRequest = await fetch('/profile/orgs').catch(err => console.log(err.message))
             const orgObject = await orgRequest.json()
 
             console.log('org: ', orgRequest)
@@ -24,27 +24,18 @@ const Card = () => {
 
     return (
         <div>
-            <div className='card' style={{width: '18rem'}}>
+            <div className='card' style={{ width: '18rem' }}>
                 <div className='card-header'>
                     Featured
                 </div>
-                <ul className='list-group list-group-flush'>
-                { 
-                    Object.entries(orgs).map(function ([key, value]) {
-                        return (<div>{`${key}:${value}`}</div>)
-                    })
-                    }
-                    {/* {
-                        orgs.map((item, index) => {
-
-                            Object.values(orgs =>
-                                <li className='list-group-item' key={index}>
-                                    {item.id}
-                                    {item.login}
-                                </li>
+                <ul className='list-group list-group-flush' key={count++}>
+                    {
+                        Object.entries(orgs).map(function ([keys, value]) {
+                            return (
+                            <li className='list-group-item'key={count++}>{keys}: {value}</li>
                             )
                         })
-                    }  */}
+                    }
                 </ul>
             </div>
             <div style={{ marginBottom: 20 }} />
