@@ -39,7 +39,7 @@ passport.use(new GitHubStrategy({
 		} = profile 
 
 		// userObject = {displayName, username, id, avatar_url}
-		userObject = {...profile}
+		userObject = { ...profile }
 
 		access_token = accessToken
 
