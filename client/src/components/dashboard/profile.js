@@ -8,7 +8,7 @@ const LoginMsg = 'You have to log in to see info!'
 const Profile = () => {
     const userData = useContext(UserProvider.context)
     console.log('usertftft', userData)
-    const { displayName, username, id, avatar_url } = userData
+    const { name, login, id, avatar_url } = userData
     let count = 0
     console.log(avatar_url)
 
@@ -38,25 +38,12 @@ const Profile = () => {
                 <div className='lead'>
                     Your notofication app for the good old GitHub..
                     <hr className='my-4' />
-                    <div className='flex'>
-
-                  
+                    <div className='flex'>                  
                     <img className='child' style={{ width: '18rem' }} src={image} />
-                    <ul className='nav justify-content-center' style={{marginLeft: '40px'}} key={count++}>
-                        <li className='nav-item'>
-                            <a className='nav-link' href='/profile'>Active</a>
-                        </li>
-                        <li className='nav-item'>
-                            <a className='nav-link' href='#'>Link</a>
-                        </li>
-                        <li className='nav-item'>
-                            <a className='nav-link' href='#'>Link</a>
-                        </li>
-                    </ul>
                     </div>
                     <Card />
-                    <p>{displayName}</p>
-                    <p>{username}</p>
+                    <p>{name}</p>
+                    <p>{login}</p>
                     <p>{id}</p>
                 </div>
             }

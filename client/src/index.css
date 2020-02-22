@@ -6,7 +6,7 @@ body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     -webkit-font-smoothing: antialiased;
     color: #444444;
-    background-color: #dfd5d5;
+    background-color: #708090;
 }
 
 pre {
@@ -36,34 +36,6 @@ pre {
     display: flex; /* equal height of the children */
   }
   
-
-
-.page-style {
-    font-weight: 400;
-    font-size: 35px;
-}
-
-
-.btn-icon {
-    width: 15px;
-    vertical-align: middle;
-    display: inline-block;
-}
-
-.btn-txt {
-    padding-left: 10px;
-    vertical-align: middle;
-}
-
-.menu-btn {
-    padding: 12px 15px;
-    display: inline-block;
-}
-
-.menu-btn:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-}
 
 .login-btn {
     padding: 5px 20px;

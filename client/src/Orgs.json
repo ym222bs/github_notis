@@ -1,0 +1,87 @@
+[
+    {
+      "login": "1dv021",
+      "id": 9986239,
+      "node_id": "MDEyOk9yZ2FuaXphdGlvbjk5ODYyMzk=",
+      "url": "https://api.github.com/orgs/1dv021",
+      "repos_url": "https://api.github.com/orgs/1dv021/repos",
+      "events_url": "https://api.github.com/orgs/1dv021/events",
+      "hooks_url": "https://api.github.com/orgs/1dv021/hooks",
+      "issues_url": "https://api.github.com/orgs/1dv021/issues",
+      "members_url": "https://api.github.com/orgs/1dv021/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/1dv021/public_members{/member}",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/9986239?v=4",
+      "description": ""
+    },
+    {
+      "login": "1dv022",
+      "id": 11003822,
+      "node_id": "MDEyOk9yZ2FuaXphdGlvbjExMDAzODIy",
+      "url": "https://api.github.com/orgs/1dv022",
+      "repos_url": "https://api.github.com/orgs/1dv022/repos",
+      "events_url": "https://api.github.com/orgs/1dv022/events",
+      "hooks_url": "https://api.github.com/orgs/1dv022/hooks",
+      "issues_url": "https://api.github.com/orgs/1dv022/issues",
+      "members_url": "https://api.github.com/orgs/1dv022/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/1dv022/public_members{/member}",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/11003822?v=4",
+      "description": "Linnaeus university course \"Client-based Web programming\""
+    },
+    {
+      "login": "1dv430",
+      "id": 11442043,
+      "node_id": "MDEyOk9yZ2FuaXphdGlvbjExNDQyMDQz",
+      "url": "https://api.github.com/orgs/1dv430",
+      "repos_url": "https://api.github.com/orgs/1dv430/repos",
+      "events_url": "https://api.github.com/orgs/1dv430/events",
+      "hooks_url": "https://api.github.com/orgs/1dv430/hooks",
+      "issues_url": "https://api.github.com/orgs/1dv430/issues",
+      "members_url": "https://api.github.com/orgs/1dv430/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/1dv430/public_members{/member}",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/11442043?v=4",
+      "description": ""
+    },
+    {
+      "login": "1dv023",
+      "id": 12395417,
+      "node_id": "MDEyOk9yZ2FuaXphdGlvbjEyMzk1NDE3",
+      "url": "https://api.github.com/orgs/1dv023",
+      "repos_url": "https://api.github.com/orgs/1dv023/repos",
+      "events_url": "https://api.github.com/orgs/1dv023/events",
+      "hooks_url": "https://api.github.com/orgs/1dv023/hooks",
+      "issues_url": "https://api.github.com/orgs/1dv023/issues",
+      "members_url": "https://api.github.com/orgs/1dv023/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/1dv023/public_members{/member}",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/12395417?v=4",
+      "description": "Linnaeus University,  Server-based Web Programming (1DV023)"
+    },
+    {
+      "login": "1dv612",
+      "id": 23627019,
+      "node_id": "MDEyOk9yZ2FuaXphdGlvbjIzNjI3MDE5",
+      "url": "https://api.github.com/orgs/1dv612",
+      "repos_url": "https://api.github.com/orgs/1dv612/repos",
+      "events_url": "https://api.github.com/orgs/1dv612/events",
+      "hooks_url": "https://api.github.com/orgs/1dv612/hooks",
+      "issues_url": "https://api.github.com/orgs/1dv612/issues",
+      "members_url": "https://api.github.com/orgs/1dv612/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/1dv612/public_members{/member}",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/23627019?v=4",
+      "description": ""
+    },
+    {
+      "login": "myorgyasmin",
+      "id": 60492651,
+      "node_id": "MDEyOk9yZ2FuaXphdGlvbjYwNDkyNjUx",
+      "url": "https://api.github.com/orgs/myorgyasmin",
+      "repos_url": "https://api.github.com/orgs/myorgyasmin/repos",
+      "events_url": "https://api.github.com/orgs/myorgyasmin/events",
+      "hooks_url": "https://api.github.com/orgs/myorgyasmin/hooks",
+      "issues_url": "https://api.github.com/orgs/myorgyasmin/issues",
+      "members_url": "https://api.github.com/orgs/myorgyasmin/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/myorgyasmin/public_members{/member}",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/60492651?v=4",
+      "description":""
+    }
+  ]
+  

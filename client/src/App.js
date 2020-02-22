@@ -9,7 +9,7 @@ import Profile from './components/dashboard/profile.js'
 
 function App() {
 	// Home is where the login/Homepage is, just a presentation
-
+	// TODO: Not be able to go to home when logged in
 	return (
 		<Router history={history}>
 			<OrgsProvider>
@@ -17,6 +17,7 @@ function App() {
 					<Route path='/profile' component={Profile}></Route>
 				</UserProvider>
 			</OrgsProvider>
+
 			<Route path='/' exact component={Home}></Route>
 		</Router>
 	)

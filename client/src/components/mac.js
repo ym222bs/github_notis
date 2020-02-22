@@ -12,8 +12,9 @@ const Mac = () => {
         <div className='window'>
             <div className='title-bar'>CommandoMaster
             <div className='buttons'>
-                    <div className='mac-btn close' />
-                    <div className='mac-btn minimize' />
+                    <div className='mac-btn open mr-1 ' style={{backgroundColor: '#00FF7F'}} />
+                    <div className='mac-btn close' style={{backgroundColor: 'red'}} />
+                    <div className='mac-btn minimize mr-1' style={{backgroundColor: '#FFA500'}} />
                 </div>
             </div>
             <div style={style} className='content'>
