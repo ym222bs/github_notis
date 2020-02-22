@@ -35,14 +35,14 @@ pre {
     background-color: #F0F8FF;
 }
 
-.flex-container {
-    display: grid;
-    grid-template-columns: 40%, 60%;
+.gridparent {
+    display: flex;
+    flex-direction: row;
   }
 
-
-  
-
+.child {
+    flex: 1;
+}
 .login-btn {
     padding: 5px 20px;
     border-radius: 3px;

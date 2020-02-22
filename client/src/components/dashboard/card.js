@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
-import PropertiesNav from './information.js'
+import PropertiesNav from './propertiesNav.js'
 // import _ from 'lodash'
 
 
