@@ -3,10 +3,10 @@
 }
 
 body {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Nunito';
     -webkit-font-smoothing: antialiased;
     color: #444444;
-    background-color: #708090;
+    background-color: #778899;
 }
 
 pre {
@@ -31,10 +31,16 @@ pre {
     transform: translateY(-10px);
 }
 
+.jumbotron {
+    background-color: #F0F8FF;
+}
 
-.flex {
-    display: flex; /* equal height of the children */
+.flex-container {
+    display: grid;
+    grid-template-columns: 40%, 60%;
   }
+
+
   
 
 .login-btn {
@@ -68,6 +74,7 @@ pre {
     border-radius: 2px;
     display: inline-block;
     margin-right: 2em;
+    width: 18rem;
 }
 
 
@@ -129,6 +136,7 @@ pre {
 img {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+    width: 18rem;
 }
 
 .col {

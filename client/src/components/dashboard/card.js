@@ -1,4 +1,4 @@
-import React, { Link, useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 import PropertiesNav from './information.js'
 // import _ from 'lodash'
@@ -18,15 +18,8 @@ const Card = () => {
     const [ selectedOrg, setSelectedOrg ] = useState('')
     const userOrganizations = useContext(OrgsProvider.contexto)
 
-    console.log(userOrganizations)
+
     let count = 0
-
-    const iterateOrganizations = () => {
-        Object.entries(userOrganizations).map(([key, value]) => console.log(userOrganizations[key].login))
-    }
-
-
-    //href={userOrganizations[key].url}
     const properties = Object.keys(userOrganizations).map(key => {
         return userOrganizations[key]
     })
@@ -35,7 +28,7 @@ const Card = () => {
 
     return (
         <div>
-            <div className='card' style={{ width: '18rem' }}>
+            <div className='card'>
                 <div className='card-header'>
                     Organizations:
                 </div>
@@ -45,21 +38,26 @@ const Card = () => {
                             return (
                                 <li className='list-group-item' key={userOrganizations[key].login}>
 
+                                    <div    className='btn btn-outline-info'  
 
-                                    <div  className='btn btn-outline-info'  style={{}} key={userOrganizations[key].login} onClick={() => setSelectedOrg(userOrganizations[key].login)}>
-                                        <img style={{ width: '2rem', marginRight: '5px' }} src={userOrganizations[key].avatar_url} />
+                                            style={{}} key={userOrganizations[key].login} 
+
+                                            onClick={() => setSelectedOrg(userOrganizations[key])}>
+
+                                        <img style={{ width: '2rem', marginRight: '5px' }} 
+                                             src={userOrganizations[key].avatar_url} />
+                                        
                                         {userOrganizations[key].login}
+                                    
                                     </div >
-
                                 </li>
                             )
                         })
                     }
                 </ul>
-                {/* <PropertiesNav options={properties}
-                    option={selectedOrg}
-                /> */}
             </div>
+
+                <PropertiesNav option={selectedOrg} />
             <div style={{ marginBottom: 20 }} />
         </div>
     )

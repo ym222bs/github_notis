@@ -6,7 +6,6 @@ import _ from 'lodash'
 
 const Menu = () => {
     const userData = useContext(UserProvider.context)
-    const loginType = true
     // !_.isEmpty(userData) ? _.find(data, d => d.id === userData.provider) : {}
 
     return (

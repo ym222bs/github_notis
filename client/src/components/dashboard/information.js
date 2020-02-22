@@ -1,29 +1,31 @@
 // Component to render data from selected Organizations
-import React, { useContext, useState, useEffect } from 'react'
-import OrgsProvider from '../../contexts/OrgsProvider.jsx'
+import React, { Fragment } from 'react'
 
 
 
 // TODO: properties should be passed down as a prop to this component and then rendered from Card
 // in basically the same way as the names but in a new div
 
-const PropertiesNav = ({ options, option }) => {
-    console.log(option)
-    console.log(options)
-   
-    // const iterateOrganizations = () => {
-    //     Object.entries(userOrganizations).map(([key, value]) => console.log(userOrganizations[key].login))
-    // }
+const PropertiesNav = ({ option }) => {
+
+    const arrayOfKeys = Object.keys(option)
+    const arrayOfValues = Object.values(option)
 
     return (
-        <div>
-            <ul className='nav justify-content-center' style={{ marginLeft: '40px' }} >
+        <Fragment>
+            <ul className='navbar navbar-expand-sm bg-light navbar-light' style={{  }} >
 
-                <li className='nav-item'>
-                    <a className='nav-link' href='/profile'>{option}</a>
+                <li className='navbar-nav'>
+                    {
+                      arrayOfKeys.map(key => 
+
+                          <a className='nav-link' href='/profile'>{key}</a>
+                      ) 
+                    }
                 </li>
             </ul>
-        </div>
+        </Fragment>
+
     )
 }
 

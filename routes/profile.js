@@ -6,6 +6,7 @@ const router = require('express').Router()
 const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
 const rp = require('request-promise')
+const Hook = require('../model/hook.js')
 
 require('dotenv').config()
 
@@ -28,7 +29,7 @@ router.get('/', authCheck, (req, res) => {
 })
 
 
-router.get('/orgs', authCheck, async (req, res) => {
+router.get('/orgs', authCheck, async (req, res, next) => {
 	 const token = getUserToken()
 
 	const options = {
@@ -48,8 +49,43 @@ router.get('/orgs', authCheck, async (req, res) => {
 
 	} catch (error) {
 		console.log(error)
+		res.send({ 
+			msg: 'Not a valid url or url missing.',
+			error: err.message 
+	  })
+	  next(error)
 	}
 }) 
 
+
+router.post('/webhook', authCheck, async (req, res, next) => {
+    // const username = req.userName
+    // const user_id = req.userID
+    // const url = req.body.url
+
+    const hook = new Hook({
+          url,
+          username,
+          userid
+    })
+    try {
+          const newHook = await hook.save()
+          res.status(201).send({
+                msg: 'Webhook url saved.',
+                hook,
+                request: {
+                      url_home:  `https://${req.headers.host}`,
+                      method: 'GET'
+                }
+          })
+          
+    }catch(error) {
+          res.send({ 
+                msg: 'Not a valid url or url missing.',
+                error: err.message 
+          })
+          next(error)
+    }
+})
 
 module.exports = router
