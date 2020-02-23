@@ -67,7 +67,10 @@ const Profile = () => {
                         </ul>
                     </div>
                     <div className='child'>
-                        <PropertiesNav option={selectedOrg} />
+                        {
+                            selectedOrg !== '' &&
+                            <PropertiesNav option={selectedOrg} />
+                        }
                     </div>
                 </div>
 

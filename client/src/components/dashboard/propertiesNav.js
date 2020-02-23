@@ -7,14 +7,18 @@ import React, { Fragment, useState } from 'react'
 // in basically the same way as the names but in a new div
 
 const PropertiesNav = ({ option }) => {
-    const [ evets, setEvents ] = useState('')
+    const [ property, setProperty ] = useState('')
 
-    const arrayOfValues = Object.values(option)
+    // const arrayOfValues = Object.values(option)
 
+    const { events_url, repos_url, hook_url } = option
+    console.log(events_url)
+    
     const handleClickOnEvent = async () => {
         const events = await fetch(option.events_url)
         const json = await events.json()
-        console.log(json)
+        // setProperty(json)
+        // console.log(json)
     }
     const handleClickOnRepos = () => {
         console.log('hello')
@@ -24,15 +28,23 @@ const PropertiesNav = ({ option }) => {
         console.log('hello')
     }
 
+    // {/* {
+    //         arrayOfValues.map(c => (
+
+    //             <a className='nav-link' onClick={handleClickOnEvent}>{lable}</a>
+    //         ))
+    // } */}
 
     return (
         <Fragment>
             <div>
-            <ul className='navbar navbar-expand-sm ' style={{  }} >
+            <ul className='navbar navbar-expand-sm' style={{  }} >
                 <li className='navbar-nav'>
-                          <a className='nav-link' onClick={handleClickOnEvent}>Events</a>
-                          <a className='nav-link' onClick={handleClickOnRepos}>Repos</a>
-                          <a className='nav-link' onClick={handleClickOnHook}>Create Hook</a>
+                <div className='nav-link' onClick={handleClickOnEvent} style={{color: '#17a2b8'}}>{option.login}</div>  
+                                <a className='nav-link btn btn-link' onClick={handleClickOnEvent}>Events</a>
+
+                          <a className='nav-link btn btn-link' onClick={handleClickOnRepos}>Repos</a>
+                          <a className='nav-link btn btn-link' onClick={handleClickOnHook}>Create Hook</a>
                 </li>
             </ul>
 
