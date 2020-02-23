@@ -11,40 +11,40 @@ const description = 'Your notofication app for the good old GitHub..'
 
 
 const Profile = () => {
-    const userData = useContext(UserProvider.context)
-    const { avatar_url } = userData
+	const userData = useContext(UserProvider.context)
+	const { avatar_url } = userData
 
-    const text = _.isEmpty(userData) ? loginMsg : 'Explore Your Orgs'
-    const image = !_.isEmpty(userData) ? avatar_url : 'Image'
+	const text = _.isEmpty(userData) ? loginMsg : 'Explore Your Orgs'
+	const image = !_.isEmpty(userData) ? avatar_url : 'Image'
 
-    return (
-        <div
-            className='jumbotron container mt-5'>
-            <h2
-                className='display-4'
-            >
-                {text}
-            </h2>
-            <div
-                className='lead'
-            >
-                {description}
-                <hr
-                    className='my-4'
-                />
-                <div
-                    className='gridparent'
-                >
-                    <CardOfOrgs
-                        avatar={image} /
-                    >
-                </div>
-            </div>
-            <div
-                style={{ marginBottom: 20 }}
-            />
-        </div>
-    )
+	return (
+		<div
+			className='jumbotron container mt-5'>
+			<h2
+				className='display-4'
+			>
+				{text}
+			</h2>
+			<div
+				className='lead'
+			>
+				{description}
+				<hr
+					className='my-4'
+				/>
+				<div
+					className='gridparent'
+				>
+					<CardOfOrgs
+						avatar={image} /
+					>
+				</div>
+			</div>
+			<div
+				style={{ marginBottom: 20 }}
+			/>
+		</div>
+	)
 }
 
 

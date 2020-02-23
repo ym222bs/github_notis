@@ -12,69 +12,69 @@ import PropertiesNav from './propertiesNav.js'
 
 const CardOfOrgs = ({ avatar }) => {
 
-    const [selectedOrg, setSelectedOrg] = useState(null)
-    const userOrganizations = useContext(OrgsProvider.contexto)
+	const [selectedOrg, setSelectedOrg] = useState(null)
+	const userOrganizations = useContext(OrgsProvider.contexto)
 
-    const properties = Object.keys(userOrganizations).map(key => {
-        return userOrganizations[key]
-    })
+	const properties = Object.keys(userOrganizations).map(key => {
+		return userOrganizations[key]
+	})
 
-    console.log(properties)
-    console.log(selectedOrg)
-    return (
-        <Fragment>
-            <div
-                className='card'>
-                <img
-                    style={{ width: '18rem' }} src={avatar}
-                />
-                <div
-                    className='card-header'
-                >
-                    Organizations:
+	console.log(properties)
+	console.log(selectedOrg)
+	return (
+		<Fragment>
+			<div
+				className='card'>
+				<img
+					style={{ width: '18rem' }} src={avatar}
+				/>
+				<div
+					className='card-header'
+				>
+					Organizations:
                 </div>
-                <ul
-                    className='list-group list-group-flush'
-                    key='orgs-list'
-                >
-                    {
-                        Object.entries(userOrganizations).map(([key, value]) => {
-                            return (
-                                <li
-                                    className='list-group-item'
-                                    key={userOrganizations[key].login}
-                                >
-                                    <div
-                                        className='btn btn-outline-info'
-                                        key={userOrganizations[key].login}
-                                        onClick={() => setSelectedOrg(userOrganizations[key])}>
+				<ul
+					className='list-group list-group-flush'
+					key='orgs-list'
+				>
+					{
+						Object.entries(userOrganizations).map(([key, value]) => {
+							return (
+								<li
+									className='list-group-item'
+									key={userOrganizations[key].login}
+								>
+									<div
+										className='btn btn-outline-info'
+										key={userOrganizations[key].login}
+										onClick={() => setSelectedOrg(userOrganizations[key])}>
 
-                                        <img
-                                            style={{ width: '2rem', marginRight: '5px' }}
-                                            src={userOrganizations[key].avatar_url}
-                                        />
+										<img
+											style={{ width: '2rem', marginRight: '5px' }}
+											src={userOrganizations[key].avatar_url}
+										/>
 
-                                        {userOrganizations[key].login}
+										{userOrganizations[key].login}
 
-                                    </div >
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
-            </div>
-            <div
-                className='child'
-            >
-                {
-                    selectedOrg &&
-                    <PropertiesNav
-                        option={selectedOrg}
-                    />
-                }
-            </div>
-        </Fragment>
-    )
+									</div >
+								</li>
+							)
+						})
+					}
+				</ul>
+			</div>
+			<div
+				className='child'
+			>
+				{
+					selectedOrg &&
+					<PropertiesNav
+						option={selectedOrg}
+					/>
+				}
+			</div>
+		</Fragment>
+	)
 }
 
 
