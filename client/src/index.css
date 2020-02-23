@@ -33,6 +33,10 @@ pre {
     transform: translateY(-10px);
 }
 
+.navbar a:hover {
+    background-color: #5ebfdc;
+}
+
 .jumbotron {
     background-color: #F0F8FF;
 }

@@ -14,19 +14,38 @@ const data = {
 const Home = () => {
     return (
         <div>
-            <div className='page' style={{ textAlign: 'center' }}>
-                <p className='page-title'>
+            <div
+                className='page'
+                style={{ textAlign: 'center' }}
+            >
+                <p
+                    className='page-title'>
                     Github Notifications
-                    </p>
+                </p>
                 <p>
-                    <span style={{ color: 'var(--primary-red)' }}>Login: </span>
+                    <span
+                        style={{ color: 'var(--primary-red)' }}>
+                        Login: </span>
                 </p>
                 <Mac />
-                <div className='card-g' style={{ border: `1xp solid`, borderRadius: 2 }} onClick={() => window.location = data.href}>
+                <div
+                    className='card-g'
+                    style={{ border: `1xp solid`, borderRadius: 2 }}
+                    onClick={() => window.location = data.href}
+                >
                     <div>
-                        <p>{data.name}</p>
+                        <p>
+                            {data.name}
+                        </p>
                     </div>
-                    <div style={{ minHeight: 100, minWidth: 100, background: `url('${data.img}') no-repeat center center / 50% ${data.color}` }}></div>
+                    <div
+                        style={{
+                            minHeight: 100,
+                            minWidth: 100,
+                            background: `url('${data.img}') no-repeat center center / 50% ${data.color}`
+                        }}
+                    >
+                    </div>
                 </div>
             </div>
         </div>
