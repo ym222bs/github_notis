@@ -50,7 +50,7 @@ const Profile = () => {
 
                                             <div className='btn btn-outline-info'
 
-                                                style={{}} key={userOrganizations[key].login}
+                                                key={userOrganizations[key].login}
 
                                                 onClick={() => setSelectedOrg(userOrganizations[key])}>
 

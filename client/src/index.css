@@ -1,5 +1,7 @@
 :root {
-    --primary-red: #ff6644;
+    --primary-gray: #f7f7f7;
+    --main-border-radius: 6px; 
+
 }
 
 body {
@@ -38,14 +40,21 @@ pre {
 .gridparent {
     display: flex;
     flex-direction: row;
-  }
+}
 
 .child {
     flex: 1;
 }
+
 .login-btn {
     padding: 5px 20px;
     border-radius: 3px;
+}
+.navbar {
+    background-color: var(--primary-gray);
+    border-radius: var(--main-border-radius);
+    box-shadow: 2px 1px 4px 1px rgba(0,0,0,0.2);
+
 }
 
 .menu-bar {
@@ -74,9 +83,10 @@ pre {
     border-radius: 2px;
     display: inline-block;
     margin-right: 2em;
+    border-radius: var(--main-border-radius);
     width: 18rem;
+    box-shadow: 2px 1px 4px 1px rgba(0,0,0,0.2);
 }
-
 
 .page {
     width: 50%;
@@ -125,7 +135,6 @@ pre {
 }
 
 
-
 .content {
     background-color: #EEEEEE;
     padding: 20px 10px;
@@ -139,17 +148,6 @@ img {
     width: 18rem;
 }
 
-.col {
-    display: inline-block;
-}
-
-.col-4 {
-    width: 25%;
-}
-
-.col-8 {
-    width: 75%;
-}
 
 .tag {
     color: var(--primary-red);
@@ -161,11 +159,6 @@ img {
     margin-bottom: 10px;
 }
 
-.tag:hover,
-.selected {
-    background-color: var(--primary-red);
-    color: white;
-}
 
 .footer {
     padding: 10px;

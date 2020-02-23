@@ -1,5 +1,5 @@
 // Component to render data from selected Organizations
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 
 
 
@@ -7,22 +7,38 @@ import React, { Fragment } from 'react'
 // in basically the same way as the names but in a new div
 
 const PropertiesNav = ({ option }) => {
+    const [ evets, setEvents ] = useState('')
 
     const arrayOfValues = Object.values(option)
 
+    const handleClickOnEvent = async () => {
+        const events = await fetch(option.events_url)
+        const json = await events.json()
+        console.log(json)
+    }
+    const handleClickOnRepos = () => {
+        console.log('hello')
+    }
+
+    const handleClickOnHook = () => {
+        console.log('hello')
+    }
+
+
     return (
         <Fragment>
-            <ul className='navbar navbar-expand-sm bg-light navbar-light' style={{  }} >
-
+            <div>
+            <ul className='navbar navbar-expand-sm ' style={{  }} >
                 <li className='navbar-nav'>
-                          <a className='nav-link' href='/p'>Events</a>
-                          <a className='nav-link' href='/profile'>Repos</a>
-                          <a className='nav-link' href='/profile'>Create Hook</a>
-
+                          <a className='nav-link' onClick={handleClickOnEvent}>Events</a>
+                          <a className='nav-link' onClick={handleClickOnRepos}>Repos</a>
+                          <a className='nav-link' onClick={handleClickOnHook}>Create Hook</a>
                 </li>
             </ul>
-        </Fragment>
 
+            
+            </div>
+        </Fragment>
     )
 }
 
