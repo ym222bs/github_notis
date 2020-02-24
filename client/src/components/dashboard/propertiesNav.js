@@ -1,57 +1,76 @@
-// Component to render data from selected Organizations
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
+import axios from 'axios'
 
-
-
-// TODO: properties should be passed down as a prop to this component and then rendered from Card
-// in basically the same way as the names but in a new div
 
 const PropertiesNav = ({ option }) => {
+	const [url, setUrl] = useState(null)
 	const [property, setProperty] = useState(null)
+	const { events_url, repos_url, hooks_url } = option
 
-	// const arrayOfValues = Object.values(option)
+	console.log('nav url ', url)
 
-	const { events_url, repos_url, hook_url } = option
-	console.log(events_url)
+	useEffect(() =>
+		async (url) => {
+			try {
+				const event = await axios.post('/profile/webhook', {
+					data: url
+				})
+				
+			} catch (err) {
+				console.log('err is hook: ',err);
+				
+			}
+		
 
-	const handleClickOnEvent = async () => {
-		const events = await fetch(option.events_url)
-		const json = await events.json()
-		// setProperty(json)
-		console.log(json)
-	}
-	const handleClickOnRepos = () => {
-		console.log('hello')
-	}
+			// console.log('event: ', events)
+			// const json = await events.json()
 
-	const handleClickOnHook = () => {
-		console.log('hello')
-	}
-
-	// {/* {
-	//         arrayOfValues.map(c => (
-
-	//             <a className='nav-link' onClick={handleClickOnEvent}>{lable}</a>
-	//         ))
-	// } */}
+			// setProperty(json)
+			// console.log('json : ', json)
+		}, [url])
 
 	return (
 		<Fragment>
-			<div>
+			<div className='flex-container'>
 				<ul className='navbar navbar-expand-sm'>
 					<li className='navbar-nav'>
-						<div className='nav-link' onClick={handleClickOnEvent} style={{ color: '#17a2b8' }}>{option.login}</div>
-						<a className='nav-link btn btn-link' onClick={handleClickOnEvent}>Events</a>
-						<a className='nav-link btn btn-link' onClick={handleClickOnRepos}>Repos</a>
-						<a className='nav-link btn btn-link' onClick={handleClickOnHook}>Create Hook</a>
+						<div
+							className='nav-link'
+							style={{ color: '#17a2b8' }}>
+							{ option.login }
+						</div>
+						<a
+							className='nav-link btn btn-link'
+							onClick={() => setUrl(events_url)}
+						>
+							Events
+						</a>
+						<a
+							className='nav-link btn btn-link'
+							onClick={() => setUrl(repos_url)}
+						>
+							Repos
+						</a>
+						<a
+							className='nav-link btn btn-link' key={hooks_url}
+							onClick={() => setUrl(hooks_url)}
+						>
+							Create Hook
+						</a>
 					</li>
 				</ul>
-
-
+				<div className="list-group">
+					{
+						<a href="#" className="list-group-item list-group-item-action">First item</a>
+					}
+				</div>
 			</div>
 		</Fragment>
 	)
 }
+
+
+
 
 
 export default PropertiesNav

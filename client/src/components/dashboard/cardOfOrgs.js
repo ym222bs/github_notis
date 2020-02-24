@@ -25,20 +25,16 @@ const CardOfOrgs = ({ avatar }) => {
 		<Fragment>
 			<div
 				className='card'>
-				<img
-					style={{ width: '18rem' }} src={avatar}
-				/>
-				<div
-					className='card-header'
-				>
+				<img style={{ width: '18rem' }} src={avatar} />
+				<div className='card-header'>
 					Organizations:
-                </div>
+        </div>
 				<ul
 					className='list-group list-group-flush'
 					key='orgs-list'
 				>
 					{
-						Object.entries(userOrganizations).map(([key, value]) => {
+						Object.keys(userOrganizations).map((key => {
 							return (
 								<li
 									className='list-group-item'
@@ -48,24 +44,19 @@ const CardOfOrgs = ({ avatar }) => {
 										className='btn btn-outline-info'
 										key={userOrganizations[key].login}
 										onClick={() => setSelectedOrg(userOrganizations[key])}>
-
 										<img
 											style={{ width: '2rem', marginRight: '5px' }}
 											src={userOrganizations[key].avatar_url}
 										/>
-
 										{userOrganizations[key].login}
-
 									</div >
 								</li>
 							)
-						})
+						}))
 					}
 				</ul>
 			</div>
-			<div
-				className='child'
-			>
+			<div className='child' >
 				{
 					selectedOrg &&
 					<PropertiesNav

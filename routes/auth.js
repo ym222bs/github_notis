@@ -6,7 +6,7 @@ const passport = require('passport')
 
 
 router.get('/logout', (req, res) => {
-	console.log('logging out')
+	req.logout()
 	res.redirect('/')
 })
 

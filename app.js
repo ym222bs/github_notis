@@ -7,7 +7,7 @@ const DBconnect = require('./config/db_config.js')
 const passportSetup = require('./config/passport_setup.js') // Initiating passportStrategy
 const authRoutes = require('./routes/auth.js')
 const profileRoutes = require('./routes/profile.js')
-
+const csp = require('express-csp-header')
 require('dotenv').config()
 const app = express()
 const secret = process.env.SECRET
@@ -19,8 +19,16 @@ app.use(cookieSession({
 DBconnect()
 app.use(cors())
 
+app.use(csp({
+    policies: {
+        'default-src': [csp.NONE],
+        'img-src': [csp.SELF],
+    }
+}))
 app.use(passport.initialize())
 app.use(passport.session())
+
+
 
 app.use('/auth', authRoutes)
 app.use('/profile', profileRoutes)

@@ -33,9 +33,7 @@ pre {
     transform: translateY(-10px);
 }
 
-.navbar a:hover {
-    background-color: #5ebfdc;
-}
+
 
 .jumbotron {
     background-color: #F0F8FF;
@@ -59,6 +57,9 @@ pre {
     border-radius: var(--main-border-radius);
     box-shadow: 2px 1px 4px 1px rgba(0,0,0,0.2);
 
+}
+.navbar a:hover {
+    background-color: #17a2b8;
 }
 
 .menu-bar {
