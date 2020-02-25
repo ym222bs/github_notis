@@ -1,15 +1,17 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-const password = process.env.MONGO_PASS
-const username = process.env.MONGO_USERNAME
+const mongoURL = process.env.MONGO_URL
 
 const connectToDatabase = async () => {
+    console.log(mongoURL)
     try {
-        await mongoose.connect(`mongodb+srv://${username}:${password}@mern-stack-qwxuy.mongodb.net/test?retryWrites=true&w=majority`, { 
+        await mongoose.connect(mongoURL, { 
             useNewUrlParser: true,  
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useNewUrlParser: true
         })
-        
+        console.log('connected to db')
     } catch (err) {
         console.log(err.message)
     }

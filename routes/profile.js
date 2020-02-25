@@ -54,7 +54,7 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 	// 	username,
 	// 	userid
 	// })
-	res.status(200).send({msg: 'I have recieved some data to webhook'})
+	res.status(200).send({msg: 'I have received some data to webhook'})
 	try {
 		// const newHook = await hook.save()
 		// res.status(201).send({

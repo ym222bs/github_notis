@@ -1,8 +1,5 @@
 const mongoose = require('mongoose')
 
-
-const Schema = mongoose.Schema
-
 const userSchema = new mongoose.Schema({
     name: {
         type: String
@@ -12,16 +9,19 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    
-    id: {
+    git_id: {
         type: String,
         required: true,
         unique: true
     },
-    organizations: {
-        type: []
+    avatar_url: {
+        type: String
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now 
     }
 })
-const Hook = mongoose.model('user_information', userSchema)
+const User = mongoose.model('user_information', userSchema)
 
-module.exports = Hook
+module.exports = User

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-
 const hookSchema = new mongoose.Schema({
       hookurl: {
             type: String,

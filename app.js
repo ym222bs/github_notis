@@ -18,7 +18,6 @@ app.use(cookieSession({
 	keys: [secret]
 }))
 
-DBconnect()
 app.use(cors())
 
 app.use(csp({
@@ -31,6 +30,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
+DBconnect()
 
 app.use('/auth', authRoutes)
 app.use('/profile', profileRoutes)

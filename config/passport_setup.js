@@ -1,6 +1,7 @@
 const GitHubStrategy = require('passport-github2')
 const passport = require('passport')
 const rp = require('request-promise')
+const User = require('../model/user.js')
 
 require('dotenv').config()
 
@@ -27,15 +28,41 @@ passport.use(new GitHubStrategy({
 		returnObject = profile._json
 		accessToken = token
 
-		return done(null, {...profile._json})
+		// Save new profile to database
+		saveProfileToDB(profile._json)
+		console.log('HERE 1')
+		return done(null, { ...profile._json })
 	}
 ))
 
+// Safe Profile to mongo
+
+const saveProfileToDB = async (profile) => {
+	try {
+		const githubID = profile.id
+		// const user = await User.findOne({ git_id: githubID })
+		if (await User.findOne({ git_id: githubID })) {
+			console.log('user already exists')
+		} else {
+			const newUser = new User({
+				name: profile.name,
+				username: profile.login,
+				git_id: profile.id,
+				avatar_url: profile.avatar_url
+			})
+			const saveduser = await newUser.save()
+			console.log(saveduser)
+		}
+	} catch (error) {
+		console.log()
+	}
+}
+
 
 module.exports.getProfileInformation = () => {
-    return returnObject
+	return returnObject
 }
 
 module.exports.getUserToken = () => {
-    return accessToken
+	return accessToken
 }
