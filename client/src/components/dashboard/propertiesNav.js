@@ -3,42 +3,47 @@ import axios from 'axios'
 
 //  Option === Specific Organization
 const PropertiesNav = ({ option }) => {
-	const [url, setUrl] = useState('poop')
+	const [url, setGithubUrl] = useState(null)
+	const [apiUrl, setApiUrl] = useState(null)
 	const [property, setProperty] = useState(null)
 	const { events_url, repos_url, hooks_url } = option
 
 	const handleNavOption = (type) => {
 		switch (type) {
 			case 'events':
-				setUrl(events_url)
-				break;
+				setGithubUrl(events_url)
+				setApiUrl('events')
+				break
 			case 'repos':
-				setUrl(repos_url)
-				break;
+				setGithubUrl(repos_url)
+				setApiUrl('repos')
+				break
 			case 'hook':
-				setUrl(hooks_url)
-				break;
+				setGithubUrl(hooks_url)
+				setApiUrl('webhook')
+				break
 		}
 	}
+	
+	const fetchData = () => {
+		const api = `profile/${apiUrl}`
 
-	const apiUrl = 'profile/webhook'
+		axios.post(api, { data: url }, {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+	}
+
 	useEffect(() => {
-
-		const fetchData = () => {
-
-			axios.post(apiUrl, { data: url }, {
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
-		}
+	
 		fetchData()
 		// And render dataObject Based on returnObject Structure
 	}, [url])
 
 
 
-	const renderListOfCOntent = () => {
+	const oderListOfContent = () => {
 
 	}
 
