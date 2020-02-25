@@ -5,7 +5,6 @@ const rp = require('request-promise')
 require('dotenv').config()
 
 let returnObject = {}
-let organizations = {}
 let accessToken = ''
 
 const clientID = process.env.GITHUB_CLIENT_ID
@@ -34,7 +33,7 @@ passport.use(new GitHubStrategy({
 
 
 module.exports.getProfileInformation = () => {
-    return userObject
+    return returnObject
 }
 
 module.exports.getUserToken = () => {

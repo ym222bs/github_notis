@@ -1,15 +1,17 @@
+require('dotenv').config()
 const cors = require('cors')
 const cookieSession = require('cookie-session')
 const express = require('express')
 const passport = require('passport')
-
+const bodyParser = require('body-parser')
 const DBconnect = require('./config/db_config.js')
 const passportSetup = require('./config/passport_setup.js') // Initiating passportStrategy
 const authRoutes = require('./routes/auth.js')
 const profileRoutes = require('./routes/profile.js')
 const csp = require('express-csp-header')
-require('dotenv').config()
 const app = express()
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 const secret = process.env.SECRET
 app.use(cookieSession({
 	maxAge: 24 * 60 * 60 * 1000,

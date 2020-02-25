@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 
 const hookSchema = new mongoose.Schema({
-      url: {
+      hookurl: {
             type: String,
             match: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
             required: true
@@ -15,7 +15,7 @@ const hookSchema = new mongoose.Schema({
       username: {
             type: String
       },
-      userid: {
+      id: {
             type: String,
             required: true
       },

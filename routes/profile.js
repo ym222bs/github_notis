@@ -13,58 +13,37 @@ const authCheck = (req, res, next) => {
 }
 
 router.get('/', authCheck, (req, res) => {
-	res.send(req.user)
+	res.status(200).send(req.user)
 })
 
 
 router.get('/orgs', authCheck, async (req, res, next) => {
-	// const organizations = await getOrganizations(req, res)
-	// res.status(200).send({ ...orgs })
-
-	const token = getUserToken()
-	const options = {
-		url: 'https://api.github.com/user/orgs',
-		qs: {
-			access_token: token
-		},
-		headers: {
-			'User-Agent': 'Request-Promise'
-		},
-		json: true
-	}
-	try {
-		const orgs = await rp(options)
-		res.send({ ...orgs })
-
-	} catch (err) {
-		console.log('get /orgs: ', err)
-		res.send({
-			msg: 'Not a valid url or url missing.',
-			err: err.message
-		})
-		next(err)
-	}
+	const orgs = await getOrganizationsFromGithub(req, res)
+	res.status(200).send({ ...orgs })
 })
 
 
 router.post('/webhook', authCheck, async (req, res, next) => {
-	const { url } = req.data
+	const url = req.body
 
+	console.log(url)
+	// const someData = await getPropertyUrl(url)
+	// console.log('somedata:: ',someData)
 	// const { login, id, url,  } = getProfileInformation()
 	// const hook = new Hook({
 	// 	url,
 	// 	username,
 	// 	userid
 	// })
+	res.status(200).send({msg: 'I have recieved some data to webhook'})
 	try {
 		// const newHook = await hook.save()
 		// res.status(201).send({
-		// 	msg: 'Webhook url saved.',
-		// 	hook
-		// })
-		console.log('url from klient to server', url)
+			// 	msg: 'Webhook url saved.',
+			// 	hook
+			// })
 	} catch (err) {
-		res.send({
+		res.status(500).send({
 			msg: 'Not a valid url or url missing.',
 			error: err.message
 		})
@@ -73,30 +52,34 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 })
 
 
-const getOrganizations = async (req, res) => {
-	const token = getUserToken()
-
-	const options = {
-		url: 'https://api.github.com/user/orgs',
-		qs: {
-			access_token: token
-		},
-		headers: {
-			'User-Agent': 'Request-Promise'
-		},
-		json: true
-	}
+const getPropertyUrl = async (url) => {
 	try {
-		const orgs = await rp(options)
-		res.send({ ...orgs })
+		const res = await axios.get(url, {
+			headers: {
+				Authorization: `token ${githubUserToken}`,
+				'User-Agent': 'axios'
+			}
+		})
+		return res.data
 
 	} catch (err) {
-		console.log('get /orgs: ', err)
-		res.send({
-			msg: 'Not a valid url or url missing.',
-			err: err.message
+		console.log('getOrganizations: ', err)
+	}
+}
+
+
+const getOrganizationsFromGithub = async (req, res) => {
+	const githubUserToken = getUserToken()
+	try {
+		const res = await axios.get('https://api.github.com/user/orgs', {
+			headers: {
+				Authorization: `token ${githubUserToken}`,
+				'User-Agent': 'axios'
+			}
 		})
-		console.log(err)
+		return res.data
+	} catch (err) {
+		console.log('getOrganizations: ', err)
 	}
 }
 
