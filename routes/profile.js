@@ -41,18 +41,19 @@ router.get('/orgs', authCheck, async (req, res, next) => {
 })
 
 
-
-
 router.get('/webhook', authCheck, async (req, res, next) => {
 	// Get current users earlies webhooks and send to Client
-
 	try {
 		const webhooks = await Hook.find({})
-
-		res.status(200).send({
-			organization: webhooks.organization,
-			createdAt: webhooks.createdAt
-		})
+		console.log(webhooks)
+		if(webhooks) {
+			res.status(200).send({
+				organization: webhooks.organization,
+				createdAt: webhooks.createdAt
+			})
+		} else {
+			console.log('no saved webhooks')
+		}
 	} catch (err) {
 		res.status(500).send('get /webhook error')
 		next(err)
@@ -75,13 +76,16 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 			// 	msg: 'Webhook url saved.',
 			// 	hook
 			// })
+
+	// TODO: create a webhook as a separate function
+
 	} catch (error) {
 		
 	}
 })
 
 
-const getPropertyUrl = async (url) => {
+const getOrganizationPropertyUrl = async (url) => {
 	try {
 		const res = await axios.get(url, {
 			headers: {
