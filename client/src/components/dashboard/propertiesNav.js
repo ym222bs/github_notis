@@ -7,8 +7,15 @@ const PropertiesNav = ({ option }) => {
 	const [apiUrl, setApiUrl] = useState(null)
 	const [property, setProperty] = useState(null)
 	const { events_url, repos_url, hooks_url } = option
+	console.log('url:', url)
+	console.log('api:', apiUrl)
+
+	console.log('evet', events_url)
+	console.log('rep', repos_url)
+	console.log('hook', hooks_url)
 
 	const handleNavOption = (type) => {
+		console.log('type', type)
 		switch (type) {
 			case 'events':
 				setGithubUrl(events_url)
@@ -24,23 +31,19 @@ const PropertiesNav = ({ option }) => {
 				break
 		}
 	}
-	
-	const fetchData = () => {
-		const api = `profile/${apiUrl}`
 
-		axios.post(api, { data: url }, {
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
+	// TODO: change to get, make server get data
+	const fetchData = async () => {
+		const api = `profile/${apiUrl}`
+		const propertyData = await axios.get(api)
+		console.log(propertyData)
+		setProperty(propertyData)
 	}
 
 	useEffect(() => {
-	
 		fetchData()
 		// And render dataObject Based on returnObject Structure
-	}, [url])
-
+	}, [url || apiUrl])
 
 
 	const oderListOfContent = () => {

@@ -34,7 +34,7 @@ const CardOfOrgs = ({ avatar }) => {
 					key='orgs-list'
 				>
 					{
-						Object.keys(userOrganizations).map((key => {
+						Object.keys(userOrganizations).map(key => {
 							return (
 								<li
 									className='list-group-item'
@@ -52,7 +52,7 @@ const CardOfOrgs = ({ avatar }) => {
 									</div >
 								</li>
 							)
-						}))
+						})
 					}
 				</ul>
 			</div>

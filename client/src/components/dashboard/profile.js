@@ -1,14 +1,12 @@
-import React, { Fragment, useContext, useState } from 'react'
+import React, { Fragment, useContext } from 'react'
 import _ from 'lodash'
 import CardOfOrgs from './cardOfOrgs.js'
 import UserProvider from '../../contexts/UserProvider.jsx'
-import axios from 'axios'
 
 const loginMsg = 'You have to log in to see info! 🤖 '
 const description = 'Your notofication app for the good old GitHub..'
 
 // Ultimate userdata Data from server:
-
 
 
 const Profile = () => {
@@ -32,7 +30,7 @@ const Profile = () => {
 						Logout
 					</a>
 					<div className='lead'>
-						{description}
+						{ description }
 						<hr className='my-4' />
 						<div className='gridparent'>
 							<CardOfOrgs avatar={image} />

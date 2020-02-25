@@ -28,20 +28,18 @@ passport.use(new GitHubStrategy({
 		returnObject = profile._json
 		accessToken = token
 
-		// Save new profile to database
-		saveProfileToDB(profile._json)
-		console.log('HERE 1')
+		
+		saveProfileToDB(profile._json)   // Save new profile to database
 		return done(null, { ...profile._json })
 	}
 ))
 
-// Safe Profile to mongo
 
 const saveProfileToDB = async (profile) => {
 	try {
 		const githubID = profile.id
-		// const user = await User.findOne({ git_id: githubID })
-		if (await User.findOne({ git_id: githubID })) {
+		const user = await User.findOne({ git_id: githubID })
+		if (user) {
 			console.log('user already exists')
 		} else {
 			const newUser = new User({

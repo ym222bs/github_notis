@@ -3,7 +3,6 @@ mongoose.Promise = global.Promise
 const mongoURL = process.env.MONGO_URL
 
 const connectToDatabase = async () => {
-    console.log(mongoURL)
     try {
         await mongoose.connect(mongoURL, { 
             useNewUrlParser: true,  

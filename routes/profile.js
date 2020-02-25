@@ -40,33 +40,43 @@ router.get('/orgs', authCheck, async (req, res, next) => {
 	res.send('Not done')
 })
 
-router.post('/webhook', authCheck, async (req, res, next) => {
+
+
+
+router.get('/webhook', authCheck, async (req, res, next) => {
 	// Get current users earlies webhooks and send to Client
 
-	const url = req.body
+	try {
+		const webhooks = await Hook.find({})
 
-	console.log(url)
-	// const someData = await getPropertyUrl(url)
-	// console.log('somedata:: ',someData)
-	// const { login, id, url,  } = getProfileInformation()
+		res.status(200).send({
+			organization: webhooks.organization,
+			createdAt: webhooks.createdAt
+		})
+	} catch (err) {
+		res.status(500).send('get /webhook error')
+		next(err)
+	}
+})
+
+
+// POST Webhook url
+router.post('/webhook', authCheck, async (req, res, next) => {
+	try {
+	// TODO check existence first!
+
 	// const hook = new Hook({
 	// 	url,
 	// 	username,
 	// 	userid
 	// })
-	res.status(200).send({msg: 'I have received some data to webhook'})
-	try {
 		// const newHook = await hook.save()
 		// res.status(201).send({
 			// 	msg: 'Webhook url saved.',
 			// 	hook
 			// })
-	} catch (err) {
-		res.status(500).send({
-			msg: 'Not a valid url or url missing.',
-			error: err.message
-		})
-		next(err)
+	} catch (error) {
+		
 	}
 })
 
