@@ -1,40 +1,47 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import axios from 'axios'
 
-
+//  Option === Specific Organization
 const PropertiesNav = ({ option }) => {
-	const [url, setUrl] = useState('fuckyou')
+	const [url, setUrl] = useState('poop')
 	const [property, setProperty] = useState(null)
 	const { events_url, repos_url, hooks_url } = option
 
-	console.log('nav url ', url)
+	const handleNavOption = (type) => {
+		switch (type) {
+			case 'events':
+				setUrl(events_url)
+				break;
+			case 'repos':
+				setUrl(repos_url)
+				break;
+			case 'hook':
+				setUrl(hooks_url)
+				break;
+		}
+	}
+
 	const apiUrl = 'profile/webhook'
 	useEffect(() => {
-		console.log('nav url 2 ', url)
 
 		const fetchData = () => {
-		console.log('nav url 3 ', url)
 
-			axios.post(apiUrl, {
-				data: url
-			}, {
-				headers:
-				{
+			axios.post(apiUrl, { data: url }, {
+				headers: {
 					'Content-Type': 'application/json'
 				}
-			}).then((payload) => {
-				console.log(payload.data)
-
 			})
-				.catch((err) => {
-					console.log(err)
-				})
-			//   .then(function(result) {
-			//    console.log(result);
-			//   })
 		}
 		fetchData()
+		// And render dataObject Based on returnObject Structure
 	}, [url])
+
+
+
+	const renderListOfCOntent = () => {
+
+	}
+
 
 	return (
 		<Fragment>
@@ -48,19 +55,19 @@ const PropertiesNav = ({ option }) => {
 						</div>
 						<a
 							className='nav-link btn btn-link'
-							onClick={() => setUrl(events_url)}
+							onClick={() => handleNavOption('events')}
 						>
 							Events
 						</a>
 						<a
 							className='nav-link btn btn-link'
-							onClick={() => setUrl(repos_url)}
+							onClick={() => handleNavOption('repos')}
 						>
 							Repos
 						</a>
 						<a
-							className='nav-link btn btn-link' key={hooks_url}
-							onClick={() => setUrl(hooks_url)}
+							className='nav-link btn btn-link'
+							onClick={() => handleNavOption('hook')}
 						>
 							Create Hook
 						</a>

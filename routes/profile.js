@@ -23,7 +23,26 @@ router.get('/orgs', authCheck, async (req, res, next) => {
 })
 
 
+/**
+ * Here are requests received from nav
+ * 
+ */
+
+ // router.get('/events')
+ router.get('/events', authCheck, (req, res) => {
+	 res.send('Not done')
+ })
+
+
+
+ // router.get('/repos')
+ router.get('/repos', authCheck, (req, res) => {
+	res.send('Not done')
+})
+
 router.post('/webhook', authCheck, async (req, res, next) => {
+	// Get current users earlies webhooks and send to Client
+
 	const url = req.body
 
 	console.log(url)
