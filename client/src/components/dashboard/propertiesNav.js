@@ -3,11 +3,11 @@ import axios from 'axios'
 
 //  Option === Specific Organization
 const PropertiesNav = ({ option }) => {
-	const [url, setGithubUrl] = useState(null)
+	const [hookurl, setGithubUrl] = useState(null)
 	const [apiUrl, setApiUrl] = useState(null)
 	const [property, setProperty] = useState(null)
 	const { events_url, repos_url, hooks_url } = option
-	console.log('url:', url)
+	console.log('url:', hookurl)
 	console.log('api:', apiUrl)
 
 	console.log('evet', events_url)
@@ -33,17 +33,35 @@ const PropertiesNav = ({ option }) => {
 	}
 
 	// TODO: change to get, make server get data
-	const fetchData = async () => {
-		const api = `profile/${apiUrl}`
-		const propertyData = await axios.get(api)
+	// const fetchData = async () => {
+	// 	const api = `profile/${apiUrl}`
+	// 	const propertyData = await axios.get(api)
+	// 	console.log(propertyData)
+	// 	setProperty(propertyData)
+	// }
+
+	const sendData = async () => {
+		// const api = `profile/${apiUrl}`
+		const propertyData = await axios.post('/profile/webhook', {
+			data: { 
+				hookurl: hookurl, 
+				orgname: option.login
+			},
+			headers: {
+				'Content-Type': 'application/json'
+		  },
+		})
 		console.log(propertyData)
-		setProperty(propertyData)
+		// setProperty(propertyData)
 	}
 
 	useEffect(() => {
-		fetchData()
+		// fetchData()
+		if(hookurl) {
+			sendData()
+		}
 		// And render dataObject Based on returnObject Structure
-	}, [url || apiUrl])
+	}, [hookurl || apiUrl])
 
 
 	const oderListOfContent = () => {

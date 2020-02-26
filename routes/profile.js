@@ -4,6 +4,8 @@ const getProfileInformation = require('../config/passport_setup').getProfileInfo
 const axios = require('axios')
 const rp = require('request-promise')
 const Hook = require('../model/hook.js')
+const re = require('request')
+let request = require('request-promise')
 
 require('dotenv').config()
 
@@ -28,72 +30,115 @@ router.get('/orgs', authCheck, async (req, res, next) => {
  * 
  */
 
- // router.get('/events')
- router.get('/events', authCheck, (req, res) => {
-	 res.send('Not done')
- })
+// router.get('/events')
+router.get('/events', authCheck, (req, res) => {
+	res.send('Not done')
+})
 
 
 
- // router.get('/repos')
- router.get('/repos', authCheck, (req, res) => {
+// router.get('/repos')
+router.get('/repos', authCheck, (req, res) => {
 	res.send('Not done')
 })
 
 
 router.get('/webhook', authCheck, async (req, res, next) => {
 	// Get current users earlies webhooks and send to Client
-	try {
-		const webhooks = await Hook.find({})
-		console.log(webhooks)
-		if(webhooks) {
-			res.status(200).send({
-				organization: webhooks.organization,
-				createdAt: webhooks.createdAt
-			})
-		} else {
-			console.log('no saved webhooks')
-		}
-	} catch (err) {
+
+	const webhooks = await Hook.find({}).catch(e => {
+		console.log(e)
 		res.status(500).send('get /webhook error')
-		next(err)
+	})
+
+	console.log(webhooks)
+	if (webhooks) {
+		res.status(200).send({
+			organization: webhooks.organization,
+			createdAt: webhooks.createdAt
+		})
+	} else {
+		console.log('no saved webhooks')
 	}
+
 })
 
 
 // POST Webhook url
+
+// json: true
 router.post('/webhook', authCheck, async (req, res, next) => {
 	try {
-	// TODO check existence first!
+		const { hookurl, orgname } = req.body.data
+		console.log('user hooook: ', hookurl)
+		console.log(orgname)
+		const { login, id } = getProfileInformation()
+		console.log(login)
+		console.log(id)
 
-	// const hook = new Hook({
-	// 	url,
-	// 	username,
-	// 	userid
-	// })
-		// const newHook = await hook.save()
+		// TODO ADD THE 
+		// const webhook = await Hook.findOne({ userid: id })
+		// if (!webhook) {
+		// 	const hook = new Hook({
+		// 		url: hookurl,
+		// 		organization: orgname,
+		// 		username: login,
+		// 		userid: id
+		// 	})
+		// 	const bja = await hook.save()
+		// 	console.log(bja)
+		const githubUserToken = getUserToken()
+		console.log('usetrrttoken: ', githubUserToken)
+		console.log('usetrrttoken: ', githubUserToken)
+
+
+		const createHookHeader = await axios({
+			method: 'POST',
+			url: `https://api.github.com/orgs/${orgname}/hooks`,
+			headers: {
+				'authorization': `token ${githubUserToken}`
+			},
+			data: {
+				name: 'web',
+				active: true,
+				events: ['push', 'repository', 'issues', 'issue_comment'],
+				config: {
+					url: 'https://webhook.site/186c4ca6-f742-4612-aa78-36a53bb1f92e',
+					content_type: 'json'
+				}
+			}
+		})
+
+		console.log('CREATE HOOK RES: ',createHookHeader)
+
+
+
 		// res.status(201).send({
-			// 	msg: 'Webhook url saved.',
-			// 	hook
-			// })
+		// 	msg: 'Webhook url saved.',
+		// 	hook
+		// })
+		// } else {
+		// 	console.log('hook already exists')
+		// }
+		res.status(200)
 
-	// TODO: create a webhook as a separate function
+		// TODO: create a webhook as a separate function
 
-	} catch (error) {
-		
+	} catch (err) {
+		console.log(err)
 	}
 })
 
 
 const getOrganizationPropertyUrl = async (url) => {
 	try {
-		const res = await axios.get(url, {
+		await axios.get(url, {
 			headers: {
 				Authorization: `token ${githubUserToken}`,
 				'User-Agent': 'axios'
 			}
 		})
-		return res.data
+		// return data
 
 	} catch (err) {
 		console.log('getOrganizations: ', err)

@@ -1,11 +1,11 @@
 require('dotenv').config()
-// const cors = require('cors')
+const cors = require('cors')
 const cookieSession = require('cookie-session')
 const express = require('express')
 const passport = require('passport')
 const bodyParser = require('body-parser')
 
-const cors = require('./allowCORS.js')
+const allowCORS = require('./allowCORS.js')
 const DBconnect = require('./config/db_config.js')
 const passportSetup = require('./config/passport_setup.js') // Initiating passportStrategy (runs Automatically)
 const authRoutes = require('./routes/auth.js')
@@ -29,6 +29,7 @@ app.use(csp({
 
 app.use(passport.initialize())
 app.use(passport.session())
+// app.use(allowCORS)
 // app.use(cors)
 DBconnect()
 
