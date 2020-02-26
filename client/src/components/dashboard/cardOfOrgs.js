@@ -40,16 +40,18 @@ const CardOfOrgs = ({ avatar }) => {
 									className='list-group-item'
 									key={userOrganizations[key].login}
 								>
-									<div
-										className='btn btn-outline-info'
+									<a 
+										href="#"
+										className='card-link'
 										key={userOrganizations[key].login}
-										onClick={() => setSelectedOrg(userOrganizations[key])}>
+										onClick={() => setSelectedOrg(userOrganizations[key])}
+										>
 										<img
 											style={{ width: '2rem', marginRight: '5px' }}
 											src={userOrganizations[key].avatar_url}
-										/>
-										{userOrganizations[key].login}
-									</div >
+											/>
+											{userOrganizations[key].login}
+									</a >
 								</li>
 							)
 						})

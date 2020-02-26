@@ -15,7 +15,7 @@ const hookSchema = new mongoose.Schema({
 	username: {
 		type: String
 	},
-	userid: {
+	git_id: {
 		type: String,
 		required: true
 	},

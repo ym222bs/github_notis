@@ -21,6 +21,16 @@ const Profile = () => {
 			<h2 className='display-4'>
 				{text}
 			</h2>
+
+			{
+				_.isEmpty(userData) &&
+				<a
+					className='btn btn-outline-dark'
+					href={'/'}
+					style={{ float: "right" }}>
+					Login
+				</a>
+			}
 			{
 				!_.isEmpty(userData) &&
 				<Fragment>
@@ -29,13 +39,20 @@ const Profile = () => {
 						className='btn btn-outline-dark'>
 						Logout
 					</a>
+					
 					<div className='lead'>
-						{ description }
-						<hr className='my-4' />
+						{description}
+						
+						<hr className='my-4' style={{
+							backgroundColor: 'white',
+							height: 2
+						}} />
+						
 						<div className='gridparent'>
 							<CardOfOrgs avatar={image} />
 						</div>
 					</div>
+
 					<div style={{ marginBottom: 20 }} />
 				</Fragment>
 			}

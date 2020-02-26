@@ -30,122 +30,81 @@ router.get('/orgs', authCheck, async (req, res, next) => {
  * 
  */
 
-// router.get('/events')
+
 router.get('/events', authCheck, (req, res) => {
-	res.send('Not done')
+	const url = req.body.data
+	const data = getOrganizationPropertyContent(url)
+	res.status(200).send(data)
 })
 
 
 
-// router.get('/repos')
+
 router.get('/repos', authCheck, (req, res) => {
-	res.send('Not done')
+	const url = req.body.data
+	const data = getOrganizationPropertyContent(url)
+	res.status(200).send(data)
 })
 
 
 router.get('/webhook', authCheck, async (req, res, next) => {
 	// Get current users earlies webhooks and send to Client
+	try {
+		const webhooks = await Hook.find({})
 
-	const webhooks = await Hook.find({}).catch(e => {
-		console.log(e)
-		res.status(500).send('get /webhook error')
-	})
+		console.log(webhooks)
+		if (webhooks) {
+			res.status(200).send({
+				organization: webhooks.organization,
+				createdAt: webhooks.createdAt
+			})
+		} else {
+			console.log('no saved webhooks')
+		}
 
-	console.log(webhooks)
-	if (webhooks) {
-		res.status(200).send({
-			organization: webhooks.organization,
-			createdAt: webhooks.createdAt
-		})
-	} else {
-		console.log('no saved webhooks')
+	} catch (err) {
+		console.log('get /webhook: ', err)
 	}
 
 })
 
+// TODO this is where the payload will land
+router.post('/payload', async (req, res) => {
+	slackNotification(req, res)
+})
 
-// POST Webhook url
 
-// json: true
 router.post('/webhook', authCheck, async (req, res, next) => {
 	try {
 		const { hookurl, orgname } = req.body.data
-		console.log('user hooook: ', hookurl)
-		console.log(orgname)
 		const { login, id } = getProfileInformation()
-		console.log(login)
-		console.log(id)
-
-		// TODO ADD THE 
-		// const webhook = await Hook.findOne({ userid: id })
-		// if (!webhook) {
-		// 	const hook = new Hook({
-		// 		url: hookurl,
-		// 		organization: orgname,
-		// 		username: login,
-		// 		userid: id
-		// 	})
-		// 	const bja = await hook.save()
-		// 	console.log(bja)
 		const githubUserToken = getUserToken()
-		console.log('usetrrttoken: ', githubUserToken)
-		console.log('usetrrttoken: ', githubUserToken)
 
+		const webhook = await Hook.findOne({ git_id: id })
 
-		const createHookHeader = await axios({
-			method: 'POST',
-			url: `https://api.github.com/orgs/${orgname}/hooks`,
-			headers: {
-				'authorization': `token ${githubUserToken}`
-			},
-			data: {
-				name: 'web',
-				active: true,
-				events: ['push', 'repository', 'issues', 'issue_comment'],
-				config: {
-					url: 'https://webhook.site/186c4ca6-f742-4612-aa78-36a53bb1f92e',
-					content_type: 'json'
-				}
-			}
+		// Save to database if the hook does not exists yet
+		if (!webhook) {
+			const newHook = new Hook({
+				url: hookurl,
+				organization: orgname,
+				username: login,
+				git_id: id
+			})
+			await newHook.save()
+
+			createWebhook(orgname, githubUserToken)
+		}
+		res.status(201).send({
+			msg: 'Webhook url saved.'
 		})
-
-		console.log('CREATE HOOK RES: ',createHookHeader)
-
-
-
-		// res.status(201).send({
-		// 	msg: 'Webhook url saved.',
-		// 	hook
-		// })
-		// } else {
-		// 	console.log('hook already exists')
-		// }
-		res.status(200)
-
-		// TODO: create a webhook as a separate function
-
 	} catch (err) {
-		console.log(err)
+		console.log('post /webhook: ', err)
 	}
+
 })
 
 
-const getOrganizationPropertyUrl = async (url) => {
-	try {
-		await axios.get(url, {
-			headers: {
-				Authorization: `token ${githubUserToken}`,
-				'User-Agent': 'axios'
-			}
-		})
-		// return data
-
-	} catch (err) {
-		console.log('getOrganizations: ', err)
-	}
-}
-
-
+// Middleware
 const getOrganizationsFromGithub = async (req, res) => {
 	const githubUserToken = getUserToken()
 	try {
@@ -157,9 +116,69 @@ const getOrganizationsFromGithub = async (req, res) => {
 		})
 		return res.data
 	} catch (err) {
+		console.log('getOrganizationsFromGithub: ', err)
+	}
+}
+
+// Helper functions
+const getOrganizationPropertyContent = async (url) => {
+	try {
+		return await axios.get(url, {
+			headers: {
+				Authorization: `token ${githubUserToken}`,
+				'User-Agent': 'axios'
+			}
+		})
+	} catch (err) {
 		console.log('getOrganizations: ', err)
 	}
 }
 
+
+
+const createWebhook = async (nameOfOrganization, githubUserToken) => {
+	// Create the hook from organization to endpoint url:
+	const createHookHeader = await axios({
+		method: 'POST',
+		url: `https://api.github.com/orgs/${nameOfOrganization}/hooks`,
+		headers: {
+			'authorization': `token ${githubUserToken}`
+		},
+		data: {
+			name: 'web',
+			active: true,
+			events: ['push', 'repository', 'issues', 'issue_comment'],
+			config: {
+				url: 'https://webhook.site/186c4ca6-f742-4612-aa78-36a53bb1f92e',
+				content_type: 'json'
+			}
+		}
+	})
+	console.log('CREATE HOOK RES: ', createHookHeader)
+}
+
+const slackNotification = async (req, res) => {
+	const slackHookKey = process.env.SLACK_HOOK
+	const typeOfEvent = req.headers['x-github-event']
+
+	// const {Something} = data
+	try {
+		const result = await request({
+			url: `https://hooks.slack.com/services/${slackHookKey}`,
+			method: 'POST',
+			body: {
+				text: typeOfEvent,
+				attachments: {
+					color: 'good',
+					text: `${data.sender.login} on: ${data.organization.login}`,
+					json: true
+				}
+			}
+		})
+		console.log('WEBHOK SENT: ', result)
+	} catch (err) {
+		console.log('slackNotification: ', err)
+	}
+}
 
 module.exports = router

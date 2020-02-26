@@ -29,7 +29,7 @@ app.use(csp({
 
 app.use(passport.initialize())
 app.use(passport.session())
-// app.use(allowCORS)
+app.use(allowCORS)
 // app.use(cors)
 DBconnect()
 

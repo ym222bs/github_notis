@@ -1,5 +1,5 @@
 :root {
-    --primary-gray: #f7f7f7;
+    --primary-gray: #b9691d;
     --main-border-radius: 6px; 
 
 }
@@ -7,9 +7,12 @@
 body {
     font-family: 'Nunito';
     -webkit-font-smoothing: antialiased;
-    color: #444444;
-    background-color: #778899;
+    color: #292f33;
+    background-image: url('./images/color.jpg');
+    /* background-image: url('./images/lightmarble.jpg'); */
+    background-repeat: no-repeat, repeat;
 }
+
 
 pre {
     white-space: pre-wrap;
@@ -35,8 +38,10 @@ pre {
 
 
 
+/* background-color: #F0F8FF; */
 .jumbotron {
-    background-color: #F0F8FF;
+    background-color: #f7f7f7;
+    opacity: 0.95;
 }
 
 .gridparent {
