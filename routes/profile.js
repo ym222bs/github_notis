@@ -6,6 +6,8 @@ const rp = require('request-promise')
 const Hook = require('../model/hook.js')
 const re = require('request')
 let request = require('request-promise')
+const nodemailer = require('nodemailer')
+
 
 require('dotenv').config()
 
@@ -76,7 +78,7 @@ router.post('/payload', async (req, res) => {
 })
 
 
-const code = 'e06370ef'
+const code = 'c4e2fc98'
 const createWebhook = async (nameOfOrganization, githubUserToken) => {
 	// Create the hook from organization to endpoint url:
 	try {
@@ -164,6 +166,28 @@ const getOrganizationPropertyContent = async (url) => {
 }
 
 
+// let transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: 'youremail@gmail.com',
+//     pass: 'yourpassword'
+//   }
+// });
+
+// let mailOptions = {
+//   from: 'youremail@gmail.com',
+//   to: 'myfriend@yahoo.com',
+//   subject: 'Sending Email using Node.js',
+//   text: 'That was easy!'
+// };
+
+// transporter.sendMail(mailOptions, function(error, info){
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Email sent: ' + info.response);
+//   }
+// })
 
 const slackNotification = async (req, res) => {
 	try {
@@ -182,7 +206,7 @@ const slackNotification = async (req, res) => {
 			url: `https://hooks.slack.com/services/${slackHookKey}`,
 			method: 'POST',
 			body: JSON.stringify({
-				text: 'hello',
+				text: typeOfEvent,
 				json: true
 			})
 		})
@@ -192,6 +216,7 @@ const slackNotification = async (req, res) => {
 		console.log('slackNotification: ', err)
 	}
 }
+
 
 
 module.exports = router
