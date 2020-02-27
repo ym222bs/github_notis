@@ -1,5 +1,5 @@
 :root {
-    --primary-gray: #b9691d;
+    --primary-gray: #fdfefe;
     --main-border-radius: 6px; 
 
 }
@@ -37,11 +37,10 @@ pre {
 }
 
 
-
 /* background-color: #F0F8FF; */
 .jumbotron {
     background-color: #f7f7f7;
-    opacity: 0.95;
+    opacity: 0.97;
 }
 
 .gridparent {
