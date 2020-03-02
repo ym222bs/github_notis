@@ -25,9 +25,9 @@ passport.use(new GitHubStrategy({
 },
 	async (token, refreshToken, profile, done) => {
 		console.log('accesstoken: ', token)
+
 		returnObject = profile._json
 		accessToken = token
-
 		
 		saveProfileToDB(profile._json)   // Save new profile to database
 		return done(null, { ...profile._json })

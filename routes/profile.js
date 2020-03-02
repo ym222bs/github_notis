@@ -13,7 +13,7 @@ require('dotenv').config()
 
 
 const authCheck = (req, res, next) => {
-	!req.user ? res.redirect('/auth/github') : next()
+	!req.user ? res.redirect('/') : next()
 }
 
 router.get('/', authCheck, (req, res) => {

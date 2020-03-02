@@ -7,7 +7,7 @@ import githubIcon from '../github.png'
 const data = {
 	name: 'Github',
 	img: githubIcon,
-	href: 'auth/github',
+	href: '/auth/github',
 	color: '#24292e'
 }
 
