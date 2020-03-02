@@ -52,7 +52,7 @@ const saveProfileToDB = async (profile) => {
 			console.log(saveduser)
 		}
 	} catch (error) {
-		console.log()
+		console.log('saveProfileToDB: ', error)
 	}
 }
 
