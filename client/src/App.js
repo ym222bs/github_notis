@@ -13,7 +13,7 @@ function App() {
 		<Router history={history}>
 			<OrgsProvider>
 				<UserProvider>
-					<Route path='/profile' component={Profile}></Route>
+					<Route path='/profile' exact component={Profile}></Route>
 				</UserProvider>
 			</OrgsProvider>
 			<Route path='/' exact component={Home}></Route>
