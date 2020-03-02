@@ -28,7 +28,7 @@ app.use(allowHeaders)
 DBconnect()
 
 app.get('/', (req, res) => {
-	res.send('hello')
+	res.send('hello igen från server')
 })
 
 app.use('/auth', authRoutes)
@@ -40,12 +40,13 @@ const port = process.env.PORT || 8000
 
 // If application is running from Heroku then build React to 
 // static files and serve from relative path:
-if(process.env.NODE_ENV === 'production') {
-	app.use(express.static('client/build'))
+
+	app.use(express.static(path.join(__dirname, 'build')))
+
 	app.get('*', (req, res) => {
-		res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+		res.sendFile(path.join(__dirname, 'build', 'index.html'))
 	})
-}
+
 
 app.listen(port, () => {
 	console.log(`Hello port ${port}.`)
