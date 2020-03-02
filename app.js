@@ -7,7 +7,7 @@ const csp = require('express-csp-header')
 const passport = require('passport')
 const path = require('path')
 
-const allowCORS = require('./allowCORS.js')
+const allowHeaders = require('./allowHeaders.js')
 const DBconnect = require('./config/db_config.js')
 const passportSetup = require('./config/passport_setup.js') // Initiating passportStrategy (runs Automatically)
 const authRoutes = require('./routes/auth.js')
@@ -30,7 +30,7 @@ app.use(csp({
 
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(allowCORS)
+app.use(allowHeaders)
 // app.use(cors)
 DBconnect()
 
@@ -45,13 +45,13 @@ app.use('/profile', profileRoutes)
 const port = process.env.PORT || 8000
 
 
-// If application is running from Heroku then build react to 
+// If application is running from Heroku then build React to 
 // static files and serve from relative path:
 if(process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'))
-	app.get('*', (req, res) => {
-		res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
-	})
+	// app.get('*', (req, res) => {
+	// 	res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+	// })
 }
 
 app.listen(port, () => {
