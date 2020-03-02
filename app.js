@@ -21,13 +21,6 @@ app.use(cookieSession({
 	keys: [secret]
 }))
 
-app.use(csp({
-	policies: {
-		'default-src': [csp.NONE],
-		'img-src': [csp.SELF],
-	}
-}))
-
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(allowHeaders)
