@@ -12,7 +12,9 @@ const DBconnect = require('./config/db_config.js')
 const passportSetup = require('./config/passport_setup.js') // Initiating passportStrategy (runs Automatically)
 const authRoutes = require('./routes/auth.js')
 const profileRoutes = require('./routes/profile.js')
+
 const app = express()
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 const secret = process.env.COOKIE_SECRET
@@ -25,11 +27,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(allowHeaders)
 // app.use(cors)
+
+// Initi MongoDB
 DBconnect()
 
-app.get('/', (req, res) => {
-	res.send('hello igen från server')
-})
 
 app.use('/auth', authRoutes)
 app.use('/profile', profileRoutes)
