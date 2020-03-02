@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-const mongoURL = process.env.MONGO_URL
+const mongoURL = process.env.MONGODB_URI
+
 
 const connectToDatabase = async () => {
     try {

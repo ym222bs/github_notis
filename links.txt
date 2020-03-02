@@ -4,3 +4,8 @@ https://api.slack.com/apps/AU4BD2RR7/incoming-webhooks?success=1
 
 
 
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "client": "npm start --prefix ./client",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
