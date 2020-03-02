@@ -34,7 +34,7 @@ const Profile = () => {
 			{
 				!_.isEmpty(userData) &&
 				<Fragment>
-					<a href={'/api/auth/logout'}
+					<a href={'/auth/logout'}
 						style={{ float: "right" }}
 						className='btn btn-outline-dark'>
 						Logout

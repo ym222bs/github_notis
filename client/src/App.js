@@ -11,15 +11,15 @@ function App() {
 
 	return (
 		<Router history={history}>
-			<OrgsProvider>
-				<UserProvider>
-					<Route path='/profile' exact component={Profile}></Route>
-				</UserProvider>
-			</OrgsProvider>
+			<UserProvider>
+				<OrgsProvider>
+					<Route path='/userprofile' exact component={Profile}></Route>
+				</OrgsProvider>
+			</UserProvider>
 			<Route path='/' exact component={Home}></Route>
 		</Router>
 	)
-	
+
 }
 
 
