@@ -7,91 +7,91 @@ const getProfileInformation = require('../config/passport_setup').getProfileInfo
 
 // TODO: Refacture DUPLICATED get requests
 module.exports.getOrganizationsFromGithub = async () => {
-	const githubUserToken = getUserToken()
+ const githubUserToken = getUserToken()
 
-	try {
-		const res = await axios.get('https://api.github.com/user/orgs', {
-			headers: {
-				Authorization: `token ${githubUserToken}`,
-				'User-Agent': 'axios'
-			}
-		})
-		return res.data
-	} catch (err) {
-		console.log('getOrganizationsFromGithub: ', err)
-	}
+ try {
+  const res = await axios.get('https://api.github.com/user/orgs', {
+   headers: {
+    Authorization: `token ${githubUserToken}`,
+    'User-Agent': 'axios'
+   }
+  })
+  return res.data
+ } catch (err) {
+  console.log('getOrganizationsFromGithub: ', err)
+ }
 }
 
 
 // TODO: Refacture DUPLICATED get requests
 module.exports.getOrganizationPropertyContent = async (url) => {
-	const githubUserToken = getUserToken()
-	console.log('URLLLLLL::::: ', url)
-	try {
-		const res = await axios.get(url, {
-			headers: {
-				Authorization: `token ${githubUserToken}`,
-				'User-Agent': 'axios'
-			}
-		})
-		return res.data
-	} catch (err) {
-		console.log('getOrganizations: ', err)
-	}
+ const githubUserToken = getUserToken()
+ console.log('URLLLLLL::::: ', url)
+ try {
+  const res = await axios.get(url, {
+   headers: {
+    Authorization: `token ${githubUserToken}`,
+    'User-Agent': 'axios'
+   }
+  })
+  return res.data
+ } catch (err) {
+  console.log('getOrganizations: ', err)
+ }
 }
 
 
 const code = '7ec32e70'
 module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
-	// Create the hook from organization to endpoint url:
-	try {
-		const createHookHeader = await axios({
-			method: 'POST',
-			url: `https://api.github.com/orgs/${nameOfOrganization}/hooks`,
-			headers: {
-				'authorization': `token ${githubUserToken}`
-			},
-			data: {
-				name: 'web',
-				active: true,
-				events: ['push', 'repository', 'issues', 'issue_comment'],
-				config: {
-					url: `http://${code}.ngrok.io/profile/payload`,
-					content_type: 'json'
-				}
-			}
-		})
-		console.log('CREATE HOOK RES: ', createHookHeader)
-	} catch (error) {
-		console.log('createWebhook: ', error)
-	}
+ // Create the hook from organization to endpoint url:
+ try {
+  const createHookHeader = await axios({
+   method: 'POST',
+   url: `https://api.github.com/orgs/${nameOfOrganization}/hooks`,
+   headers: {
+    'authorization': `token ${githubUserToken}`
+   },
+   data: {
+    name: 'web',
+    active: true,
+    events: ['push', 'repository', 'issues', 'issue_comment'],
+    config: {
+     url: `http://${code}.ngrok.io/profile/payload`,
+     content_type: 'json'
+    }
+   }
+  })
+  console.log('CREATE HOOK RES: ', createHookHeader)
+ } catch (error) {
+  console.log('createWebhook: ', error)
+ }
 }
 
 
 module.exports.slackNotification = async (req) => {
-	try {
-		const slackHookKey = process.env.SLACK_HOOK
-		console.log(typeof slackHookKey)
-		const typeOfEvent = req.headers['x-github-event']
-		const resp = req.body
-		// console.log('typeof login:: ', resp.sender.login)
-		// console.log('typeof login:: ', resp.sender.login)
-		console.log('typeof event:: ', typeof typeOfEvent)
-		console.log('typeof login:: ', typeof resp.sender.login)
+ try {
+  const slackHookKey = process.env.SLACK_HOOK
+  console.log(typeof slackHookKey)
+  const typeOfEvent = req.headers['x-github-event']
+  const resp = req.body
+  // console.log('typeof login:: ', resp.sender.login)
+  // console.log('typeof login:: ', resp.sender.login)
+  console.log('typeof event:: ', typeof typeOfEvent)
+  console.log('typeof login:: ', typeof resp.sender.login)
 
 
-		const result = await request({
-			url: `https://hooks.slack.com/services/${slackHookKey}`,
-			method: 'POST',
-			body: JSON.stringify({
-				text: typeOfEvent,
-				json: true
-			})
-		})
-		console.log('WEBHOK SENT: ', result)
-	} catch (err) {
-		console.log('slackNotification: ', err)
-	}
+  const result = await request({
+   url: `https://hooks.slack.com/services/${slackHookKey}`,
+   method: 'POST',
+   body: JSON.stringify({
+    text: typeOfEvent,
+    json: true
+   })
+  })
+  console.log('WEBHOK SENT: ', result)
+ } catch (err) {
+  console.log('slackNotification: ', err)
+ }
 }
 
 

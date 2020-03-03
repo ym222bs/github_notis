@@ -19,8 +19,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 const secret = process.env.COOKIE_SECRET
 app.use(cookieSession({
-	maxAge: 24 * 60 * 60 * 1000,
-	keys: [secret]
+ maxAge: 24 * 60 * 60 * 1000,
+ keys: [secret]
 }))
 
 app.use(passport.initialize())
@@ -42,13 +42,13 @@ const port = process.env.PORT || 8000
 // If application is running from Heroku then build React to 
 // static files and serve from relative path:
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('client/build'))
-	app.get('*', (req, res) => {
-		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-	})
+ app.use(express.static('client/build'))
+ app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+ })
 }
 
 app.listen(port, () => {
-	console.log(`Hello port ${port}.`)
+ console.log(`Hello port ${port}.`)
 })
 
