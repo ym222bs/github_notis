@@ -6,13 +6,15 @@ const PropertiesNav = ({ option }) => {
 	const [hookurl, setGithubUrl] = useState(null)
 	const [apiUrl, setApiUrl] = useState(null)
 	const [property, setProperty] = useState(null)
+
 	const { events_url, repos_url, hooks_url } = option
+
 	console.log('url:', hookurl)
 	console.log('api:', apiUrl)
 
-	console.log('evet', events_url)
-	console.log('rep', repos_url)
-	console.log('hook', hooks_url)
+	// console.log('event', events_url)
+	// console.log('rep', repos_url)
+	// console.log('hook', hooks_url)
 
 	const handleNavOption = (type) => {
 		console.log('type', type)
@@ -36,13 +38,26 @@ const PropertiesNav = ({ option }) => {
 	// const fetchData = async () => {
 	// 	const api = `profile/${apiUrl}`
 	// 	const propertyData = await axios.get(api)
-	// 	console.log(propertyData)
+	// 	console.log('PROPDATA: ', propertyData)
 	// 	setProperty(propertyData)
 	// }
 
+	// const postReq = async () => {
+	// 	const api = `profile/${apiUrl}`
+	// 	return await axios.post(api, {
+	// 		data: { 
+	// 			url: hookurl
+	// 		},
+	// 		headers: {
+	// 			'Content-Type': 'application/json'
+	// 	  },
+	// 	})
+	// }
+
+	// Create new webhook by sending hookUrl to server
 	const sendData = async () => {
-		// const api = `profile/${apiUrl}`
-		const propertyData = await axios.post('/profile/webhook', {
+		const api = `profile/${apiUrl}`
+		const propertyData = await axios.post(api, {
 			data: { 
 				hookurl: hookurl, 
 				orgname: option.login
@@ -51,15 +66,15 @@ const PropertiesNav = ({ option }) => {
 				'Content-Type': 'application/json'
 		  },
 		})
-		console.log(propertyData)
+		console.log('Property shit:',propertyData.data)
 		// setProperty(propertyData)
 	}
 
 	useEffect(() => {
 		// fetchData()
-		if(hookurl) {
+
 			sendData()
-		}
+
 		// And render dataObject Based on returnObject Structure
 	}, [hookurl || apiUrl])
 

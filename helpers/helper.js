@@ -4,6 +4,8 @@ const request = require('request-promise')
 const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
 
+
+// TODO: Refacture DUPLICATED get requests
 module.exports.getOrganizationsFromGithub = async () => {
 	const githubUserToken = getUserToken()
 	
@@ -21,14 +23,18 @@ module.exports.getOrganizationsFromGithub = async () => {
 }
 
 
+// TODO: Refacture DUPLICATED get requests
 module.exports.getOrganizationPropertyContent = async (url) => {
+	const githubUserToken = getUserToken()
+	console.log('URLLLLLL::::: ', url)
 	try {
-		return await axios.get(url, {
+		const res = await axios.get(url, {
 			headers: {
 				Authorization: `token ${githubUserToken}`,
 				'User-Agent': 'axios'
 			}
 		})
+		return res.data
 	} catch (err) {
 		console.log('getOrganizations: ', err)
 	}
