@@ -1,3 +1,4 @@
+require('dotenv').config()
 const router = require('express').Router()
 const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
@@ -5,7 +6,6 @@ const getProfileInformation = require('../config/passport_setup').getProfileInfo
 const helper = require('../helpers/helper.js')
 const Hook = require('../model/hook.js')
 
-// require('dotenv').config()
 
 
 const authCheck = (req, res, next) => {

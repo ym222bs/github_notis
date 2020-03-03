@@ -1,4 +1,4 @@
-// require('dotenv').config()
+require('dotenv').config()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const cookieSession = require('cookie-session')
@@ -47,7 +47,7 @@ const c = process.env.COOKIE_SECRET
 console.log('COOKIE: ', c)
 
 const m = process.env.MONGODB_URI
-console.log('MONGO: ', m)
+console.log('MONGO: ', typeof m)
 
 const s = process.env.SLACK_HOOK
 console.log('SLCAK: ', s)

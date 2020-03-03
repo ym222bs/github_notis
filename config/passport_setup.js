@@ -17,10 +17,12 @@ passport.deserializeUser((user, cb) => {
   cb(null, user)
 })
 
+
+const herokuURL = 'https://github-notis.herokuapp.com'
 passport.use(new GitHubStrategy({
   clientID: clientID,
   clientSecret: clientSecret,
-  callbackURL: '/auth/github/callback'
+  callbackURL: herokuURL + '/auth/github/callback'
 },
   async (token, refreshToken, profile, done) => {
     console.log('accesstoken: ', token)
