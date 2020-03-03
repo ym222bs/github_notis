@@ -38,12 +38,12 @@ router.post('/repos', authCheck, async (req, res) => {
 })
 
 
-router.get('/webhook', async (req, res) => {
+router.get('/webhook', authCheck, async (req, res) => {
   // TODO: Get current users webhooks and send to Client
   try {
     const { id } = getProfileInformation()
-
-    const webhooks = await Hook.find({}).select('-_id url organization username ')
+    console.log(id)
+    const webhooks = await Hook.find({ git_id: id }).select('-_id url organization username ')
     return res.status(200).send({ webhooks })
   } catch (err) {
     console.log('get /webhook: ', err)
