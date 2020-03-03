@@ -5,7 +5,7 @@ const getProfileInformation = require('../config/passport_setup').getProfileInfo
 const helper = require('../helpers/helper.js')
 const Hook = require('../model/hook.js')
 
-require('dotenv').config()
+// require('dotenv').config()
 
 
 const authCheck = (req, res, next) => {
@@ -14,6 +14,8 @@ const authCheck = (req, res, next) => {
 
 
 router.get('/', authCheck, (req, res) => {
+  const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+  console.log('fullUrl: ', fullUrl)
   res.status(200).send(req.user)
 })
 

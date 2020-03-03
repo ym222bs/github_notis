@@ -1,6 +1,5 @@
 const GitHubStrategy = require('passport-github2')
 const passport = require('passport')
-const rp = require('request-promise')
 const User = require('../model/user.js')
 
 require('dotenv').config()
@@ -29,7 +28,7 @@ passport.use(new GitHubStrategy({
     returnObject = profile._json
     accessToken = token
 
-    saveProfileToDB(profile._json)   // Save new profile to database
+    // saveProfileToDB(profile._json)   // Save new profile to database
     return done(null, { ...profile._json })
   }
 ))

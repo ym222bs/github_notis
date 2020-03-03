@@ -1,4 +1,4 @@
-require('dotenv').config()
+// require('dotenv').config()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const cookieSession = require('cookie-session')
@@ -52,8 +52,7 @@ console.log('MONGO: ', m)
 const s = process.env.SLACK_HOOK
 console.log('SLCAK: ', s)
 
-const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-console.log('fullUrl: ', fullUrl)
+
 
 // If application is running from Heroku then build React to 
 // static files and serve from relative path:
