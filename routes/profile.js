@@ -39,10 +39,8 @@ router.post('/repos', authCheck, async (req, res) => {
 
 
 router.get('/webhook', authCheck, async (req, res) => {
-  // TODO: Get current users webhooks and send to Client
   try {
     const { id } = getProfileInformation()
-    console.log(id)
     const webhooks = await Hook.find({ git_id: id }).select('-_id url organization username ')
     return res.status(200).send({ webhooks })
   } catch (err) {
@@ -57,6 +55,7 @@ router.post('/webhook', authCheck, async (req, res, next) => {
     const { login, id } = getProfileInformation()
     const githubUserToken = getUserToken()
 
+    // TODO: check if one userID has multiple Organization hooks (double query)
     const webhook = await Hook.findOne({ git_id: id })
 
     // Save to database if the hook does not exists yet
