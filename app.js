@@ -28,7 +28,7 @@ app.use(passport.session())
 app.use(allowHeaders)
 // app.use(cors)
 
-// Initi MongoDB
+// Initialize MongoDB
 DBconnect()
 
 

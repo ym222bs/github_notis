@@ -34,53 +34,33 @@ const PropertiesNav = ({ option }) => {
 		}
 	}
 
-	// TODO: change to get, make server get data
-	// const fetchData = async () => {
-	// 	const api = `profile/${apiUrl}`
-	// 	const propertyData = await axios.get(api)
-	// 	console.log('PROPDATA: ', propertyData)
-	// 	setProperty(propertyData)
-	// }
-
-	// const postReq = async () => {
-	// 	const api = `profile/${apiUrl}`
-	// 	return await axios.post(api, {
-	// 		data: { 
-	// 			url: hookurl
-	// 		},
-	// 		headers: {
-	// 			'Content-Type': 'application/json'
-	// 	  },
-	// 	})
-	// }
 
 	// Create new webhook by sending hookUrl to server
 	const sendData = async () => {
 		const api = `profile/${apiUrl}`
 		const propertyData = await axios.post(api, {
-			data: { 
-				hookurl: hookurl, 
+			data: {
+				hookurl: hookurl,
 				orgname: option.login
 			},
 			headers: {
 				'Content-Type': 'application/json'
-		  },
+			},
 		})
-		console.log('Property shit:',propertyData.data)
+		console.log('Property shit:', propertyData.data)
 		// setProperty(propertyData)
 	}
 
 	useEffect(() => {
-		// fetchData()
 
-			sendData()
+		sendData()
 
 		// And render dataObject Based on returnObject Structure
 	}, [hookurl || apiUrl])
 
 
-	const oderListOfContent = () => {
-
+	const orderListOfContent = () => {
+		// TODO: structure the returnObject from content api
 	}
 
 

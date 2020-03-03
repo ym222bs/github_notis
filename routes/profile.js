@@ -26,20 +26,14 @@ router.get('/orgs', authCheck, async (req, res, next) => {
 
 router.post('/events', authCheck, async (req, res) => {
 	const { hookurl, orgname } = req.body.data
-	console.log('hook url events', hookurl)
 	const data = await helper.getOrganizationPropertyContent(hookurl)
-	console.log('data:::::::::::::::::: ', data)
-
 	res.status(200).send({ ...data })
 })
 
 
 router.post('/repos', authCheck, async (req, res) => {
 	const { hookurl, orgname } = req.body.data
-	console.log('hook url repos: ',hookurl)
-
 	const data = await helper.getOrganizationPropertyContent(hookurl)
-	console.log('data::::: ', data)
 	res.status(200).send({ ...data })
 })
 
@@ -49,7 +43,7 @@ router.get('/webhook', async (req, res) => {
 	try {
 		const { id } = getProfileInformation()
 
-		const webhooks = await Hook.find({ }).select('-_id url organization username ')
+		const webhooks = await Hook.find({}).select('-_id url organization username ')
 		return res.status(200).send({ webhooks })
 	} catch (err) {
 		console.log('get /webhook: ', err)
@@ -87,7 +81,7 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 
 
 // TODO this is where the payload will land
-router.post('/payload', authCheck,  async (req, res) => {
+router.post('/payload', authCheck, async (req, res) => {
 	console.log(req.body)
 	helper.slackNotification(req, res)
 	res.status(200).send('Payload ok')

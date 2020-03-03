@@ -8,7 +8,7 @@ const getProfileInformation = require('../config/passport_setup').getProfileInfo
 // TODO: Refacture DUPLICATED get requests
 module.exports.getOrganizationsFromGithub = async () => {
 	const githubUserToken = getUserToken()
-	
+
 	try {
 		const res = await axios.get('https://api.github.com/user/orgs', {
 			headers: {
@@ -70,14 +70,14 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
 
 module.exports.slackNotification = async (req) => {
 	try {
-	const slackHookKey = process.env.SLACK_HOOK
-	console.log( typeof slackHookKey)
-	const typeOfEvent = req.headers['x-github-event']
-	const resp = req.body
-	// console.log('typeof login:: ', resp.sender.login)
-	// console.log('typeof login:: ', resp.sender.login)
-	console.log('typeof event:: ',typeof typeOfEvent)
-	console.log('typeof login:: ', typeof resp.sender.login)
+		const slackHookKey = process.env.SLACK_HOOK
+		console.log(typeof slackHookKey)
+		const typeOfEvent = req.headers['x-github-event']
+		const resp = req.body
+		// console.log('typeof login:: ', resp.sender.login)
+		// console.log('typeof login:: ', resp.sender.login)
+		console.log('typeof event:: ', typeof typeOfEvent)
+		console.log('typeof login:: ', typeof resp.sender.login)
 
 
 		const result = await request({
@@ -102,14 +102,14 @@ module.exports.slackNotification = async (req) => {
 //      pass: 'yourpassword'
 //    }
 //  });
- 
+
 //  let mailOptions = {
 //    from: 'youremail@gmail.com',
 //    to: 'myfriend@yahoo.com',
 //    subject: 'Sending Email using Node.js',
 //    text: 'That was easy!'
 //  };
- 
+
 //  transporter.sendMail(mailOptions, function(error, info){
 //    if (error) {
 //      console.log(error);
