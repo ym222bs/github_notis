@@ -10,54 +10,54 @@ const description = 'Your notofication app for the good old GitHub..'
 
 
 const Profile = () => {
- const userData = useContext(UserProvider.context)
- const { avatar_url } = userData
- const text = _.isEmpty(userData) ? loginMsg : 'Explore Your Orgs 😎 '
- const image = !_.isEmpty(userData) ? avatar_url : 'Image'
+  const userData = useContext(UserProvider.context)
+  const { avatar_url } = userData
+  const text = _.isEmpty(userData) ? loginMsg : 'Explore Your Orgs 😎 '
+  const image = !_.isEmpty(userData) ? avatar_url : 'Image'
 
- return (
-  <div
-   className='jumbotron container mt-5'>
-   <h2 className='display-4'>
-    {text}
-   </h2>
+  return (
+    <div
+      className='jumbotron container mt-5'>
+      <h2 className='display-4'>
+        {text}
+      </h2>
 
-   {
-    _.isEmpty(userData) &&
-    <a
-     className='btn btn-outline-dark'
-     href={'/'}
-     style={{ float: "right" }}>
-     Login
+      {
+        _.isEmpty(userData) &&
+        <a
+          className='btn btn-outline-dark'
+          href={'/'}
+          style={{ float: "right" }}>
+          Login
 				</a>
-   }
-   {
-    !_.isEmpty(userData) &&
-    <Fragment>
-     <a href={'/auth/logout'}
-      style={{ float: "right" }}
-      className='btn btn-outline-dark'>
-      Logout
+      }
+      {
+        !_.isEmpty(userData) &&
+        <Fragment>
+          <a href={'/auth/logout'}
+            style={{ float: "right" }}
+            className='btn btn-outline-dark'>
+            Logout
 					</a>
 
-     <div className='lead'>
-      {description}
+          <div className='lead'>
+            {description}
 
-      <hr className='my-4' style={{
-       backgroundColor: 'white',
-       height: 2
-      }} />
+            <hr className='my-4' style={{
+              backgroundColor: 'white',
+              height: 2
+            }} />
 
-      <div className='gridparent'>
-       <CardOfOrgs avatar={image} />
-      </div>
-     </div>
+            <div className='gridparent'>
+              <CardOfOrgs avatar={image} />
+            </div>
+          </div>
 
-     <div style={{ marginBottom: 20 }} />
-    </Fragment>
-   }
-  </div>
- )
+          <div style={{ marginBottom: 20 }} />
+        </Fragment>
+      }
+    </div>
+  )
 }
 
 
