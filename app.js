@@ -37,7 +37,23 @@ app.use('/profile', profileRoutes)
 
 
 const port = process.env.PORT || 8000
+const githubid = process.env.GITHUB_CLIENT_ID
+console.log('GITID: ', githubid)
 
+const githubsecret = process.env.GITHUB_CLIENT_SECRET
+console.log('SECRET: ', githubsecret)
+
+const c = process.env.COOKIE_SECRET
+console.log('COOKIE: ', c)
+
+const m = process.env.MONGODB_URI
+console.log('MONGO: ', m)
+
+const s = process.env.SLACK_HOOK
+console.log('SLCAK: ', s)
+
+const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+console.log('fullUrl: ', fullUrl)
 
 // If application is running from Heroku then build React to 
 // static files and serve from relative path:
