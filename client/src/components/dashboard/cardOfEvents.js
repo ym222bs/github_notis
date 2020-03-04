@@ -14,7 +14,7 @@ const cardOfEvents = ({ events }) => {
           <>
             <div className="card" style={{ width: '20rem', marginBottom: '1rem' }}>
               <div className="card-body" key={property.name}>
-                <h5 className="card-title" key={property.name}>New <spam style={{ color: '#1ca3b9' }}>{property.type}</spam></h5>
+                <h5 className="card-title" key={property.name}>New <span style={{ color: '#1ca3b9' }}>{property.type}</span></h5>
                 <h6 className="card-subtitle mb-2 text-muted" key={property.name} >in {property.repo.name}</h6>
                 <p className="card-text" key={property.name}>by {property.actor.login}</p>
               </div>
