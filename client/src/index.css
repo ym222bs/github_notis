@@ -39,7 +39,8 @@ pre {
 
 /* background-color: #F0F8FF; */
 .jumbotron {
-    background-color: #f7f7f7;
+    /* background-color: #f7f7f7; */
+    background-color: #FFFFFF;
     opacity: 0.97;
 }
 
@@ -51,6 +52,11 @@ pre {
 .child {
     flex: 1;
 }
+
+/* eventcard {
+  margin-left: 0px;
+  margin-right: 0px;
+} */
 
 .login-btn {
     padding: 5px 20px;

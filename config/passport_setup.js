@@ -22,7 +22,7 @@ const herokuURL = 'https://github-notis.herokuapp.com'
 passport.use(new GitHubStrategy({
   clientID: clientID,
   clientSecret: clientSecret,
-  callbackURL: herokuURL + '/auth/github/callback'
+  callbackURL: '/auth/github/callback'
 },
   async (token, refreshToken, profile, done) => {
     console.log('accesstoken: ', token)
@@ -30,7 +30,7 @@ passport.use(new GitHubStrategy({
     returnObject = profile._json
     accessToken = token
 
-    // saveProfileToDB(profile._json)   // Save new profile to database
+    saveProfileToDB(profile._json)   // Save new profile to database
     return done(null, { ...profile._json })
   }
 ))

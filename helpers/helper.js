@@ -56,7 +56,7 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
         active: true,
         events: ['push', 'repository', 'issues', 'issue_comment'],
         config: {
-          url: `http://${code}.ngrok.io/profile/payload`,
+          url: `http://${code}.ngrok.io/gitprofile/payload`,
           content_type: 'json'
         }
       }

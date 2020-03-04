@@ -3,14 +3,14 @@ const context = createContext(null)
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState([])
+
   useEffect(() => {
-    fetch('/profile')
+    fetch('/gitprofile')
       .then(res => res.json())
       .then(res => setUser(res))
       .catch(err => {
         console.log(err)
       })
-
   }, [])
 
   return (

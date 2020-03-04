@@ -12,7 +12,7 @@ const description = 'Your notofication app for the good old GitHub..'
 const Profile = () => {
   const userData = useContext(UserProvider.context)
   const { avatar_url } = userData
-  const text = _.isEmpty(userData) ? loginMsg : 'Explore Your Orgs 😎 '
+  const text = _.isEmpty(userData) ? loginMsg : 'Explore Your Orgs 😎 💬 '
   const image = !_.isEmpty(userData) ? avatar_url : 'Image'
 
   return (

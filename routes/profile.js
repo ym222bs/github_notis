@@ -27,15 +27,15 @@ router.get('/orgs', authCheck, async (req, res, next) => {
 
 
 router.post('/events', authCheck, async (req, res) => {
-  const { hookurl, orgname } = req.body.data
-  const data = await helper.getOrganizationPropertyContent(hookurl)
+  const { githubUrl, orgname } = req.body.data
+  const data = await helper.getOrganizationPropertyContent(githubUrl)
   res.status(200).send({ ...data })
 })
 
 
 router.post('/repos', authCheck, async (req, res) => {
-  const { hookurl, orgname } = req.body.data
-  const data = await helper.getOrganizationPropertyContent(hookurl)
+  const { githubUrl, orgname } = req.body.data
+  const data = await helper.getOrganizationPropertyContent(githubUrl)
   res.status(200).send({ ...data })
 })
 
@@ -53,7 +53,7 @@ router.get('/webhook', authCheck, async (req, res) => {
 
 router.post('/webhook', authCheck, async (req, res, next) => {
   try {
-    const { hookurl, orgname } = req.body.data
+    const { githubUrl, orgname } = req.body.data
     const { login, id } = getProfileInformation()
     const githubUserToken = getUserToken()
 
@@ -63,7 +63,7 @@ router.post('/webhook', authCheck, async (req, res, next) => {
     // Save to database if the hook does not exists yet
     if (!webhook) {
       const newHook = new Hook({
-        url: hookurl,
+        url: githubUrl,
         organization: orgname,
         username: login,
         git_id: id
@@ -81,11 +81,16 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 })
 
 
-// TODO this is where the payload will land
+// TODO: settings route, access HookDB of this user, and change settings to (false/true)? 
+
+
+
 router.post('/payload', authCheck, async (req, res) => {
   console.log(req.body)
   helper.slackNotification(req, res)
   res.status(200).send('Payload ok')
 })
+
+
 
 module.exports = router

@@ -15,12 +15,10 @@ const CardOfOrgs = ({ avatar }) => {
   const [selectedOrg, setSelectedOrg] = useState(null)
   const userOrganizations = useContext(OrgsProvider.contexto)
 
-  const properties = Object.keys(userOrganizations).map(key => {
-    return userOrganizations[key]
-  })
+  // const properties = Object.keys(userOrganizations).map(key => {
+  //   return userOrganizations[key]
+  // })
 
-  console.log(properties)
-  console.log(selectedOrg)
   return (
     <Fragment>
       <div

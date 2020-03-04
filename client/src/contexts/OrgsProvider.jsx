@@ -1,11 +1,11 @@
 import React, { createContext, useState, useEffect } from 'react'
 const contexto = createContext(null)
 
-
 const OrgsProvider = ({ children }) => {
   const [orgs, setOrgs] = useState([])
+
   useEffect(() => {
-    fetch('/profile/orgs')
+    fetch('/gitprofile/orgs')
       .then(res => res.json())
       .then(res => setOrgs(res))
       .catch(err => {

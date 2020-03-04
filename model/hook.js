@@ -19,6 +19,10 @@ const hookSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  notify: {
+    type: Boolean,
+    default: true
+  },
   createdAt: {
     type: Date,
     default: Date.now
