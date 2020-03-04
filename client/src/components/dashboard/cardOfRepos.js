@@ -1,7 +1,6 @@
 import React from 'react'
 
 const cardOfRepos = ({ events }) => {
-  console.log('property inside card: ', type)
 
   const newArrayOfObjects = Object.entries(events).map(e => e[1])
   console.log('newArrayDataOfOjbect: ', newArrayOfObjects[0].id)
