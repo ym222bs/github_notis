@@ -1,13 +1,10 @@
 import React from 'react'
 
 const cardOfEvents = ({ events }) => {
-  console.log('property inside card: ', type)
 
   const newArrayOfObjects = Object.entries(events).map(e => e[1])
   // console.log('stringifies: ', JSON.stringify(newArrayOfObjects))
   console.log('newArrayDataOfOjbect: ', newArrayOfObjects[0].id)
-
-
 
 
   return (
