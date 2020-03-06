@@ -29,7 +29,7 @@ const CardOfOrgs = ({ avatar }) => {
     var { events_url, repos_url, hooks_url } = selectedOrg
   }
 
-  // Set option:
+
   const handleNavOption = (type) => {
     switch (type) {
       case 'events':
@@ -154,7 +154,6 @@ const CardOfOrgs = ({ avatar }) => {
                 apiUrl === 'events' && event &&
                 <CardOfEvents events={event} />
               }
-
               {
                 apiUrl === 'repos' && repo &&
                 <CardOfRepos events={repo} />
