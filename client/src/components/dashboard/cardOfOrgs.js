@@ -147,12 +147,12 @@ const CardOfOrgs = ({ avatar }) => {
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('hook')}
                   >
-                    <input type="checkbox" checked data-toggle="toggle"></input>
                     Create Hook
 						      </a>
                 </li>
               </ul>
               <div>
+                <input type="checkbox" checked data-toggle="toggle"></input>
                 {
                   apiUrl === 'events' && event &&
                   <CardOfEvents events={event} />
