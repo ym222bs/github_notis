@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react'
+import React, { Fragment, useEffect, useContext, useState, useRef } from 'react'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 import PropertiesNav from './propertiesNav.js'
 
@@ -7,6 +7,8 @@ const CardOfOrgs = ({ avatar }) => {
 
   const [selectedOrg, setSelectedOrg] = useState(null)
   const userOrganizations = useContext(OrgsProvider.contexto)
+  const ref = useRef(null)
+
 
   return (
     <Fragment>
@@ -49,11 +51,13 @@ const CardOfOrgs = ({ avatar }) => {
             })
           }
         </ul>
+        <button onClick={() => { ref.current.cleanValue() }} type="button">Reset</button>
       </div>
       <div className='child' >
         {
           selectedOrg &&
           <PropertiesNav
+            ref={ref}
             option={selectedOrg}
           />
         }

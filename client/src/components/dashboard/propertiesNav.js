@@ -1,26 +1,39 @@
-import React, { Fragment, useEffect, useState, useImperativeHandle } from 'react'
+import React, { Fragment, useEffect, useState, forwardRef, useRef, useImperativeHandle } from 'react'
+// const { forwardRef, useRef, useImperativeHandle } = React
+
 import CardOfEvents from './cardOfEvents.js'
 import CardOfRepos from './cardOfRepos.js'
 import axios from 'axios'
-import { set } from 'mongoose'
 
 //  Option === Specific Organization
-const PropertiesNav = ({ option }) => {
+const PropertiesNav = forwardRef((props, ref) => {
+  console.log(props.option)
   const [githubUrl, setGithubUrl] = useState(null)
   const [apiUrl, setApiUrl] = useState(null)
   const [event, setEvent] = useState(null)
   const [repo, setRepo] = useState(null)
 
+  console.log('1 repo: ', repo)
+  console.log('1 event: ', event)
 
-  const handleChangedVariable = () => {
-    // antingen när option.login changes eller DIV OnChange changes.
+
+  const cleanValue = () => {
+
+    // if (event !== null || repo !== null) {
     setEvent(null)
     setRepo(null)
     console.log('Null on states')
+    // }
   }
 
+  useImperativeHandle(ref, () => {
+    return {
+      cleanValue: cleanValue()
+    }
 
-  const { events_url, repos_url, hooks_url } = option
+  })
+
+  const { events_url, repos_url, hooks_url } = props.option
 
   // Set option:
   const handleNavOption = (type) => {
@@ -50,7 +63,7 @@ const PropertiesNav = ({ option }) => {
       const propertyData = await axios.post(api, {
         data: {
           githubUrl: githubUrl,
-          orgname: option.login
+          orgname: props.option.login
         },
         headers: {
           'Content-Type': 'application/json'
@@ -63,22 +76,17 @@ const PropertiesNav = ({ option }) => {
 
   }, [githubUrl || apiUrl])
 
-  // useEffect(() => {
-  //   setEvent(null)
-  //   setRepo(null)
-  // }, [])
-
 
   return (
+
     <Fragment>
       <div className='flex-container'>
         <ul className='navbar navbar-expand-sm'>
           <li className='navbar-nav'>
             <div
-              onClick={handleChangedVariable}
               className='nav-link'
               style={{ color: '#17a2b8' }}>
-              {option.login}
+              {props.option.login}
 
             </div>
             <a
@@ -119,7 +127,8 @@ const PropertiesNav = ({ option }) => {
       </div>
     </Fragment>
   )
-}
+})
+
 
 
 
