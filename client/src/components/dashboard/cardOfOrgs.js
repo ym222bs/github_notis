@@ -3,21 +3,10 @@ import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 import PropertiesNav from './propertiesNav.js'
 
 
-// TODO: next step: 
-
-//      Render data when clicking on navigation. Get the buttons/links from organizationObject
-//      Example: Repos => fetch Repos render in card/list/table
-//      Example: Events => fetch events render in card/list/table
-//      Example: Webhook => fetch Webhook render in card/list/table, get current hooks from MOngo, on user?
-
 const CardOfOrgs = ({ avatar }) => {
 
   const [selectedOrg, setSelectedOrg] = useState(null)
   const userOrganizations = useContext(OrgsProvider.contexto)
-
-  // const properties = Object.keys(userOrganizations).map(key => {
-  //   return userOrganizations[key]
-  // })
 
   return (
     <Fragment>

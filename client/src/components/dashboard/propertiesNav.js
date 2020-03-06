@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useImperativeHandle } from 'react'
 import CardOfEvents from './cardOfEvents.js'
 import CardOfRepos from './cardOfRepos.js'
 import axios from 'axios'
@@ -10,6 +10,14 @@ const PropertiesNav = ({ option }) => {
   const [apiUrl, setApiUrl] = useState(null)
   const [event, setEvent] = useState(null)
   const [repo, setRepo] = useState(null)
+
+
+  const handleChangedVariable = () => {
+    // antingen när option.login changes eller DIV OnChange changes.
+    setEvent(null)
+    setRepo(null)
+    console.log('Null on states')
+  }
 
 
   const { events_url, repos_url, hooks_url } = option
@@ -52,11 +60,14 @@ const PropertiesNav = ({ option }) => {
     }
 
     fetchData()
+
   }, [githubUrl || apiUrl])
 
-  handleOnChange = () => {
-    // antingen när option.login changes eller DIV OnChange changes.
-  }
+  // useEffect(() => {
+  //   setEvent(null)
+  //   setRepo(null)
+  // }, [])
+
 
   return (
     <Fragment>
@@ -64,9 +75,11 @@ const PropertiesNav = ({ option }) => {
         <ul className='navbar navbar-expand-sm'>
           <li className='navbar-nav'>
             <div
+              onClick={handleChangedVariable}
               className='nav-link'
               style={{ color: '#17a2b8' }}>
               {option.login}
+
             </div>
             <a
               href='#'

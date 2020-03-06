@@ -11,6 +11,7 @@ const cardOfEvents = ({ events }) => {
   return (
     <Fragment>
       {
+        newArrayOfObjects &&
         newArrayOfObjects.slice(0, 5).map(property =>
           <div key={count++}>
             <div className="card" style={{ width: '20rem', marginBottom: '1rem' }}>
