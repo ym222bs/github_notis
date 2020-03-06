@@ -113,53 +113,56 @@ const CardOfOrgs = ({ avatar }) => {
       </div>
       <div className='child'>
         <>
-          <div className='flex-container'>
-            <ul className='navbar navbar-expand-sm'>
-              <li className='navbar-nav'>
-                <div
-                  className='nav-link'
-                  style={{ color: '#17a2b8' }}>
-                  {
-                    selectedOrg &&
-                    selectedOrg.login
-                  }
+          {
+            selectedOrg &&
+            <div className='flex-container'>
+              <ul className='navbar navbar-expand-sm'>
+                <li className='navbar-nav'>
+                  <div
+                    className='nav-link'
+                    style={{ color: '#17a2b8' }}>
+                    {
+                      selectedOrg &&
+                      selectedOrg.login
+                    }
 
-                </div>
-                <a
-                  href='#'
-                  className='nav-link btn btn-link'
-                  onClick={() => handleNavOption('events')}
+                  </div>
+                  <a
+                    href='#'
+                    className='nav-link btn btn-link'
+                    onClick={() => handleNavOption('events')}
 
-                >
-                  Events
+                  >
+                    Events
 						</a>
-                <a
-                  href='#'
-                  className='nav-link btn btn-link'
-                  onClick={() => handleNavOption('repos')}
-                >
-                  Repos
+                  <a
+                    href='#'
+                    className='nav-link btn btn-link'
+                    onClick={() => handleNavOption('repos')}
+                  >
+                    Repos
 						</a>
-                <a
-                  href='#'
-                  className='nav-link btn btn-link'
-                  onClick={() => handleNavOption('hook')}
-                >
-                  Create Hook
+                  <a
+                    href='#'
+                    className='nav-link btn btn-link'
+                    onClick={() => handleNavOption('hook')}
+                  >
+                    Create Hook
 						</a>
-              </li>
-            </ul>
-            <div>
-              {
-                apiUrl === 'events' && event &&
-                <CardOfEvents events={event} />
-              }
-              {
-                apiUrl === 'repos' && repo &&
-                <CardOfRepos events={repo} />
-              }
+                </li>
+              </ul>
+              <div>
+                {
+                  apiUrl === 'events' && event &&
+                  <CardOfEvents events={event} />
+                }
+                {
+                  apiUrl === 'repos' && repo &&
+                  <CardOfRepos events={repo} />
+                }
+              </div>
             </div>
-          </div>
+          }
         </>
       </div>
     </Fragment>
