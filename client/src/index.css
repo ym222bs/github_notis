@@ -8,7 +8,7 @@ body {
     font-family: 'Nunito';
     -webkit-font-smoothing: antialiased;
     color: #292f33;
-    background-image: url('./images/color.jpg');
+    background-image: url('./images/kladd.jpg');
     /* background-image: url('./images/lightmarble.jpg'); */
     background-repeat: no-repeat, repeat;
 }
@@ -41,7 +41,7 @@ pre {
 .jumbotron {
     /* background-color: #f7f7f7; */
     background-color: #FFFFFF;
-    opacity: 0.97;
+    opacity: 0.90;
 }
 
 .gridparent {
