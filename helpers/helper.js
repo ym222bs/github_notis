@@ -5,14 +5,11 @@ const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
 
 
-// TODO: Refacture DUPLICATED get requests
-module.exports.getOrganizationsFromGithub = async () => {
-  const githubUserToken = getUserToken()
-
+const getData = async (url, token) => {
   try {
-    const res = await axios.get('https://api.github.com/user/orgs', {
+    const res = await axios.get(url, {
       headers: {
-        Authorization: `token ${githubUserToken}`,
+        Authorization: `token ${token}`,
         'User-Agent': 'axios'
       }
     })
@@ -22,22 +19,18 @@ module.exports.getOrganizationsFromGithub = async () => {
   }
 }
 
+// TODO: Refacture DUPLICATED get requests
+module.exports.getOrganizationsFromGithub = () => {
+  const githubUserToken = getUserToken()
+  const url = 'https://api.github.com/user/orgs'
+  return getData(url, githubUserToken)
+}
+
 
 // TODO: Refacture DUPLICATED get requests
-module.exports.getOrganizationPropertyContent = async (url) => {
+module.exports.getOrganizationPropertyContent = (url) => {
   const githubUserToken = getUserToken()
-  console.log('URLLLLLL::::: ', url)
-  try {
-    const res = await axios.get(url, {
-      headers: {
-        Authorization: `token ${githubUserToken}`,
-        'User-Agent': 'axios'
-      }
-    })
-    return res.data
-  } catch (err) {
-    console.log('getOrganizations: ', err)
-  }
+  return getData(url, githubUserToken)
 }
 
 

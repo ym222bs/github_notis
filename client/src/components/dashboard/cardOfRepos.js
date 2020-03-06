@@ -1,31 +1,28 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 const cardOfRepos = ({ events }) => {
 
   const newArrayOfObjects = Object.entries(events).map(e => e[1])
   console.log('newArrayDataOfOjbect: ', newArrayOfObjects[0].id)
-
+  let count = 0
 
   return (
-    <div>
+    <Fragment>
       {
         newArrayOfObjects.slice(0, 5).map(property =>
-          <>
-            < div className="card">
-              <div className="card-header">
-                Quote
-              </div>
-              <div className="card-body">
-                <blockquote className="blockquote mb-0">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                  <footer className="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                </blockquote>
-              </div>
+          <div className='list-group' key={count++}>
+            <div className='list-group-item' style={{ marginBottom: '1rem' }}>
+              <div style={{ fontSize: 'medium' }}>{property.full_name}</div>
+              <a
+                href={property.html_url}
+                style={{ fontSize: 'small' }}
+              >{property.html_url}</a>
+
             </div>
-          </>
+          </div>
         )
       }
-    </div>
+    </Fragment>
   )
 }
 

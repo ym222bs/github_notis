@@ -1,18 +1,20 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import CardOfEvents from './cardOfEvents.js'
+import CardOfRepos from './cardOfRepos.js'
 import axios from 'axios'
+import { set } from 'mongoose'
 
 //  Option === Specific Organization
 const PropertiesNav = ({ option }) => {
   const [githubUrl, setGithubUrl] = useState(null)
   const [apiUrl, setApiUrl] = useState(null)
-  const [property, setProperty] = useState(null)
+  const [event, setEvent] = useState(null)
+  const [repo, setRepo] = useState(null)
 
-  console.log('property inside Nav: ', property)
 
   const { events_url, repos_url, hooks_url } = option
 
-
+  // Set option:
   const handleNavOption = (type) => {
     switch (type) {
       case 'events':
@@ -27,30 +29,34 @@ const PropertiesNav = ({ option }) => {
         setGithubUrl(hooks_url)
         setApiUrl('webhook')
         break
+      default:
+        return null
     }
   }
 
-  // Create new webhook by sending hookUrl to server
-  const requestData = async () => {
-    const api = `gitprofile/${apiUrl}`
-    const propertyData = await axios.post(api, {
-      data: {
-        githubUrl: githubUrl,
-        orgname: option.login
-      },
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    // console.log('Property shit:', propertyData.data)
-    setProperty(propertyData.data)
-  }
-
-
   useEffect(() => {
-    requestData()
+
+    // Get option data:  
+    const fetchData = async () => {
+      const api = `gitprofile/${apiUrl}`
+      const propertyData = await axios.post(api, {
+        data: {
+          githubUrl: githubUrl,
+          orgname: option.login
+        },
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      apiUrl === 'events' ? await setEvent(propertyData.data) : await setRepo(propertyData.data)
+    }
+
+    fetchData()
   }, [githubUrl || apiUrl])
 
+  handleOnChange = () => {
+    // antingen när option.login changes eller DIV OnChange changes.
+  }
 
   return (
     <Fragment>
@@ -63,23 +69,24 @@ const PropertiesNav = ({ option }) => {
               {option.login}
             </div>
             <a
+              href='#'
               className='nav-link btn btn-link'
               onClick={() => handleNavOption('events')}
-              onMouseDown={() => requestData()}
+
             >
               Events
 						</a>
             <a
+              href='#'
               className='nav-link btn btn-link'
               onClick={() => handleNavOption('repos')}
-              onMouseDown={() => requestData()}
             >
               Repos
 						</a>
             <a
+              href='#'
               className='nav-link btn btn-link'
               onClick={() => handleNavOption('hook')}
-
             >
               Create Hook
 						</a>
@@ -87,8 +94,13 @@ const PropertiesNav = ({ option }) => {
         </ul>
         <div>
           {
-            property &&
-            <CardOfEvents events={property} />
+            apiUrl === 'events' && event &&
+            <CardOfEvents events={event} />
+          }
+
+          {
+            apiUrl === 'repos' && repo &&
+            <CardOfRepos events={repo} />
           }
         </div>
       </div>

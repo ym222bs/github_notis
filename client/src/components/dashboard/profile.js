@@ -16,8 +16,7 @@ const Profile = () => {
   const image = !_.isEmpty(userData) ? avatar_url : 'Image'
 
   return (
-    <div
-      className='jumbotron container mt-5'>
+    <div className='jumbotron container mt-5'>
       <h2 className='display-4'>
         {text}
       </h2>

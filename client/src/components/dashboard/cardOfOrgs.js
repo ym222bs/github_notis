@@ -23,7 +23,11 @@ const CardOfOrgs = ({ avatar }) => {
     <Fragment>
       <div
         className='card'>
-        <img style={{ width: '18rem' }} src={avatar} />
+        <img
+          alt='profile avatar'
+          style={{ width: '18rem' }}
+          src={avatar}
+        />
         <div className='card-header'>
           Organizations:
         </div>
@@ -39,12 +43,13 @@ const CardOfOrgs = ({ avatar }) => {
                   key={userOrganizations[key].login}
                 >
                   <a
-                    href="#"
+                    href='#'
                     className='card-link'
                     key={userOrganizations[key].login}
                     onClick={() => setSelectedOrg(userOrganizations[key])}
                   >
                     <img
+                      alt='organization avatar'
                       style={{ width: '2rem', marginRight: '5px' }}
                       src={userOrganizations[key].avatar_url}
                     />
