@@ -134,21 +134,22 @@ const CardOfOrgs = ({ avatar }) => {
 
                   >
                     Events
-						</a>
+						      </a>
                   <a
                     href='#'
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('repos')}
                   >
                     Repos
-						</a>
+						      </a>
                   <a
                     href='#'
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('hook')}
                   >
+                    <input type="checkbox" checked data-toggle="toggle"></input>
                     Create Hook
-						</a>
+						      </a>
                 </li>
               </ul>
               <div>

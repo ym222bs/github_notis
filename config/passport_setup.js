@@ -19,6 +19,7 @@ passport.deserializeUser((user, cb) => {
 
 
 const herokuURL = 'https://github-notis.herokuapp.com'
+
 passport.use(new GitHubStrategy({
   clientID: clientID,
   clientSecret: clientSecret,
