@@ -1,14 +1,79 @@
-import React, { Fragment, useEffect, useContext, useState, useRef } from 'react'
+import React, { Fragment, useEffect, useContext, useState, useRef, createRef } from 'react'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 import PropertiesNav from './propertiesNav.js'
+
+
+import CardOfEvents from './cardOfEvents.js'
+import CardOfRepos from './cardOfRepos.js'
+import axios from 'axios'
 
 
 const CardOfOrgs = ({ avatar }) => {
 
   const [selectedOrg, setSelectedOrg] = useState(null)
   const userOrganizations = useContext(OrgsProvider.contexto)
-  const ref = useRef(null)
 
+
+  //// Content<<<<<<<<<<<<<
+  const [githubUrl, setGithubUrl] = useState(null)
+  const [apiUrl, setApiUrl] = useState(null)
+  const [event, setEvent] = useState(null)
+  const [repo, setRepo] = useState(null)
+
+
+  const cleanValue = () => {
+
+    if (event !== null || repo !== null) {
+      setEvent(null)
+      setRepo(null)
+    }
+  }
+
+  if (selectedOrg) {
+
+    var { events_url, repos_url, hooks_url } = selectedOrg
+  }
+
+  // Set option:
+  const handleNavOption = (type) => {
+    switch (type) {
+      case 'events':
+        setGithubUrl(events_url)
+        setApiUrl('events')
+        break
+      case 'repos':
+        setGithubUrl(repos_url)
+        setApiUrl('repos')
+        break
+      case 'hook':
+        setGithubUrl(hooks_url)
+        setApiUrl('webhook')
+        break
+      default:
+        return null
+    }
+  }
+
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+      const api = `gitprofile/${apiUrl}`
+      const propertyData = await axios.post(api, {
+        data: {
+          githubUrl: githubUrl,
+          orgname: selectedOrg ? selectedOrg.login : null
+        },
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      apiUrl === 'events' ? await setEvent(propertyData.data) : await setRepo(propertyData.data)
+    }
+    fetchData()
+  }, [githubUrl || apiUrl])
+
+  //<<<<<<<<<<<<<<<<<<<<<<<
 
   return (
     <Fragment>
@@ -34,6 +99,7 @@ const CardOfOrgs = ({ avatar }) => {
                   key={userOrganizations[key].login}
                 >
                   <a
+                    onMouseDown={cleanValue}
                     href='#'
                     className='card-link'
                     key={userOrganizations[key].login}
@@ -51,20 +117,70 @@ const CardOfOrgs = ({ avatar }) => {
             })
           }
         </ul>
-        <button onClick={() => { ref.current.cleanValue() }} type="button">Reset</button>
       </div>
       <div className='child' >
-        {
-          selectedOrg &&
-          <PropertiesNav
-            ref={ref}
-            option={selectedOrg}
-          />
-        }
+
+        <Fragment>
+          <div className='flex-container'>
+            <ul className='navbar navbar-expand-sm'>
+              <li className='navbar-nav'>
+                <div
+                  className='nav-link'
+                  style={{ color: '#17a2b8' }}>
+                  {
+                    selectedOrg &&
+                    selectedOrg.login
+                  }
+
+                </div>
+                <a
+                  href='#'
+                  className='nav-link btn btn-link'
+                  onClick={() => handleNavOption('events')}
+
+                >
+                  Events
+						</a>
+                <a
+                  href='#'
+                  className='nav-link btn btn-link'
+                  onClick={() => handleNavOption('repos')}
+                >
+                  Repos
+						</a>
+                <a
+                  href='#'
+                  className='nav-link btn btn-link'
+                  onClick={() => handleNavOption('hook')}
+                >
+                  Create Hook
+						</a>
+              </li>
+            </ul>
+            <div>
+              {
+                apiUrl === 'events' && event &&
+                <CardOfEvents events={event} />
+              }
+
+              {
+                apiUrl === 'repos' && repo &&
+                <CardOfRepos events={repo} />
+              }
+            </div>
+          </div>
+        </Fragment>
       </div>
     </Fragment>
   )
 }
 
+
+// {
+//   selectedOrg &&
+//   <PropertiesNav
+//     option={selectedOrg}
+//   />
+// }
 
 export default CardOfOrgs
