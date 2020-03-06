@@ -12,9 +12,6 @@ const CardOfOrgs = ({ avatar }) => {
 
   const [selectedOrg, setSelectedOrg] = useState(null)
   const userOrganizations = useContext(OrgsProvider.contexto)
-
-
-  //// Content<<<<<<<<<<<<<
   const [githubUrl, setGithubUrl] = useState(null)
   const [apiUrl, setApiUrl] = useState(null)
   const [event, setEvent] = useState(null)
@@ -22,7 +19,6 @@ const CardOfOrgs = ({ avatar }) => {
 
 
   const cleanValue = () => {
-
     if (event !== null || repo !== null) {
       setEvent(null)
       setRepo(null)
@@ -30,7 +26,6 @@ const CardOfOrgs = ({ avatar }) => {
   }
 
   if (selectedOrg) {
-
     var { events_url, repos_url, hooks_url } = selectedOrg
   }
 
@@ -56,7 +51,6 @@ const CardOfOrgs = ({ avatar }) => {
 
 
   useEffect(() => {
-
     const fetchData = async () => {
       const api = `gitprofile/${apiUrl}`
       const propertyData = await axios.post(api, {
@@ -73,7 +67,6 @@ const CardOfOrgs = ({ avatar }) => {
     fetchData()
   }, [githubUrl || apiUrl])
 
-  //<<<<<<<<<<<<<<<<<<<<<<<
 
   return (
     <Fragment>
@@ -118,9 +111,8 @@ const CardOfOrgs = ({ avatar }) => {
           }
         </ul>
       </div>
-      <div className='child' >
-
-        <Fragment>
+      <div className='child'>
+        <>
           <div className='flex-container'>
             <ul className='navbar navbar-expand-sm'>
               <li className='navbar-nav'>
@@ -169,18 +161,11 @@ const CardOfOrgs = ({ avatar }) => {
               }
             </div>
           </div>
-        </Fragment>
+        </>
       </div>
     </Fragment>
   )
 }
 
-
-// {
-//   selectedOrg &&
-//   <PropertiesNav
-//     option={selectedOrg}
-//   />
-// }
 
 export default CardOfOrgs
