@@ -1,6 +1,6 @@
 const axios = require('axios')
+const nodemailer = require('nodemailer')
 const request = require('request-promise')
-
 const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
 
@@ -64,7 +64,6 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
 module.exports.slackNotification = async (req) => {
   try {
     const slackHookKey = process.env.SLACK_HOOK
-    console.log(typeof slackHookKey)
     const typeOfEvent = req.headers['x-github-event']
     const resp = req.body
     // console.log('typeof login:: ', resp.sender.login)
@@ -72,6 +71,8 @@ module.exports.slackNotification = async (req) => {
     console.log('typeof event:: ', typeof typeOfEvent)
     console.log('typeof login:: ', typeof resp.sender.login)
 
+    // TODO: Validate Request ORIGIN!!!!!!
+    // TODO: ONLY send the webhooks that are TOGGLED = TRUE in DataBase to slack notification
 
     const result = await request({
       url: `https://hooks.slack.com/services/${slackHookKey}`,
@@ -89,24 +90,24 @@ module.exports.slackNotification = async (req) => {
 
 
 // let transporter = nodemailer.createTransport({
-//    service: 'gmail',
-//    auth: {
-//      user: 'youremail@gmail.com',
-//      pass: 'yourpassword'
-//    }
-//  });
+//   service: 'gmail',
+//   auth: {
+//     user: 'youremail@gmail.com',
+//     pass: 'yourpassword'
+//   }
+// });
 
-//  let mailOptions = {
-//    from: 'youremail@gmail.com',
-//    to: 'myfriend@yahoo.com',
-//    subject: 'Sending Email using Node.js',
-//    text: 'That was easy!'
-//  };
+// let mailOptions = {
+//   from: 'youremail@gmail.com',
+//   to: 'myfriend@yahoo.com',
+//   subject: 'Sending Email using Node.js',
+//   text: 'That was easy!'
+// };
 
-//  transporter.sendMail(mailOptions, function(error, info){
-//    if (error) {
-//      console.log(error);
-//    } else {
-//      console.log('Email sent: ' + info.response);
-//    }
-//  })
+// transporter.sendMail(mailOptions, function (error, info) {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Email sent: ' + info.response);
+//   }
+// })

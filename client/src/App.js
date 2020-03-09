@@ -3,8 +3,8 @@ import { Router, Route } from 'react-router-dom'
 import UserProvider from './contexts/UserProvider'
 import OrgsProvider from './contexts/OrgsProvider'
 import history from './history.js'
-import Home from './components/home.js'
-import Profile from './components/dashboard/profile.js'
+import Home from './components/Home.js'
+import Profile from './components/dashboard/Profile.js'
 
 
 function App() {

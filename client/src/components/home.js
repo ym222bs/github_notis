@@ -1,10 +1,8 @@
 import React from 'react'
 import Mac from './mac'
-
-
 import githubIcon from '../github.png'
 
-const data = {
+const github = {
   name: 'Github',
   img: githubIcon,
   href: '/auth/github',
@@ -23,32 +21,33 @@ const Home = () => {
         <p
           className='page-title'>
           Github Notifications
-                </p>
-        <p>
-          <span
-            style={{ color: 'var(--primary-red)' }}>
-            Login:
-                    </span>
         </p>
+        <p>
+          <span>
+            Login:
+          </span>
+        </p>
+
         <Mac />
+
         <div
           className='card-g'
+          onClick={() => window.location = github.href}
           style={{
             border: `1xp solid`,
             borderRadius: 2
           }}
-          onClick={() => window.location = data.href}
         >
           <div>
             <p>
-              {data.name}
+              {github.name}
             </p>
           </div>
           <div
             style={{
               minHeight: 100,
               minWidth: 100,
-              background: `url('${data.img}') no-repeat center center / 50% ${data.color}`
+              background: `url('${github.img}') no-repeat center center / 50% ${github.color}`
             }}
           >
           </div>

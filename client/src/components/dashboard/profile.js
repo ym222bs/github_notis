@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from 'react'
 import _ from 'lodash'
-import CardOfOrgs from './cardOfOrgs.js'
+import Content from './Content.js'
 import UserProvider from '../../contexts/UserProvider.jsx'
 
 const loginMsg = 'You have to log in to see info! 🤖 '
@@ -33,7 +33,8 @@ const Profile = () => {
       {
         !_.isEmpty(userData) &&
         <Fragment>
-          <a href={'/auth/logout'}
+          <a
+            href={'/auth/logout'}
             style={{ float: "right" }}
             className='btn btn-outline-dark'>
             Logout
@@ -48,7 +49,7 @@ const Profile = () => {
             }} />
 
             <div className='gridparent'>
-              <CardOfOrgs avatar={image} />
+              <Content avatar={image} />
             </div>
           </div>
 

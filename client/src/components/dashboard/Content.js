@@ -1,22 +1,18 @@
 import React, { Fragment, useEffect, useContext, useState, useRef, createRef } from 'react'
-import OrgsProvider from '../../contexts/OrgsProvider.jsx'
-import PropertiesNav from './propertiesNav.js'
-
-
-import CardOfEvents from './cardOfEvents.js'
-import CardOfRepos from './cardOfRepos.js'
 import axios from 'axios'
+import CardOfEvents from './CardOfEvents.js'
+import CardOfRepos from './CardOfRepos.js'
+import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 
 
-const CardOfOrgs = ({ avatar }) => {
-
+const Content = ({ avatar }) => {
   const [selectedOrg, setSelectedOrg] = useState(null)
-  const userOrganizations = useContext(OrgsProvider.contexto)
   const [githubUrl, setGithubUrl] = useState(null)
   const [apiUrl, setApiUrl] = useState(null)
   const [event, setEvent] = useState(null)
   const [repo, setRepo] = useState(null)
 
+  const userOrganizations = useContext(OrgsProvider.contexto)
 
   const cleanValue = () => {
     if (event !== null || repo !== null) {
@@ -25,6 +21,7 @@ const CardOfOrgs = ({ avatar }) => {
     }
   }
 
+  // Var is useful
   if (selectedOrg) {
     var { events_url, repos_url, hooks_url } = selectedOrg
   }
@@ -56,13 +53,17 @@ const CardOfOrgs = ({ avatar }) => {
       const propertyData = await axios.post(api, {
         data: {
           githubUrl: githubUrl,
-          orgname: selectedOrg ? selectedOrg.login : null
+          orgname: selectedOrg ?
+            selectedOrg.login :
+            null
         },
         headers: {
           'Content-Type': 'application/json'
         },
       })
-      apiUrl === 'events' ? await setEvent(propertyData.data) : await setRepo(propertyData.data)
+      apiUrl === 'events' ?
+        await setEvent(propertyData.data) :
+        await setRepo(propertyData.data)
     }
     fetchData()
   }, [githubUrl || apiUrl])
@@ -171,4 +172,4 @@ const CardOfOrgs = ({ avatar }) => {
 }
 
 
-export default CardOfOrgs
+export default Content

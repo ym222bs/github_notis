@@ -1,13 +1,13 @@
 // import React, { Fragment, useEffect, useState, forwardRef, useRef, useImperativeHandle } from 'react'
-// const { forwardRef, useRef, useImperativeHandle } = React
+// // const { forwardRef, useRef, useImperativeHandle } = React
 
 // import CardOfEvents from './cardOfEvents.js'
 // import CardOfRepos from './cardOfRepos.js'
 // import axios from 'axios'
 
 // //  Option === Specific Organization
-// const PropertiesNav = ({option}) => {
-//   console.log(props.option)
+// const PropertiesNav = ({ option, generateRef }) => {
+//   console.log('generateRef: ', generateRef)
 //   const [githubUrl, setGithubUrl] = useState(null)
 //   const [apiUrl, setApiUrl] = useState(null)
 //   const [event, setEvent] = useState(null)
@@ -21,7 +21,9 @@
 //     }
 //   }
 
-//   const { events_url, repos_url, hooks_url } = props.option
+//   if (option) {
+//     var { events_url, repos_url, hooks_url } = option
+//   }
 
 //   // Set option:
 //   const handleNavOption = (type) => {
@@ -44,27 +46,32 @@
 //   }
 
 //   useEffect(() => {
-
-//     // Get option data:  
 //     const fetchData = async () => {
-//       const api = `gitprofile/${apiUrl}`
-//       const propertyData = await axios.post(api, {
-//         data: {
-//           githubUrl: githubUrl,
-//           orgname: props.option.login
-//         },
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//       })
-//       apiUrl === 'events' ? await setEvent(propertyData.data) : await setRepo(propertyData.data)
+//       if (option) {
+//         const api = `gitprofile/${apiUrl}`
+//         const propertyData = await axios.post(api, {
+//           data: {
+//             githubUrl: githubUrl,
+//             orgname: option.login
+//           },
+//           headers: {
+//             'Content-Type': 'application/json'
+//           },
+//         })
+//         apiUrl === 'events' ? await setEvent(propertyData.data) : await setRepo(propertyData.data)
+//       }
 //     }
 
 //     fetchData()
 
 //   }, [githubUrl || apiUrl])
 
-
+//   // useEffect(() => {
+//   //   generateRef.generateRef.current = cleanValue
+//   //   return () => {
+//   //     generateRef.generateRef.current = null
+//   //   }
+//   // })
 
 //   return (
 
@@ -72,12 +79,14 @@
 //       <div className='flex-container'>
 //         <ul className='navbar navbar-expand-sm'>
 //           <li className='navbar-nav'>
-//             <div
-//               className='nav-link'
-//               style={{ color: '#17a2b8' }}>
-//               {props.option.login}
-
-//             </div>
+//             {
+//               option &&
+//               <div
+//                 className='nav-link'
+//                 style={{ color: '#17a2b8' }}>
+//                 {option.login}
+//               </div>
+//             }
 //             <a
 //               href='#'
 //               className='nav-link btn btn-link'
@@ -116,7 +125,7 @@
 //       </div>
 //     </Fragment>
 //   )
-// })
+// }
 
 
 

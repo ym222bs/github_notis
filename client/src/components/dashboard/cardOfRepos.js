@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-const cardOfRepos = ({ events }) => {
+const CardOfRepos = ({ events }) => {
 
   const newArrayOfObjects = Object.entries(events).map(e => e[1])
   console.log('newArrayDataOfOjbect: ', newArrayOfObjects[0].id)
@@ -27,4 +27,4 @@ const cardOfRepos = ({ events }) => {
 }
 
 
-export default cardOfRepos
+export default CardOfRepos

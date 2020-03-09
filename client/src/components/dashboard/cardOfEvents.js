@@ -1,11 +1,7 @@
 import React, { Fragment } from 'react'
 
-const cardOfEvents = ({ events }) => {
-  console.log('1. events : ', events)
+const CardOfEvents = ({ events }) => {
   const newArrayOfObjects = Object.entries(events).map(e => e[1])
-  // console.log('stringifies: ', JSON.stringify(newArrayOfObjects))
-  console.log('2. newArrayDataOfOjbect: ', newArrayOfObjects[0].id)
-  console.log('3. events repo name: ', newArrayOfObjects[0].repo.name)
   let count = 0
 
   return (
@@ -29,4 +25,4 @@ const cardOfEvents = ({ events }) => {
 }
 
 
-export default cardOfEvents
+export default CardOfEvents

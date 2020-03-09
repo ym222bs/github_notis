@@ -23,7 +23,7 @@ const herokuURL = 'https://github-notis.herokuapp.com'
 passport.use(new GitHubStrategy({
   clientID: clientID,
   clientSecret: clientSecret,
-  callbackURL: herokuURL + '/auth/github/callback'
+  callbackURL: '/auth/github/callback'
 },
   async (token, refreshToken, profile, done) => {
     console.log('accesstoken: ', token)
