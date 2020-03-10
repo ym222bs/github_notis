@@ -1,4 +1,5 @@
 const axios = require('axios')
+const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer')
 const request = require('request-promise')
 const getUserToken = require('../config/passport_setup').getUserToken
@@ -19,7 +20,7 @@ const getData = async (url, token) => {
   }
 }
 
-// TODO: Refacture DUPLICATED get requests
+
 module.exports.getOrganizationsFromGithub = () => {
   const githubUserToken = getUserToken()
   const url = 'https://api.github.com/user/orgs'
@@ -27,14 +28,15 @@ module.exports.getOrganizationsFromGithub = () => {
 }
 
 
-// TODO: Refacture DUPLICATED get requests
 module.exports.getOrganizationPropertyContent = (url) => {
   const githubUserToken = getUserToken()
   return getData(url, githubUserToken)
 }
 
 
-const code = '7ec32e70'
+const code = '9093a27f'
+const bla = `https://352a39e7.ngrok.io/gitprofile/payload`
+
 module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
   // Create the hook from organization to endpoint url:
   try {
@@ -49,8 +51,9 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
         active: true,
         events: ['push', 'repository', 'issues', 'issue_comment'],
         config: {
-          url: `http://${code}.ngrok.io/gitprofile/payload`,
-          content_type: 'json'
+          url: bla,
+          content_type: 'json',
+          secret: 'superdupersecret888'
         }
       }
     })

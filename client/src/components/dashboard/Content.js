@@ -153,7 +153,6 @@ const Content = ({ avatar }) => {
                 </li>
               </ul>
               <div>
-                <input type="checkbox" checked data-toggle="toggle"></input>
                 {
                   apiUrl === 'events' && event &&
                   <CardOfEvents events={event} />

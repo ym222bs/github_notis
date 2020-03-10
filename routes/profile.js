@@ -87,7 +87,23 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 
 router.post('/payload', authCheck, async (req, res) => {
   console.log(req.body)
-  helper.slackNotification(req, res)
+  // const payload = await JSON.stringify(req.body)
+  // const sec = 'superdupersecret888'
+  // const signature = req.headers['x-hub-signature']
+  // const hmac = crypto.createHmac('sha1', sec)
+  // hmac.update(payload)
+
+
+  // //  compare hashed string
+  // const hashad = 'sha1=' + hmac.digest('hex')
+
+  // if (secureCompare(signature, hashad)) {
+  //   console.log('data came from git')
+  // }
+
+
+
+  helper.slackNotification(req)
   res.status(200).send('Payload ok')
 })
 
