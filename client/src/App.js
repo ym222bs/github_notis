@@ -3,7 +3,7 @@ import { Router, Route } from 'react-router-dom'
 import UserProvider from './contexts/UserProvider'
 import OrgsProvider from './contexts/OrgsProvider'
 import history from './history.js'
-import Home from './components/Home'
+import Home from './components/home'
 import Profile from './components/dashboard/Profile.js'
 
 
