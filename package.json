@@ -1,6 +1,9 @@
 {
   "name": "github_notis",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.15.0"
+  },
   "description": "Testing to maybe go expressJS on this B!",
   "main": "app.js",
   "dependencies": {
