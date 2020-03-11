@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useContext, useState, useRef, createRef } from 'react'
 import axios from 'axios'
-import CardOfEvents from './CardOfEvents.js'
-import CardOfRepos from './CardOfRepos.js'
+import CardOfEvents from './cardOfEvents.js'
+import CardOfRepos from './cardOfRepos.js'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 
 

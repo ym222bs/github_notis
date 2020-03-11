@@ -4,7 +4,7 @@ import UserProvider from './contexts/UserProvider'
 import OrgsProvider from './contexts/OrgsProvider'
 import history from './history.js'
 import Home from './components/home'
-import Profile from './components/dashboard/Profile.js'
+import Profile from './components/dashboard/profile.js'
 
 
 function App() {
