@@ -5,13 +5,12 @@ const request = require('request-promise')
 const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
 
-const githubUserToken = getUserToken()
 
 const getData = async (url, token) => {
   try {
     const res = await axios.get(url, {
       headers: {
-        Authorization: `token ${token}`,
+        Authorization: `token ${githubUserToken}`,
         'User-Agent': 'axios'
       }
     })
@@ -23,12 +22,14 @@ const getData = async (url, token) => {
 
 
 module.exports.getOrganizationsFromGithub = () => {
+  const githubUserToken = getUserToken()
   const url = 'https://api.github.com/user/orgs'
   return getData(url, githubUserToken)
 }
 
 
 module.exports.getOrganizationPropertyContent = (url) => {
+  const githubUserToken = getUserToken()
   return getData(url, githubUserToken)
 }
 
