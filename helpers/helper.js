@@ -1,7 +1,8 @@
 const axios = require('axios')
-const bcrypt = require('bcrypt')
+const crypto = require('crypto')
 const nodemailer = require('nodemailer')
 const request = require('request-promise')
+const secureCompare = require('secure-compare')
 const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
 
@@ -34,10 +35,13 @@ module.exports.getOrganizationPropertyContent = (url) => {
 }
 
 
-const code = '9093a27f'
-const bla = `https://352a39e7.ngrok.io/gitprofile/payload`
-const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload'
+const code = ''
+const bla = `https://f3804528.ngrok.io/gitprofile/payload/`
+const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload/'
 
+
+// TODO: ALARMING INSTRUCTIONS: ALWAYS USE '/' at the end of a url, 
+// otherwise the browser will give 302!!!!!!!
 module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
   // Create the hook from organization to endpoint url:
   try {
@@ -52,7 +56,7 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
         active: true,
         events: ['push', 'repository', 'issues', 'issue_comment'],
         config: {
-          url: herokuURL,
+          url: bla,
           content_type: 'json',
           secret: 'superdupersecret888'
         }
@@ -69,14 +73,11 @@ module.exports.slackNotification = async (req) => {
   try {
     const slackHookKey = process.env.SLACK_HOOK
     const typeOfEvent = req.headers['x-github-event']
-    const resp = req.body
-    // console.log('typeof login:: ', resp.sender.login)
-    // console.log('typeof login:: ', resp.sender.login)
-    console.log('typeof event:: ', typeof typeOfEvent)
-    console.log('typeof login:: ', typeof resp.sender.login)
 
-    // TODO: Validate Request ORIGIN!!!!!!
     // TODO: ONLY send the webhooks that are TOGGLED = TRUE in DataBase to slack notification
+
+    validateIncomingPayload(req)
+
 
     const result = await request({
       url: `https://hooks.slack.com/services/${slackHookKey}`,
@@ -92,6 +93,21 @@ module.exports.slackNotification = async (req) => {
   }
 }
 
+const validateIncomingPayload = async (req) => {
+  const payload = await JSON.stringify(req.body)
+  const sec = 'superdupersecret888'
+  const signature = req.headers['x-hub-signature']
+
+  const hmac = crypto.createHmac('sha1', sec)
+  hmac.update(payload)
+
+  //  compare hashed string
+  const hashad = 'sha1=' + hmac.digest('hex')
+
+  if (secureCompare(signature, hashad)) {
+    console.log('Payload came from git')
+  }
+}
 
 // let transporter = nodemailer.createTransport({
 //   service: 'gmail',

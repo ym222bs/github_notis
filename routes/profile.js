@@ -1,4 +1,5 @@
 require('dotenv').config()
+const crypto = require('crypto')
 const router = require('express').Router()
 const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
@@ -13,8 +14,8 @@ const authCheck = (req, res, next) => {
 }
 
 
-router.get('/', authCheck, (req, res) => {
-  const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+router.get('/', (req, res) => {
+  const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
   console.log('fullUrl: ', fullUrl)
   res.status(200).send(req.user)
 })
@@ -27,14 +28,14 @@ router.get('/orgs', authCheck, async (req, res, next) => {
 
 
 router.post('/events', authCheck, async (req, res) => {
-  const { githubUrl, orgname } = req.body.data
+  const { githubUrl } = req.body.data
   const data = await helper.getOrganizationPropertyContent(githubUrl)
   res.status(200).send({ ...data })
 })
 
 
 router.post('/repos', authCheck, async (req, res) => {
-  const { githubUrl, orgname } = req.body.data
+  const { githubUrl } = req.body.data
   const data = await helper.getOrganizationPropertyContent(githubUrl)
   res.status(200).send({ ...data })
 })
@@ -85,24 +86,8 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 
 
 
-router.post('/payload', authCheck, async (req, res) => {
-  console.log(req.body)
-  // const payload = await JSON.stringify(req.body)
-  // const sec = 'superdupersecret888'
-  // const signature = req.headers['x-hub-signature']
-  // const hmac = crypto.createHmac('sha1', sec)
-  // hmac.update(payload)
-
-
-  // //  compare hashed string
-  // const hashad = 'sha1=' + hmac.digest('hex')
-
-  // if (secureCompare(signature, hashad)) {
-  //   console.log('data came from git')
-  // }
-
-
-
+router.post('/payload', async (req, res) => {
+  console.log('CHECK PAYLOAD: ', req.body)
   helper.slackNotification(req)
   res.status(200).send('Payload ok')
 })

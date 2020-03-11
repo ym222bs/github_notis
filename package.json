@@ -1,14 +1,10 @@
 {
   "name": "github_notis",
   "version": "1.0.0",
-  "engines": {
-    "node": "10.15.0"
-  },
   "description": "Testing to maybe go expressJS on this B!",
   "main": "app.js",
   "dependencies": {
     "axios": "^0.19.2",
-    "bcrypt": "^4.0.1",
     "concurrently": "^5.1.0",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
@@ -16,16 +12,15 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-csp-header": "^2.3.2",
-    "http-proxy-middleware": "^0.20.0",
     "mongoose": "^5.8.11",
     "node-fetch": "^2.6.0",
     "nodemailer": "^6.4.3",
     "nodemon": "^2.0.2",
-    "octonode": "^0.9.5",
     "passport": "^0.4.1",
     "passport-github2": "^0.1.11",
     "request": "^2.88.2",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "secure-compare": "^3.0.1"
   },
   "devDependencies": {},
   "scripts": {
