@@ -10,7 +10,7 @@ const getData = async (url, token) => {
   try {
     const res = await axios.get(url, {
       headers: {
-        Authorization: `token ${githubUserToken}`,
+        Authorization: `token ${token}`,
         'User-Agent': 'axios'
       }
     })
