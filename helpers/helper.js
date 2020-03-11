@@ -5,6 +5,7 @@ const request = require('request-promise')
 const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
 
+const githubUserToken = getUserToken()
 
 const getData = async (url, token) => {
   try {
@@ -22,20 +23,19 @@ const getData = async (url, token) => {
 
 
 module.exports.getOrganizationsFromGithub = () => {
-  const githubUserToken = getUserToken()
   const url = 'https://api.github.com/user/orgs'
   return getData(url, githubUserToken)
 }
 
 
 module.exports.getOrganizationPropertyContent = (url) => {
-  const githubUserToken = getUserToken()
   return getData(url, githubUserToken)
 }
 
 
 const code = '9093a27f'
 const bla = `https://352a39e7.ngrok.io/gitprofile/payload`
+const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload'
 
 module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
   // Create the hook from organization to endpoint url:
@@ -51,7 +51,7 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
         active: true,
         events: ['push', 'repository', 'issues', 'issue_comment'],
         config: {
-          url: bla,
+          url: herokuURL,
           content_type: 'json',
           secret: 'superdupersecret888'
         }
