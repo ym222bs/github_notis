@@ -16,7 +16,7 @@ const Content = ({ avatar }) => {
   const [repo, setRepo] = useState(null)
 
   const userOrganizations = useContext(OrgsProvider.context)
-  // const userSettings = useContext(SettingsProvider.context)
+
 
   // TODO: add all the other things WEBHOOK and Settings
   const cleanValue = () => {
@@ -31,7 +31,7 @@ const Content = ({ avatar }) => {
     }
   }
 
-  // Var is useful
+  // Var is still useful
   if (selectedOrg) {
     var { events_url, repos_url, hooks_url } = selectedOrg
   }
@@ -87,7 +87,6 @@ const Content = ({ avatar }) => {
 
 
   const fetchSettings = async () => {
-    // if (selectedOrg !== null) {
     const url = '/gitprofile/settings'
     const settingsData = await axios.post(url, {
       data: {
@@ -96,13 +95,11 @@ const Content = ({ avatar }) => {
       headers: {
         'Content-Type': 'application/json'
       },
-    })
-    console.log('Ok from eventToggle: ', settingsData)
+    }).catch(err => console.log('fetchSettings: ', err))
     await setSettings(settingsData.data)
-    // }
   }
 
-
+  // TODO. clean up this mess
   return (
     <Fragment>
       <div

@@ -6,12 +6,7 @@ function Settings({ organization, settingsList }) {
   const [repo, setRepo] = useState(settingsList[0].repo)
   const [issue, setIssue] = useState(settingsList[0].issue)
   const [comment, setComment] = useState(settingsList[0].comment)
-  const [oldSettings, setOldSettings] = useState(false)
-  console.log('UserSettings: ', settingsList)
 
-  const setting = settingsList[0]
-
-  // Set settingsslsist
 
   const toggle = (type) => {
     console.log(type)
@@ -38,7 +33,6 @@ function Settings({ organization, settingsList }) {
   }
 
   const postSetting = async (event, toggle) => {
-    console.log(organization)
     const response = await axios.put('/gitprofile/settings', {
       data: {
         type: event,
@@ -48,7 +42,7 @@ function Settings({ organization, settingsList }) {
       headers: {
         'Content-Type': 'application/json'
       },
-    })
+    }).catch(err => console.log('postSettings: ', err))
     console.log('Ok from eventToggle: ', response)
   }
 
