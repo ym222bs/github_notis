@@ -1,23 +1,33 @@
-import React, { Fragment, useEffect, useContext, useState, useRef, createRef } from 'react'
+import React, { Fragment, useEffect, useContext, useState } from 'react'
 import axios from 'axios'
 import CardOfEvents from './cardOfEvents.js'
 import CardOfRepos from './cardOfRepos.js'
+import Settings from './settings.js'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
+// import SettingsProvider from '../../contexts/SettingsProvider.jsx'
 
 
 const Content = ({ avatar }) => {
   const [selectedOrg, setSelectedOrg] = useState(null)
   const [githubUrl, setGithubUrl] = useState(null)
+  const [settings, setSettings] = useState(null)
   const [apiUrl, setApiUrl] = useState(null)
   const [event, setEvent] = useState(null)
   const [repo, setRepo] = useState(null)
 
-  const userOrganizations = useContext(OrgsProvider.contexto)
+  const userOrganizations = useContext(OrgsProvider.context)
+  // const userSettings = useContext(SettingsProvider.context)
 
+  // TODO: add all the other things WEBHOOK and Settings
   const cleanValue = () => {
-    if (event !== null || repo !== null) {
+    if (
+      event !== null
+      || repo !== null
+      || settings !== null
+    ) {
       setEvent(null)
       setRepo(null)
+      setSettings(null)
     }
   }
 
@@ -30,16 +40,22 @@ const Content = ({ avatar }) => {
   const handleNavOption = (type) => {
     switch (type) {
       case 'events':
+        setSettings(null)
         setGithubUrl(events_url)
         setApiUrl('events')
         break
       case 'repos':
+        setSettings(null)
         setGithubUrl(repos_url)
         setApiUrl('repos')
         break
       case 'hook':
+        setSettings(null)
         setGithubUrl(hooks_url)
         setApiUrl('webhook')
+        break
+      case 'settings':
+        fetchSettings()
         break
       default:
         return null
@@ -49,8 +65,8 @@ const Content = ({ avatar }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const api = `gitprofile/${apiUrl}`
-      const propertyData = await axios.post(api, {
+      const url = `gitprofile/${apiUrl}`
+      const propertyData = await axios.post(url, {
         data: {
           githubUrl: githubUrl,
           orgname: selectedOrg ?
@@ -66,7 +82,25 @@ const Content = ({ avatar }) => {
         await setRepo(propertyData.data)
     }
     fetchData()
-  }, [githubUrl || apiUrl])
+  }, [githubUrl, apiUrl])
+
+
+
+  const fetchSettings = async () => {
+    // if (selectedOrg !== null) {
+    const url = '/gitprofile/settings'
+    const settingsData = await axios.post(url, {
+      data: {
+        org: selectedOrg.login
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    console.log('Ok from eventToggle: ', settingsData)
+    await setSettings(settingsData.data)
+    // }
+  }
 
 
   return (
@@ -94,7 +128,7 @@ const Content = ({ avatar }) => {
                 >
                   <a
                     onMouseDown={cleanValue}
-                    href='#'
+                    href='#orgs'
                     className='card-link'
                     key={userOrganizations[key].login}
                     onClick={() => setSelectedOrg(userOrganizations[key])}
@@ -129,7 +163,7 @@ const Content = ({ avatar }) => {
 
                   </div>
                   <a
-                    href='#'
+                    href='#events'
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('events')}
 
@@ -137,18 +171,25 @@ const Content = ({ avatar }) => {
                     Events
 						      </a>
                   <a
-                    href='#'
+                    href='#repos'
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('repos')}
                   >
                     Repos
 						      </a>
                   <a
-                    href='#'
+                    href='#hook'
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('hook')}
                   >
                     Create Hook
+						      </a>
+                  <a
+                    href='#settings'
+                    className='nav-link btn btn-link'
+                    onClick={() => handleNavOption('settings')}
+                  >
+                    Settings
 						      </a>
                 </li>
               </ul>
@@ -160,6 +201,10 @@ const Content = ({ avatar }) => {
                 {
                   apiUrl === 'repos' && repo &&
                   <CardOfRepos events={repo} />
+                }
+                {
+                  settings &&
+                  <Settings organization={selectedOrg.login} settingsList={settings} />
                 }
               </div>
             </div>

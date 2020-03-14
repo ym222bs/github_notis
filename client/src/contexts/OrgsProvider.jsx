@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
-const contexto = createContext(null)
+const context = createContext(null)
 
 const OrgsProvider = ({ children }) => {
   const [orgs, setOrgs] = useState([])
@@ -14,11 +14,11 @@ const OrgsProvider = ({ children }) => {
   }, [])
 
   return (
-    <contexto.Provider value={orgs}>
+    <context.Provider value={orgs}>
       {children}
-    </contexto.Provider>
+    </context.Provider>
   )
 }
 
-OrgsProvider.contexto = contexto
+OrgsProvider.context = context
 export default OrgsProvider

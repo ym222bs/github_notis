@@ -1,10 +1,10 @@
 import React from 'react'
 import { Router, Route } from 'react-router-dom'
-import UserProvider from './contexts/UserProvider'
-import OrgsProvider from './contexts/OrgsProvider'
-import history from './history.js'
 import Home from './components/home'
+import history from './history.js'
+import OrgsProvider from './contexts/OrgsProvider'
 import Profile from './components/dashboard/profile.js'
+import UserProvider from './contexts/UserProvider'
 
 
 function App() {

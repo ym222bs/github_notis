@@ -82,16 +82,37 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 })
 
 
-// TODO: settings route, access HookDB of this user, and change settings to (false/true)? 
-
-
-
-router.post('/payload', async (req, res) => {
+router.post('/payload', authCheck, async (req, res) => {
   console.log('CHECK PAYLOAD: ', req.body)
   helper.slackNotification(req)
   res.status(200).send('Payload ok')
 })
 
 
+router.post('/settings', authCheck, async (req, res) => {
+  const { org } = req.body.data
+  console.log(org)
+  const { id } = getProfileInformation()
+  const findHook = await Hook.find({ git_id: id, organization: org })
+
+  res.send(findHook)
+})
+
+router.put('/settings', async (req, res) => {
+  const { id } = getProfileInformation()
+  const { type, state, org } = req.body.data
+  console.log(typeof type)
+  console.log(state)
+  const findHook = await Hook.findOne({ git_id: id, organization: org })
+
+  const query = {}
+  query[type] = state   // Apparently When I do {type: state}, the key is the string 'type' and not the value of the variable name
+  if (findHook !== null) {
+    var toggle = await Hook.updateOne({ '_id': findHook._id }, { $set: query })
+  }
+
+  console.log('TOGGLE: ', toggle)
+  res.send('Done')
+})
 
 module.exports = router

@@ -19,9 +19,21 @@ const hookSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  notify: {
+  push: {
     type: Boolean,
-    default: true
+    default: false
+  },
+  repo: {
+    type: Boolean,
+    default: false
+  },
+  issue: {
+    type: Boolean,
+    default: false
+  },
+  comment: {
+    type: Boolean,
+    default: false
   },
   createdAt: {
     type: Date,
