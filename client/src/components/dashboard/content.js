@@ -1,17 +1,19 @@
 import React, { Fragment, useEffect, useContext, useState } from 'react'
 import axios from 'axios'
+import _ from 'lodash'
 import CardOfEvents from './cardOfEvents.js'
 import CardOfRepos from './cardOfRepos.js'
 import Settings from './settings.js'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
-// import SettingsProvider from '../../contexts/SettingsProvider.jsx'
 
 
 const Content = ({ avatar }) => {
   const [selectedOrg, setSelectedOrg] = useState(null)
   const [githubUrl, setGithubUrl] = useState(null)
-  const [settings, setSettings] = useState(null)
   const [apiUrl, setApiUrl] = useState(null)
+  const [settings, setSettings] = useState(null)
+  const [controllString, setString] = useState(null)
+  const [webhook, setWebhook] = useState(null)
   const [event, setEvent] = useState(null)
   const [repo, setRepo] = useState(null)
 
@@ -21,13 +23,16 @@ const Content = ({ avatar }) => {
   // TODO: add all the other things WEBHOOK and Settings
   const cleanValue = () => {
     if (
-      event !== null
-      || repo !== null
-      || settings !== null
+      event !== null ||
+      repo !== null ||
+      settings !== null ||
+      webhook !== null
     ) {
       setEvent(null)
       setRepo(null)
       setSettings(null)
+      setWebhook(null)
+      setString(null)
     }
   }
 
@@ -38,24 +43,24 @@ const Content = ({ avatar }) => {
 
 
   const handleNavOption = (type) => {
+    cleanValue()
     switch (type) {
       case 'events':
-        setSettings(null)
         setGithubUrl(events_url)
         setApiUrl('events')
         break
       case 'repos':
-        setSettings(null)
         setGithubUrl(repos_url)
         setApiUrl('repos')
         break
       case 'hook':
-        setSettings(null)
+        // TODO: change here: add a function to fire of "createWebhook"
         setGithubUrl(hooks_url)
         setApiUrl('webhook')
         break
       case 'settings':
         fetchSettings()
+        setString('settings')
         break
       default:
         return null
@@ -69,9 +74,9 @@ const Content = ({ avatar }) => {
       const propertyData = await axios.post(url, {
         data: {
           githubUrl: githubUrl,
-          orgname: selectedOrg ?
-            selectedOrg.login :
-            null
+          orgname: selectedOrg
+            ? selectedOrg.login
+            : null
         },
         headers: {
           'Content-Type': 'application/json'
@@ -197,20 +202,41 @@ const Content = ({ avatar }) => {
                 }
                 {
                   apiUrl === 'repos' && repo &&
-                  <CardOfRepos events={repo} />
+                  <CardOfRepos repos={repo} />
                 }
                 {
-                  settings &&
-                  <Settings organization={selectedOrg.login} settingsList={settings} />
+                  !_.isEmpty(settings)
+                    ? <Settings organization={selectedOrg.login} settingsList={settings} />
+                    : controllString
+                      ? (
+                        <div
+                          className='container empty-message'
+                          style={{ padding: '20px', fontSize: '15px' }}
+                        >
+                          There is no webhook set on this organization yet.
+                        </div>
+                      ) :
+                      null
                 }
               </div>
+
             </div>
           }
+          <slackWebhook />
         </>
       </div>
     </Fragment>
   )
 }
+
+const slackWebhook = () => {
+  return (
+    <div>
+      If you are unsure on how to create a Slack webhook key, check out the docs <a href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'>here</a>docs
+    </div>
+  )
+}
+
 
 
 export default Content

@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
-function Settings({ organization, settingsList }) {
+const Settings = ({ organization, settingsList }) => {
   const [push, setPush] = useState(settingsList[0].push)
   const [repo, setRepo] = useState(settingsList[0].repo)
   const [issue, setIssue] = useState(settingsList[0].issue)
   const [comment, setComment] = useState(settingsList[0].comment)
 
-
   const toggle = (type) => {
-    console.log(type)
     switch (type) {
       case 'push':
         setPush(!push)
@@ -48,7 +46,7 @@ function Settings({ organization, settingsList }) {
 
 
   return (
-    <div className='container'>
+    <div className='container' style={{ backgroundColor: 'white', padding: '20px' }}>
       <h5 onClick={() => toggle('push')}>
         <p className='element1'>Get new 'Push' events?</p>
         <div className='toggle element2'>
@@ -87,6 +85,14 @@ function Settings({ organization, settingsList }) {
       </h5>
     </div>
   )
+  // } else {
+  //   return (
+  //     <div className='container empty-message' style={{ padding: '20px', fontSize: '15px' }}>
+  //       There is no webhook set on this organization yet.
+  //     </div>
+
+  //   )
+  // }
 }
 
 

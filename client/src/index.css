@@ -1,9 +1,9 @@
 :root {
-    --primary-gray: #fdfefe;
+    --primary-gray: #ffffff;
     --main-border-radius: 2px; 
+    --shadow: 2px 1px 4px 1px rgba(0,0,0,0.2);
 
 }
-
 
 body {
     font-family: 'Nunito';
@@ -14,7 +14,6 @@ body {
     background-repeat: no-repeat, repeat;
 }
 
-
 pre {
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
@@ -22,7 +21,6 @@ pre {
     white-space: -o-pre-wrap;
     white-space: break-word;
 }
-
 
 .card-g {
     background: white;
@@ -34,16 +32,23 @@ pre {
     transition: all ease-in-out 0.6s;
 }
 
-
 .card-g:hover {
     transform: translateY(-10px);
 }
 
-
 .jumbotron {
-    background-color: #FFFFFF;
-    opacity: 0.90;
+    background-color: #f8f8f8;
+    /* opacity: 0.90; */
     border-radius: var(--main-border-radius);
+}
+
+.container {
+  box-shadow: var(--shadow);
+  /* background-color: var(--primary-gray); */
+}
+
+.empty-message {
+  background-color: var(--primary-gray);
 }
 
 
@@ -52,50 +57,24 @@ pre {
     flex-direction: row;
 }
 
-
 .child {
     flex: 1;
 }
-
 
 .login-btn {
     padding: 5px 20px;
     border-radius: 3px;
 }
 
-
 .navbar {
     background-color: var(--primary-gray);
     border-radius: var(--main-border-radius);
-    box-shadow: 2px 1px 4px 1px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow);
 
 }
-
 
 .navbar a:hover {
     background-color: #17a2b8;
-}
-
-
-.menu-bar {
-    overflow: hidden;
-    background-color: var(--primary-red);
-    box-shadow: -5px -7px 15px 1px rgba(0,0,0,0.8);
-    padding-left: 20%;
-    padding-right: 20%;
-}
-
-
-.disabled {
-    pointer-events: none;
-}
-
-.app-icon-container {
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    font-size: 1.5rem;
-    border-radius: 50%;
 }
 
 .card {
@@ -109,19 +88,16 @@ pre {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
     width: 18rem;
-    box-shadow: 2px 1px 4px 1px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow);
 }
-
 
 .toggle {
   cursor: pointer;
 }
 
-
 .toggle:hover {
   text-decoration: underline;
 }
-
 
 /*Inline settings and toggle*/
 .element1 {
@@ -131,33 +107,28 @@ pre {
   width:20rem;
 } 
 
-
 .element2 {
   display:inline-block; 
   width:5rem; 
 } 
-
 
 .page {
     width: 50%;
     margin: 0 auto;
 }
 
-
 .page-title {
     font-weight: 400;
     font-size: 35px;
 }
 
-
+/*Mac window style*/
 .window {
     width: 80%;
     margin: 0 auto;
     background: white;
     border-radius: var(--main-border-radius);
 }
-
-
 .title-bar {
     background-color: white;
     border-top-right-radius: var(--main-border-radius);
@@ -166,15 +137,12 @@ pre {
     padding-top: 5px;
     padding-bottom: 5px;
 }
-
-
 .buttons {
     float: left;
     padding-left: 8px;
     padding-top: 3px;
     line-height: 0;
 }
-
 .mac-btn {
     font-size: 9px;
     width: 11px;
@@ -182,14 +150,13 @@ pre {
     display: inline-block;
     border-radius: var(--main-border-radius);
 }
-
-
 .content {
-    background-color: #EEEEEE;
-    padding: 20px 10px;
-    border-bottom-left-radius: var(--main-border-radius);
-    border-bottom-right-radius: var(--main-border-radius);
+  background-color: #EEEEEE;
+  padding: 20px 10px;
+  border-bottom-left-radius: var(--main-border-radius);
+  border-bottom-right-radius: var(--main-border-radius);
 }
+/*END: Mac window style*/
 
 
 img {
@@ -197,7 +164,6 @@ img {
     border-top-right-radius: var(--main-border-radius);
     width: 18rem;
 }
-
 
 .tag {
     color: var(--primary-red);
@@ -209,22 +175,9 @@ img {
     margin-bottom: 10px;
 }
 
-
 .footer {
     padding: 10px;
     border: 1px solid #d4d7dd;
     background-color: #eae9e9;
     color: #45454d;
-}
-
-
-.social-icon {
-    width: 24px;
-    height: 24px;
-    transition: all ease-in-out 0.6s;
-}
-
-
-.social-icon:hover {
-    transform: translateY(-5px);
 }
