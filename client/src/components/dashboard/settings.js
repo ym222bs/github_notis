@@ -1,7 +1,23 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import _ from 'lodash'
 
-const Settings = ({ organization, settingsList }) => {
+const Settings = ({ org, settingsArray }) => {
+  console.log(settingsArray)
+  if (!_.isEmpty(settingsArray)) {
+    return (
+      <SettingsComponent organization={org} settingsList={settingsArray} />
+    )
+  } else {
+    return (
+      <div className='container empty-message' style={{ padding: '20px', fontSize: '15px' }}>
+        There is no webhook set on this organization yet.
+      </div>
+    )
+  }
+}
+
+const SettingsComponent = ({ organization, settingsList }) => {
   const [push, setPush] = useState(settingsList[0].push)
   const [repo, setRepo] = useState(settingsList[0].repo)
   const [issue, setIssue] = useState(settingsList[0].issue)
@@ -30,8 +46,9 @@ const Settings = ({ organization, settingsList }) => {
     }
   }
 
+
   const postSetting = async (event, toggle) => {
-    const response = await axios.put('/gitprofile/settings', {
+    await axios.put('/gitprofile/settings', {
       data: {
         type: event,
         state: toggle,
@@ -41,7 +58,6 @@ const Settings = ({ organization, settingsList }) => {
         'Content-Type': 'application/json'
       },
     }).catch(err => console.log('postSettings: ', err))
-    console.log('Ok from eventToggle: ', response)
   }
 
 
@@ -85,14 +101,6 @@ const Settings = ({ organization, settingsList }) => {
       </h5>
     </div>
   )
-  // } else {
-  //   return (
-  //     <div className='container empty-message' style={{ padding: '20px', fontSize: '15px' }}>
-  //       There is no webhook set on this organization yet.
-  //     </div>
-
-  //   )
-  // }
 }
 
 

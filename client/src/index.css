@@ -70,8 +70,12 @@ pre {
     background-color: var(--primary-gray);
     border-radius: var(--main-border-radius);
     box-shadow: var(--shadow);
-
+    
 }
+
+/* navbar button {
+  color: #292f33;
+} */
 
 .navbar a:hover {
     background-color: #17a2b8;

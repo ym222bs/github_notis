@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useContext, useState } from 'react'
 import axios from 'axios'
-import _ from 'lodash'
 import CardOfEvents from './cardOfEvents.js'
 import CardOfRepos from './cardOfRepos.js'
 import Settings from './settings.js'
@@ -12,15 +11,13 @@ const Content = ({ avatar }) => {
   const [githubUrl, setGithubUrl] = useState(null)
   const [apiUrl, setApiUrl] = useState(null)
   const [settings, setSettings] = useState(null)
-  const [controllString, setString] = useState(null)
   const [webhook, setWebhook] = useState(null)
+  const [webhooks, setWebhooks] = useState(null)
   const [event, setEvent] = useState(null)
   const [repo, setRepo] = useState(null)
-
   const userOrganizations = useContext(OrgsProvider.context)
 
 
-  // TODO: add all the other things WEBHOOK and Settings
   const cleanValue = () => {
     if (
       event !== null ||
@@ -28,22 +25,21 @@ const Content = ({ avatar }) => {
       settings !== null ||
       webhook !== null
     ) {
-      setEvent(null)
-      setRepo(null)
       setSettings(null)
       setWebhook(null)
-      setString(null)
+      setWebhooks(null)
+      setEvent(null)
+      setRepo(null)
     }
   }
 
-  // Var is still useful
+
   if (selectedOrg) {
     var { events_url, repos_url, hooks_url } = selectedOrg
   }
 
 
   const handleNavOption = (type) => {
-    // cleanValue()
     switch (type) {
       case 'events':
         setGithubUrl(events_url)
@@ -55,12 +51,15 @@ const Content = ({ avatar }) => {
         break
       case 'hook':
         // TODO: change here: add a function to fire of "createWebhook"
-        setGithubUrl(hooks_url)
-        setApiUrl('webhook')
+        // setGithubUrl(hooks_url)
+        // TODOD: this function is not needed here:
+        // setApiUrl('webhook')
+
+        // 1. Get hooks and render
+        fetchWebhooks()
         break
       case 'settings':
         fetchSettings()
-        setString('settings')
         break
       default:
         return null
@@ -87,8 +86,7 @@ const Content = ({ avatar }) => {
         await setRepo(propertyData.data)
     }
     fetchData()
-  }, [githubUrl, apiUrl])
-
+  }, [githubUrl])
 
 
   const fetchSettings = async () => {
@@ -103,6 +101,15 @@ const Content = ({ avatar }) => {
     }).catch(err => console.log('fetchSettings: ', err))
     await setSettings(settingsData.data)
   }
+
+  const fetchWebhooks = async () => {
+    const url = '/gitprofile/webhook'
+    const webhooks = await axios.get(url)
+      .catch(err => console.log('fetchWebhook: ', err))
+    console.log('webhook: ', webhooks.data.webhooks)
+    await setWebhooks(webhooks.data.webhooks)
+  }
+
 
   // TODO. clean up this mess
   return (
@@ -125,11 +132,11 @@ const Content = ({ avatar }) => {
             Object.keys(userOrganizations).map(key => {
               return (
                 <li
+                  onClick={cleanValue}
                   className='list-group-item'
                   key={userOrganizations[key].login}
                 >
                   <a
-                    onMouseDown={cleanValue}
                     href='#orgs'
                     className='card-link'
                     key={userOrganizations[key].login}
@@ -165,7 +172,6 @@ const Content = ({ avatar }) => {
 
                   </div>
                   <a
-                    href='#events'
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('events')}
 
@@ -173,7 +179,6 @@ const Content = ({ avatar }) => {
                     Events
 						      </a>
                   <a
-                    href='#repos'
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('repos')}
                   >
@@ -184,7 +189,7 @@ const Content = ({ avatar }) => {
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('hook')}
                   >
-                    Create Hook
+                    Webhooks
 						      </a>
                   <a
                     href='#settings'
@@ -205,36 +210,39 @@ const Content = ({ avatar }) => {
                   <CardOfRepos repos={repo} />
                 }
                 {
-                  !_.isEmpty(settings)
-                    ? <Settings organization={selectedOrg.login} settingsList={settings} />
-                    : controllString
-                      ? (
-                        <div
-                          className='container empty-message'
-                          style={{ padding: '20px', fontSize: '15px' }}
-                        >
-                          There is no webhook set on this organization yet.
-                        </div>
-                      ) :
-                      null
+                  webhooks &&
+                  <SlackWebhook webhooksList={webhooks} />
                 }
-              </div>
+                {
+                  settings &&
+                  <Settings org={selectedOrg.login} settingsArray={settings} />
+                }
 
+              </div>
             </div>
           }
-          <SlackWebhook />
         </>
       </div>
     </Fragment>
   )
 }
 
-const SlackWebhook = () => {
-  return (
-    <div>
-      If you are unsure on how to create a Slack webhook key, check out the docs <a target='_blank' href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'>here</a>docs
-    </div>
-  )
+const SlackWebhook = ({ webhooksList }) => {
+  console.log('SlackWebhook: ', (webhooksList))
+  if (webhooksList) {
+    return (
+      <div>
+        If you are unsure on how to create a Slack webhook key, check out the docs
+        <a target='_blank'
+          href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'
+          rel='noopener noreferrer'>
+          here
+        </a>.
+      ....psst, it's super easy.
+      </div>
+
+    )
+  }
 }
 
 

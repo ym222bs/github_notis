@@ -44,7 +44,7 @@ router.post('/repos', authCheck, async (req, res) => {
 router.get('/webhook', authCheck, async (req, res) => {
   try {
     const { id } = getProfileInformation()
-    const webhooks = await Hook.find({ git_id: id }).select('-_id url organization username ')
+    const webhooks = await Hook.find({ git_id: id }).select('-_id')
     return res.status(200).send({ webhooks })
   } catch (err) {
     console.log('get /webhook: ', err)

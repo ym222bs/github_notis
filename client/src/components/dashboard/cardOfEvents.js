@@ -12,7 +12,7 @@ const CardOfEvents = ({ events }) => {
         {
           newArrayOfObjects.slice(0, 5).map(property =>
             <div key={count++}>
-              <div className="card" style={{ width: '20rem', marginBottom: '1rem' }}>
+              <div className="card" style={{ width: '100%', marginBottom: '1rem' }}>
                 <div className="card-body">
                   <h5 className="card-title">New <span style={{ color: '#1ca3b9' }}>{property.type}</span></h5>
                   <h6 className="card-subtitle mb-2 text-muted" >in {property.repo.name}</h6>
