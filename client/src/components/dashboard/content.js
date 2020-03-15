@@ -15,6 +15,7 @@ const Content = ({ avatar }) => {
   const [webhooks, setWebhooks] = useState(null)
   const [event, setEvent] = useState(null)
   const [repo, setRepo] = useState(null)
+  const [controller, setController] = useState(null)
   const userOrganizations = useContext(OrgsProvider.context)
 
 
@@ -44,21 +45,24 @@ const Content = ({ avatar }) => {
       case 'events':
         setGithubUrl(events_url)
         setApiUrl('events')
+        setController('events')
         break
       case 'repos':
         setGithubUrl(repos_url)
         setApiUrl('repos')
+        setController('repos')
         break
       case 'hook':
         // TODO: change here: add a function to fire of "createWebhook"
         // setGithubUrl(hooks_url)
         // TODOD: this function is not needed here:
         // setApiUrl('webhook')
-
+        setController('hook')
         // 1. Get hooks and render
         fetchWebhooks()
         break
       case 'settings':
+        setController('settings')
         fetchSettings()
         break
       default:
@@ -101,6 +105,7 @@ const Content = ({ avatar }) => {
     }).catch(err => console.log('fetchSettings: ', err))
     await setSettings(settingsData.data)
   }
+
 
   const fetchWebhooks = async () => {
     const url = '/gitprofile/webhook'
@@ -202,19 +207,19 @@ const Content = ({ avatar }) => {
               </ul>
               <div>
                 {
-                  apiUrl === 'events' && event &&
+                  controller === 'events' && event &&
                   <CardOfEvents events={event} />
                 }
                 {
-                  apiUrl === 'repos' && repo &&
+                  controller === 'repos' && repo &&
                   <CardOfRepos repos={repo} />
                 }
                 {
-                  webhooks &&
+                  controller === 'hook' && 'webhooks' &&
                   <SlackWebhook webhooksList={webhooks} />
                 }
                 {
-                  settings &&
+                  controller === 'settings' && settings &&
                   <Settings org={selectedOrg.login} settingsArray={settings} />
                 }
 
@@ -229,20 +234,20 @@ const Content = ({ avatar }) => {
 
 const SlackWebhook = ({ webhooksList }) => {
   console.log('SlackWebhook: ', (webhooksList))
-  if (webhooksList) {
-    return (
-      <div>
-        If you are unsure on how to create a Slack webhook key, check out the docs
-        <a target='_blank'
-          href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'
-          rel='noopener noreferrer'>
-          here
+  // if (webhooksList) {
+  return (
+    <div>
+      If you are unsure on how to create a Slack webhook key, check out the docs
+      <a target='_blank'
+        href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'
+        rel='noopener noreferrer'>
+        here
         </a>.
       ....psst, it's super easy.
-      </div>
+    </div>
 
-    )
-  }
+  )
+  // }
 }
 
 
