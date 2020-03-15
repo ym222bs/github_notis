@@ -43,7 +43,7 @@ const Content = ({ avatar }) => {
 
 
   const handleNavOption = (type) => {
-    cleanValue()
+    // cleanValue()
     switch (type) {
       case 'events':
         setGithubUrl(events_url)
@@ -222,17 +222,17 @@ const Content = ({ avatar }) => {
 
             </div>
           }
-          <slackWebhook />
+          <SlackWebhook />
         </>
       </div>
     </Fragment>
   )
 }
 
-const slackWebhook = () => {
+const SlackWebhook = () => {
   return (
     <div>
-      If you are unsure on how to create a Slack webhook key, check out the docs <a href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'>here</a>docs
+      If you are unsure on how to create a Slack webhook key, check out the docs <a target='_blank' href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'>here</a>docs
     </div>
   )
 }

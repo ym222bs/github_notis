@@ -56,7 +56,7 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
         active: true,
         events: ['push', 'repository', 'issues', 'issue_comment'],
         config: {
-          url: bla,
+          url: herokuURL,
           content_type: 'json',
           secret: 'superdupersecret888'
         }

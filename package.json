@@ -31,7 +31,8 @@
     "server": "nodemon app.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "git": "git add . && git commit -m",
-    "postgit": "git push"
+    "postgit": "git push",
+    "heroku": "git push heroku master"
   },
   "repository": {
     "type": "git",
