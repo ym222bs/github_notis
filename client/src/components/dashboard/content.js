@@ -90,25 +90,34 @@ const Content = ({ avatar }) => {
 
 
   const fetchSettings = async () => {
-    const url = '/gitprofile/settings'
-    const settingsData = await axios.post(url, {
-      data: {
-        org: selectedOrg.login
-      },
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }).catch(err => console.log('fetchSettings: ', err))
-    await setSettings(settingsData.data)
+    try {
+      const url = '/gitprofile/settings'
+      const settingsData = await axios.post(url, {
+        data: {
+          org: selectedOrg.login
+        },
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      await setSettings(settingsData.data)
+
+    } catch (err) {
+      console.log('fetchSettings: ', err)
+    }
   }
 
   // Fecth all webhooks and show them
   const fetchWebhooks = async () => {
-    const url = '/gitprofile/webhook'
-    const webhooks = await axios.get(url)
-      .catch(err => console.log('fetchWebhook: ', err))
-    console.log('webhook: ', webhooks.data.webhooks)
-    await setWebhooks(webhooks.data.webhooks)
+    try {
+      const url = '/gitprofile/webhook'
+      const webhooks = await axios.get(url)
+
+      console.log('webhook: ', webhooks.data.webhooks)
+      await setWebhooks(webhooks.data.webhooks)
+    } catch (err) {
+      console.log('fetchWebhook: ', err)
+    }
   }
 
   const updateWebhook = (hook) => {
