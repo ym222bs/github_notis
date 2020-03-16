@@ -131,14 +131,13 @@ router.post('/settings', authCheck, async (req, res) => {
     const findHook = await Hook.find({ git_id: id, organization: org })
     res.send(findHook)
   } catch (error) {
-
+    console.log('POST settings: ', err)
   }
 })
 
 router.put('/settings', async (req, res) => {
   const { id } = getProfileInformation()
   const { type, state, org } = req.body.data
-
   const findHook = await Hook.findOne({ git_id: id, organization: org })
     .catch(err => console.log('PUT settings ', err))
 

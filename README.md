@@ -15,8 +15,6 @@ If so, the application should be able to show information that is new since the 
 
 
 
-
-
 A Github OAuth 2.0 application, using Passport.js and React + Bootstrap  :v:
 
 Enjoy! <https://github-notis.herokuapp.com/>

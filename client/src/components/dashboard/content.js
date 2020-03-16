@@ -88,7 +88,6 @@ const Content = ({ avatar }) => {
     fetchData()
   }, [githubUrl])
 
-
   const fetchSettings = async () => {
     const url = '/gitprofile/settings'
     const settingsData = await axios.post(url, {
@@ -108,7 +107,6 @@ const Content = ({ avatar }) => {
     const webhooks = await axios.get(url)
       .catch(err => console.log('fetchWebhooks: ', err))
     await setWebhooks(webhooks.data.webhooks)
-
   }
 
   // TODO: clean up this mess
@@ -169,12 +167,10 @@ const Content = ({ avatar }) => {
                       selectedOrg &&
                       selectedOrg.login
                     }
-
                   </div>
                   <a
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('events')}
-
                   >
                     Events
 						      </a>
@@ -208,7 +204,6 @@ const Content = ({ avatar }) => {
                   <CardOfRepos repos={repo} />
                 }
                 {
-
                   controller === 'hook' && webhooks &&
                   <>
                     <CreateWebhook hookUrl={hooks_url} org={selectedOrg.login} />
@@ -219,7 +214,6 @@ const Content = ({ avatar }) => {
                   controller === 'settings' && settings &&
                   <Settings org={selectedOrg.login} settingsArray={settings} />
                 }
-
               </div>
             </div>
           }

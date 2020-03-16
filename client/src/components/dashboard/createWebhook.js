@@ -19,16 +19,17 @@ const CreateWebhook = ({ hookUrl, org }) => {
         'Content-Type': 'application/json'
       },
     })
-    setWebhook('')
     if (propertyData.status === 201) {
       setSuccess(true)
     }
   }
 
+
   useEffect(() => {
     const timer = setTimeout(() => setSuccess(false), 4000)
     return () => clearTimeout(timer)
   }, [success])
+
 
   return (
     <>
@@ -36,16 +37,21 @@ const CreateWebhook = ({ hookUrl, org }) => {
         success &&
         <SuccessAlert />
       }
-      <div className='container'
-        style={{ backgroundColor: 'white', padding: '20px', fontSize: '15px' }}>
-        Create your webhook on this Organization and receive events on your Slack:
-      <form onSubmit={fetchData}>
+      <div
+        className='container'
+        style={{
+          backgroundColor: 'white',
+          padding: '20px',
+          fontSize: '15px'
+        }}>
+        Create your webhook on this Organization and receive events to your Slack.<br />
+        Input your slack hook key:
+        <form onSubmit={fetchData}>
           <div className='form-group'>
             <input
               className='form-control'
               onFocus={(e) => e.target.placeholder = ''}
               onChange={e => setWebhook(e.target.value)}
-
               placeholder='e.g. TUCNGMA2Y/BUM57BJEA/d7LMEPXoqbsGNVX43xk6Sarq'
               style={{ fontSize: '12px' }}>
             </input>
@@ -57,10 +63,10 @@ const CreateWebhook = ({ hookUrl, org }) => {
           </button>
           </div>
         </form>
-
         <div style={{ marginTop: '5rem' }}>
           If you are unsure on how to create a Slack webhook key, check out the docs
-      <a target='_blank'
+        <a
+            target='_blank'
             href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'
             rel='noopener noreferrer'> here
         </a>.

@@ -5,7 +5,7 @@
 
 3. SOCKET EVERYWHERE! but mostly when updating settings and receiving new events.
 
-
+4. Return an Alert if a webhook is duplicated, when created. 
 
 
 
