@@ -13,10 +13,7 @@ const Home = () => {
   return (
     <div>
       <div
-        className='page'
-        style={{
-          textAlign: 'center'
-        }}
+        className='page' style={{ textAlign: 'center' }}
       >
         <p
           className='page-title'>
