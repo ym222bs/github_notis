@@ -207,7 +207,6 @@ const Content = ({ avatar }) => {
                   controller === 'hook' && webhooks &&
                   <>
                     <CreateWebhook hookUrl={hooks_url} org={selectedOrg.login} />
-                    <WebhooksList webhookList={webhooks} />
                   </>
                 }
                 {
