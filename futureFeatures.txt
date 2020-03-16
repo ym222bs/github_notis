@@ -1,0 +1,31 @@
+1. Add delete webhook functionality.
+
+2. Somehow check if the organization is still active (existing),
+    if not, remove from database.
+
+3. SOCKET EVERYWHERE! but mostly when updating settings and receiving new events.
+
+
+
+
+
+
+## Random information:
+
+Slack Wekhook page that i never could find:
+https://api.slack.com/apps/AU4BD2RR7/incoming-webhooks?success=1
+
+
+
+
+// TODO: WEBHOOK URL INSTRUCTIONS: ALWAYS USE '/' at the end of a url, 
+// otherwise the browser will give 302!!
+https://stackoverflow.com/questions/49848884/github-webhook-with-jenkins-return-302-notfound
+
+
+
+IF build does not work with heroku and react, then run command:
+ git rm cached (something like that)
+
+
+

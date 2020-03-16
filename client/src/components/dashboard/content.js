@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useContext, useState } from 'react'
 import axios from 'axios'
 import CardOfEvents from './cardOfEvents.js'
 import CardOfRepos from './cardOfRepos.js'
+import CreateWebhook from './createWebhook.js'
 import Settings from './settings.js'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 
@@ -34,11 +35,9 @@ const Content = ({ avatar }) => {
     }
   }
 
-
   if (selectedOrg) {
     var { events_url, repos_url, hooks_url } = selectedOrg
   }
-
 
   const handleNavOption = (type) => {
     switch (type) {
@@ -216,9 +215,7 @@ const Content = ({ avatar }) => {
 
                   controller === 'hook' && webhooks &&
                   <>
-                    {/* <CreateWebhook onWebhookUpdate={updateWebhook} /> */}
                     <CreateWebhook hookUrl={hooks_url} org={selectedOrg.login} />
-                    {/* <WebhooksList webhooksList={webhooks} /> */}
                   </>
                 }
                 {
@@ -244,62 +241,6 @@ const WebhooksList = ({ webhooksList }) => {
     </div>
   )
 }
-
-const CreateWebhook = ({ hookUrl, org }) => {
-  const [webhook, setWebhook] = useState('')
-
-  // Create or simply request data based on selected menu button
-
-  const fetchData = async () => {
-    const url = 'gitprofile/webhook'
-    const propertyData = await axios.post(url, {
-      data: {
-        githubUrl: hookUrl,
-        orgname: org
-          ? org
-          : null,
-        webhook: webhook
-      },
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    console.log('PROPERTYDATA: ', propertyData.data)
-  }
-
-
-  return (
-    <div className='container'
-      style={{ backgroundColor: 'white', padding: '20px', fontSize: '15px' }}>
-      Create your webhook on this Organization and receive events on your Slack:
-      <form onSubmit={fetchData}>
-        <div className='form-group'>
-          <input
-            className='form-control'
-            onFocus={(e) => e.target.placeholder = ''}
-            onChange={e => setWebhook(e.target.value)}
-            placeholder='e.g. TUCNGMA2Y/BUM57BJEA/d7LMEPXoqbsGNVX43xk6Sarq'>
-          </input>
-          <button
-            className='btn btn-info'
-            type='submit'
-            style={{ marginTop: '1rem', float: 'right' }}
-          >Create Webhook
-          </button>
-        </div>
-      </form>
-
-      <div style={{ marginTop: '5rem' }}>
-        If you are unsure on how to create a Slack webhook key, check out the docs
-      <a target='_blank'
-          href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'
-          rel='noopener noreferrer'> here
-        </a>.
-      </div>
-    </div >
-  )
-}
-
 
 
 export default Content

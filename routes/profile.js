@@ -3,10 +3,8 @@ const crypto = require('crypto')
 const router = require('express').Router()
 const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
-
 const helper = require('../helpers/helper.js')
 const Hook = require('../model/hook.js')
-
 
 
 const authCheck = (req, res, next) => {
@@ -16,7 +14,6 @@ const authCheck = (req, res, next) => {
 
 router.get('/', (req, res) => {
   const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
-  console.log('fullUrl: ', fullUrl)
   res.status(200).send(req.user)
 })
 
@@ -47,7 +44,7 @@ router.get('/webhook', authCheck, async (req, res) => {
     const webhooks = await Hook.find({ git_id: id }).select('-_id')
     return res.status(200).send({ webhooks })
   } catch (err) {
-    console.log('get /webhook: ', err)
+    console.log('GET webhook ', err)
   }
 })
 
@@ -78,27 +75,22 @@ router.post('/webhook', authCheck, async (req, res, next) => {
       msg: 'Webhook url saved.'
     })
   } catch (err) {
-    console.log('post /webhook: ', err)
+    console.log('POST webhook ', err)
   }
 })
 
 // need to be posting without auth here, only Github validation 
 // will save this route.
 router.post('/payload', async (req, res) => {
-  console.log('CHECK PAYLOAD: ', req.body)
-  const typeOfEvent = req.headers['x-github-event']
 
-  console.log(typeOfEvent)
+  const typeOfEvent = req.headers['x-github-event']
   const org = req.body.organization.login
   const sender = req.body.sender.id
-  console.log(sender)
-
-
   const hook = await Hook.findOne({ git_id: sender, organization: org })
-  console.log('HOOOOOOOK ', hook)
-  console.log('HOOOOOOOK2 ', hook.webhook)
-  const slackhook = hook.webhook
-  const url = `https://hooks.slack.com/services/${slackhook}`
+    .catch(err => console.log('POST payload ', err))
+
+  const slackHookKey = hook.webhook
+  const url = `https://hooks.slack.com/services/${slackHookKey}`
 
   switch (typeOfEvent) {
     case 'push':
@@ -145,13 +137,15 @@ router.put('/settings', async (req, res) => {
   const { type, state, org } = req.body.data
 
   const findHook = await Hook.findOne({ git_id: id, organization: org })
-    .catch(err => console.log(err))
+    .catch(err => console.log('PUT settings ', err))
+
   const query = {}
   query[type] = state   // Apparently When I do {type: state}, the key is the string 'type' and not the value of the variable name
+
   if (findHook !== null) {
     var toggle = await Hook.updateOne({ '_id': findHook._id }, { $set: query })
   }
-  res.send('Done')
+  res.send('Done with settings')
 })
 
 module.exports = router
