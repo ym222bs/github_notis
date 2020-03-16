@@ -1,6 +1,6 @@
 import React from 'react'
 import Mac from './mac'
-import githubIcon from '../github.png'
+import githubIcon from '../images/github.png'
 
 const github = {
   name: 'Github',
