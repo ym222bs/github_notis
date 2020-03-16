@@ -190,14 +190,12 @@ const Content = ({ avatar }) => {
                     Repos
 						      </a>
                   <a
-                    href='#hook'
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('hook')}
                   >
                     Webhooks
 						      </a>
                   <a
-                    href='#settings'
                     className='nav-link btn btn-link'
                     onClick={() => handleNavOption('settings')}
                   >
@@ -234,20 +232,44 @@ const Content = ({ avatar }) => {
 
 const SlackWebhook = ({ webhooksList }) => {
   console.log('SlackWebhook: ', (webhooksList))
-  // if (webhooksList) {
+  const [webhook, setWebhook] = useState(null)
+
+  const handleSubmit = async (value) => {
+    const createdWebhook = await axios.post('/webhooks', {
+      data: {
+        // githubUrl: githubUrl,
+        // orgname: selectedOrg
+        //   ? selectedOrg.login
+        //   : null
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+  }
+
   return (
-    <div>
-      If you are unsure on how to create a Slack webhook key, check out the docs
+    <div className='container'
+      style={{ backgroundColor: 'white', padding: '20px', fontSize: '15px' }}>
+      Create your webhook to Slack and receive events on your Organizations:
+      <form onSubmit={handleSubmit}>
+        <div className='form-group'>
+          <input className='form-control' placeholder='e.g. TUCNGMA2Y/BUM57BJEA/d7LMEPXoqbsGNVX43xk6Sarq'></input>
+          <button className='btn btn-info' type='submit' style={{ marginTop: '10px' }}>Create Webhook</button>
+        </div>
+      </form>
+
+        If you are unsure on how to create a Slack webhook key, check out the docs->
       <a target='_blank'
         href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'
         rel='noopener noreferrer'>
         here
         </a>.
-      ....psst, it's super easy.
+      <br />
+      ....Psst, it's super easy.
     </div>
 
   )
-  // }
 }
 
 
