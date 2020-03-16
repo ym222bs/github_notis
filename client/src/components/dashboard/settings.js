@@ -12,6 +12,8 @@ const Settings = ({ org, settingsArray }) => {
     return (
       <div className='container empty-message' style={{ padding: '20px', fontSize: '15px' }}>
         There is no webhook set on this organization yet.
+        Once you have created a webhook then you will be able to
+        manage your setting on that webhook here.
       </div>
     )
   }

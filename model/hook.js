@@ -8,6 +8,10 @@ const hookSchema = new mongoose.Schema({
     match: urlmatch,
     required: true
   },
+  webhook: {
+    type: String,
+    required: true
+  },
   organization: {
     type: String,
     required: true

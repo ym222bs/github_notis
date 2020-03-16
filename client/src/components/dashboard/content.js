@@ -53,12 +53,8 @@ const Content = ({ avatar }) => {
         setController('repos')
         break
       case 'hook':
-        // TODO: change here: add a function to fire of "createWebhook"
-        // setGithubUrl(hooks_url)
-        // TODOD: this function is not needed here:
-        // setApiUrl('webhook')
+        setApiUrl('webhook')
         setController('hook')
-        // 1. Get hooks and render
         fetchWebhooks()
         break
       case 'settings':
@@ -70,7 +66,7 @@ const Content = ({ avatar }) => {
     }
   }
 
-
+  // Simply request data based on selected menu button
   useEffect(() => {
     const fetchData = async () => {
       const url = `gitprofile/${apiUrl}`
@@ -79,12 +75,13 @@ const Content = ({ avatar }) => {
           githubUrl: githubUrl,
           orgname: selectedOrg
             ? selectedOrg.login
-            : null
+            : null,
         },
         headers: {
           'Content-Type': 'application/json'
         },
       })
+      console.log('PROPERTYDATA: ', propertyData.data)
       apiUrl === 'events' ?
         await setEvent(propertyData.data) :
         await setRepo(propertyData.data)
@@ -106,7 +103,7 @@ const Content = ({ avatar }) => {
     await setSettings(settingsData.data)
   }
 
-
+  // Fecth all webhooks and show them
   const fetchWebhooks = async () => {
     const url = '/gitprofile/webhook'
     const webhooks = await axios.get(url)
@@ -115,6 +112,9 @@ const Content = ({ avatar }) => {
     await setWebhooks(webhooks.data.webhooks)
   }
 
+  const updateWebhook = (hook) => {
+    setWebhook(hook)
+  }
 
   // TODO. clean up this mess
   return (
@@ -213,8 +213,13 @@ const Content = ({ avatar }) => {
                   <CardOfRepos repos={repo} />
                 }
                 {
-                  controller === 'hook' && 'webhooks' &&
-                  <SlackWebhook webhooksList={webhooks} />
+
+                  controller === 'hook' && webhooks &&
+                  <>
+                    {/* <CreateWebhook onWebhookUpdate={updateWebhook} /> */}
+                    <CreateWebhook hookUrl={hooks_url} org={selectedOrg.login} />
+                    {/* <WebhooksList webhooksList={webhooks} /> */}
+                  </>
                 }
                 {
                   controller === 'settings' && settings &&
@@ -230,45 +235,68 @@ const Content = ({ avatar }) => {
   )
 }
 
-const SlackWebhook = ({ webhooksList }) => {
-  console.log('SlackWebhook: ', (webhooksList))
-  const [webhook, setWebhook] = useState(null)
 
-  const handleSubmit = async (value) => {
-    const createdWebhook = await axios.post('/webhooks', {
+const WebhooksList = ({ webhooksList }) => {
+  return (
+    <div>
+      Your current registered webhooks:
+      {/* {webhooksList.} */}
+    </div>
+  )
+}
+
+const CreateWebhook = ({ hookUrl, org }) => {
+  const [webhook, setWebhook] = useState('')
+
+  // Create or simply request data based on selected menu button
+
+  const fetchData = async () => {
+    const url = 'gitprofile/webhook'
+    const propertyData = await axios.post(url, {
       data: {
-        // githubUrl: githubUrl,
-        // orgname: selectedOrg
-        //   ? selectedOrg.login
-        //   : null
+        githubUrl: hookUrl,
+        orgname: org
+          ? org
+          : null,
+        webhook: webhook
       },
       headers: {
         'Content-Type': 'application/json'
       },
     })
+    console.log('PROPERTYDATA: ', propertyData.data)
   }
+
 
   return (
     <div className='container'
       style={{ backgroundColor: 'white', padding: '20px', fontSize: '15px' }}>
-      Create your webhook to Slack and receive events on your Organizations:
-      <form onSubmit={handleSubmit}>
+      Create your webhook on this Organization and receive events on your Slack:
+      <form onSubmit={fetchData}>
         <div className='form-group'>
-          <input className='form-control' placeholder='e.g. TUCNGMA2Y/BUM57BJEA/d7LMEPXoqbsGNVX43xk6Sarq'></input>
-          <button className='btn btn-info' type='submit' style={{ marginTop: '10px' }}>Create Webhook</button>
+          <input
+            className='form-control'
+            onFocus={(e) => e.target.placeholder = ''}
+            onChange={e => setWebhook(e.target.value)}
+            placeholder='e.g. TUCNGMA2Y/BUM57BJEA/d7LMEPXoqbsGNVX43xk6Sarq'>
+          </input>
+          <button
+            className='btn btn-info'
+            type='submit'
+            style={{ marginTop: '1rem', float: 'right' }}
+          >Create Webhook
+          </button>
         </div>
       </form>
 
-        If you are unsure on how to create a Slack webhook key, check out the docs->
+      <div style={{ marginTop: '5rem' }}>
+        If you are unsure on how to create a Slack webhook key, check out the docs
       <a target='_blank'
-        href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'
-        rel='noopener noreferrer'>
-        here
+          href='https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack'
+          rel='noopener noreferrer'> here
         </a>.
-      <br />
-      ....Psst, it's super easy.
-    </div>
-
+      </div>
+    </div >
   )
 }
 

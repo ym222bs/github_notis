@@ -54,17 +54,18 @@ router.get('/webhook', authCheck, async (req, res) => {
 
 router.post('/webhook', authCheck, async (req, res, next) => {
   try {
-    const { githubUrl, orgname } = req.body.data
+    const { githubUrl, orgname, webhook } = req.body.data
     const { login, id } = getProfileInformation()
     const githubUserToken = getUserToken()
 
     // TODO: check if one userID has multiple Organization hooks (double query)
-    const webhook = await Hook.findOne({ git_id: id })
+    const existsingHook = await Hook.findOne({ git_id: id })
 
     // Save to database if the hook does not exists yet
-    if (!webhook) {
+    if (!existsingHook) {
       const newHook = new Hook({
         url: githubUrl,
+        webhook: webhook,
         organization: orgname,
         username: login,
         git_id: id
@@ -81,10 +82,53 @@ router.post('/webhook', authCheck, async (req, res, next) => {
   }
 })
 
-
-router.post('/payload', authCheck, async (req, res) => {
+// need to be posting without auth here, only Github validation 
+// will save this route.
+router.post('/payload', async (req, res) => {
   console.log('CHECK PAYLOAD: ', req.body)
-  helper.slackNotification(req)
+  const typeOfEvent = req.headers['x-github-event']
+
+  console.log(typeOfEvent)
+  const org = req.body.organization.login
+  const sender = req.body.sender.id
+  console.log(sender)
+
+
+  const hook = await Hook.findOne({ git_id: sender, organization: org })
+  console.log('HOOOOOOOK ', hook)
+  console.log('HOOOOOOOK2 ', hook.webhook)
+  const slackhook = hook.webhook
+  const url = `https://hooks.slack.com/services/${slackhook}`
+
+  switch (typeOfEvent) {
+    case 'push':
+      if (hook.push === false) {
+        return
+      } else {
+        helper.slackNotification(req, url)
+      }
+      break;
+    case 'reposetory':
+      if (hook.repo === false) {
+        return
+      } else {
+        helper.slackNotification(req, url)
+      }
+    case 'issues':
+      if (hook.issue === false) {
+        return
+      } else {
+        helper.slackNotification(req, url)
+      }
+    case 'issue_comment':
+      if (hook.comment === false) {
+        return
+      } else {
+        helper.slackNotification(req, url)
+      }
+    default:
+      break;
+  }
   res.status(200).send('Payload ok')
 })
 

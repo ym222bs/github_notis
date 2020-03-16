@@ -36,7 +36,7 @@ module.exports.getOrganizationPropertyContent = (url) => {
 
 
 const code = ''
-const bla = `https://f3804528.ngrok.io/gitprofile/payload/`
+const bla = 'http://fa137571.ngrok.io/gitprofile/payload/'
 const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload/'
 
 
@@ -56,7 +56,7 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
         active: true,
         events: ['push', 'repository', 'issues', 'issue_comment'],
         config: {
-          url: herokuURL,
+          url: bla,
           content_type: 'json',
           secret: 'superdupersecret888'
         }
@@ -69,29 +69,43 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
 }
 
 
-module.exports.slackNotification = async (req) => {
+module.exports.slackNotification = async (req, url) => {
+
   try {
     const slackHookKey = process.env.SLACK_HOOK
     const typeOfEvent = req.headers['x-github-event']
 
-    // TODO: ONLY send the webhooks that are TOGGLED = TRUE in DataBase to slack notification
-
     validateIncomingPayload(req)
 
     const result = await request({
-      url: `https://hooks.slack.com/services/${slackHookKey}`,
+      url: url,
       method: 'POST',
       body: JSON.stringify({
         text: typeOfEvent,
         json: true
       })
     })
-    console.log('WEBHOK SENT: ', result)
+    console.log('WEBHoOK SENT: ', result)
+    return result
+
   } catch (err) {
     console.log('slackNotification: ', err)
   }
 }
 
+
+const sendNotification = async (slackHookKey, typeOfEvent, url) => {
+  const result = await request({
+    url: url,
+    method: 'POST',
+    body: JSON.stringify({
+      text: typeOfEvent,
+      json: true
+    })
+  })
+  console.log('WEBHoOK SENT: ', result)
+  return result
+}
 
 const validateIncomingPayload = async (req) => {
   const payload = await JSON.stringify(req.body)
