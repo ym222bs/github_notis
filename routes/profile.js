@@ -40,8 +40,13 @@ router.post('/repos', authCheck, async (req, res) => {
 
 router.get('/webhook', authCheck, async (req, res) => {
   try {
+    console.log('Here 1')
     const { id } = getProfileInformation()
+    console.log('Here 2')
+
     const webhooks = await Hook.find({ git_id: id }).select('-_id')
+    console.log('Here 3')
+
     return res.status(200).send({ webhooks })
   } catch (err) {
     console.log('GET webhook ', err)
@@ -126,10 +131,22 @@ router.post('/payload', async (req, res) => {
 
 
 router.post('/settings', authCheck, async (req, res) => {
-  const { org } = req.body.data
-  const { id } = getProfileInformation()
-  const findHook = await Hook.find({ git_id: id, organization: org })
-  res.send(findHook)
+  try {
+    console.log('Here 1')
+
+    const { org } = req.body.data
+    console.log('Here 2')
+
+    const { id } = getProfileInformation()
+    console.log('Here 3')
+
+    const findHook = await Hook.find({ git_id: id, organization: org })
+    console.log('Here 4')
+
+    res.send(findHook)
+  } catch (error) {
+
+  }
 })
 
 router.put('/settings', async (req, res) => {
