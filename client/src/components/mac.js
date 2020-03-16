@@ -9,16 +9,10 @@ const Mac = () => {
   const curl = "$ curl -H 'Authorization: token ACCESS_TOKEN' https://api.github.com/user"
 
   return (
-    <div
-      className='window'
-    >
-      <div
-        className='title-bar'
-      >
+    <div className='window'>
+      <div className='title-bar'>
         CommandoMaster
-            <div
-          className='buttons'
-        >
+            <div className='buttons'>
           <div
             className='mac-btn open mr-1 '
             style={{ backgroundColor: '#00FF7F' }}
