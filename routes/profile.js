@@ -55,7 +55,6 @@ router.post('/webhook', authCheck, async (req, res, next) => {
     const { login, id } = getProfileInformation()
     const githubUserToken = getUserToken()
 
-    // TODO: check if one userID has multiple Organization hooks (double query)
     const existsingHook = await Hook.findOne({ git_id: id })
 
     // Save to database if the hook does not exists yet

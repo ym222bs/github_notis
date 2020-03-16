@@ -17,7 +17,7 @@ https://api.slack.com/apps/AU4BD2RR7/incoming-webhooks?success=1
 
 
 
-// TODO: WEBHOOK URL INSTRUCTIONS: ALWAYS USE '/' at the end of a url, 
+// WEBHOOK URL INSTRUCTIONS: ALWAYS USE '/' at the end of a url, 
 // otherwise the browser will give 302!!
 https://stackoverflow.com/questions/49848884/github-webhook-with-jenkins-return-302-notfound
 

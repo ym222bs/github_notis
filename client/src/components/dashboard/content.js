@@ -90,39 +90,28 @@ const Content = ({ avatar }) => {
 
 
   const fetchSettings = async () => {
-    console.log('Hello')
-    try {
-      const url = '/gitprofile/settings'
-      const settingsData = await axios.post(url, {
-        data: {
-          org: selectedOrg.login
-        },
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      })
-      await setSettings(settingsData.data)
-
-    } catch (err) {
-      console.log('fetchSettings: ', err)
-    }
+    const url = '/gitprofile/settings'
+    const settingsData = await axios.post(url, {
+      data: {
+        org: selectedOrg.login
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).catch(err => console.log('fetchSettings: ', err))
+    await setSettings(settingsData.data)
   }
 
   // Fecth all webhooks and show them
   const fetchWebhooks = async () => {
-    console.log('Hello2')
-    try {
-      const url = '/gitprofile/webhook'
-      const webhooks = await axios.get(url)
+    const url = '/gitprofile/webhook'
+    const webhooks = await axios.get(url)
+      .catch(err => console.log('fetchWebhooks: ', err))
+    await setWebhooks(webhooks.data.webhooks)
 
-      console.log('webhook: ', webhooks.data.webhooks)
-      await setWebhooks(webhooks.data.webhooks)
-    } catch (err) {
-      console.log('fetchWebhook: ', err)
-    }
   }
 
-  // TODO. clean up this mess
+  // TODO: clean up this mess
   return (
     <Fragment>
       <div
@@ -223,6 +212,7 @@ const Content = ({ avatar }) => {
                   controller === 'hook' && webhooks &&
                   <>
                     <CreateWebhook hookUrl={hooks_url} org={selectedOrg.login} />
+                    <WebhooksList webhookList={webhooks} />
                   </>
                 }
                 {
@@ -241,6 +231,7 @@ const Content = ({ avatar }) => {
 
 
 const WebhooksList = ({ webhooksList }) => {
+  console.log(webhooksList)
   return (
     <div>
       Your current registered webhooks:

@@ -40,8 +40,8 @@ const ngrokURL = 'http://fa137571.ngrok.io/gitprofile/payload/'
 const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload/'
 
 
-// TODO: ALARMING INSTRUCTIONS: ALWAYS USE '/' at the end of a url, 
-// otherwise the browser will give 302!!
+//  ALARMING INSTRUCTIONS: ALWAYS USE '/' at the end of the webhook url, 
+//  otherwise the browser will give 302
 module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
   try {
     const createHookHeader = await axios({
