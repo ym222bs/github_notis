@@ -1,7 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-const mongoURL = process.env.MONGODB_URI
+const mongoURL = process.env.MONGODB_URL
 
 const connectToDatabase = async () => {
   try {
