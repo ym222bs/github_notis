@@ -36,14 +36,13 @@ module.exports.getOrganizationPropertyContent = (url) => {
 
 
 const code = ''
-const bla = 'http://fa137571.ngrok.io/gitprofile/payload/'
+const ngrokURL = 'http://fa137571.ngrok.io/gitprofile/payload/'
 const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload/'
 
 
 // TODO: ALARMING INSTRUCTIONS: ALWAYS USE '/' at the end of a url, 
-// otherwise the browser will give 302!!!!!!!
+// otherwise the browser will give 302!!
 module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
-  // Create the hook from organization to endpoint url:
   try {
     const createHookHeader = await axios({
       method: 'POST',
@@ -56,13 +55,15 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
         active: true,
         events: ['push', 'repository', 'issues', 'issue_comment'],
         config: {
-          url: bla,
+          url: process.env.NODE_ENV === 'production'
+            ? herokuURL
+            : ngrokURL,
           content_type: 'json',
-          secret: 'superdupersecret888'
+          secret: process.env.GITHUB_WEBHOOK_SECRET
         }
       }
     })
-    console.log('CREATE HOOK RES: ', createHookHeader)
+    console.log('Created webhook: ', createHookHeader)
   } catch (error) {
     console.log('createWebhook: ', error)
   }
@@ -70,7 +71,6 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
 
 
 module.exports.slackNotification = async (req, url) => {
-
   try {
     const slackHookKey = process.env.SLACK_HOOK
     const typeOfEvent = req.headers['x-github-event']
@@ -85,31 +85,16 @@ module.exports.slackNotification = async (req, url) => {
         json: true
       })
     })
-    console.log('WEBHoOK SENT: ', result)
     return result
-
   } catch (err) {
     console.log('slackNotification: ', err)
   }
 }
 
 
-const sendNotification = async (slackHookKey, typeOfEvent, url) => {
-  const result = await request({
-    url: url,
-    method: 'POST',
-    body: JSON.stringify({
-      text: typeOfEvent,
-      json: true
-    })
-  })
-  console.log('WEBHoOK SENT: ', result)
-  return result
-}
-
 const validateIncomingPayload = async (req) => {
   const payload = await JSON.stringify(req.body)
-  const sec = 'superdupersecret888'
+  const sec = process.env.GITHUB_WEBHOOK_SECRET
   const signature = req.headers['x-hub-signature']
 
   const hmac = crypto.createHmac('sha1', sec)
