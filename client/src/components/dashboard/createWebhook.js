@@ -19,6 +19,7 @@ const CreateWebhook = ({ hookUrl, org }) => {
         'Content-Type': 'application/json'
       },
     })
+    setWebhook('')
     if (propertyData.status === 201) {
       setSuccess(true)
     }
