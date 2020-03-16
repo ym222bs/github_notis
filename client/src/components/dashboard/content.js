@@ -3,8 +3,8 @@ import axios from 'axios'
 import CardOfEvents from './cardOfEvents.js'
 import CardOfRepos from './cardOfRepos.js'
 import CreateWebhook from './createWebhook.js'
-import Settings from './settings.js'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
+import Settings from './settings.js'
 
 
 const Content = ({ avatar }) => {
@@ -90,6 +90,7 @@ const Content = ({ avatar }) => {
 
 
   const fetchSettings = async () => {
+    console.log('Hello')
     try {
       const url = '/gitprofile/settings'
       const settingsData = await axios.post(url, {
@@ -109,6 +110,7 @@ const Content = ({ avatar }) => {
 
   // Fecth all webhooks and show them
   const fetchWebhooks = async () => {
+    console.log('Hello2')
     try {
       const url = '/gitprofile/webhook'
       const webhooks = await axios.get(url)
@@ -118,10 +120,6 @@ const Content = ({ avatar }) => {
     } catch (err) {
       console.log('fetchWebhook: ', err)
     }
-  }
-
-  const updateWebhook = (hook) => {
-    setWebhook(hook)
   }
 
   // TODO. clean up this mess
