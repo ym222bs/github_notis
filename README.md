@@ -12,4 +12,11 @@ events will be sent as notifications in this way.
 :heavy_check_mark: The user should be able to close the application and return at a later date. 
 If so, the application should be able to show information that is new since the last execution. 
 
-A Github OAuth 2.0 application, using Passport.js and React + Bootstrap, enjoy !  :v:
+
+
+
+
+
+A Github OAuth 2.0 application, using Passport.js and React + Bootstrap  :v:
+
+Enjoy! <https://github-notis.herokuapp.com/>
