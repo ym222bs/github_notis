@@ -23,7 +23,6 @@ A Github OAuth 2.0 application, using Passport.js and React + Bootstrap  :v:
 Enjoy! <https://github-notis.herokuapp.com/>
 
 
-<hr>
 
 ## To start the app locally
 
