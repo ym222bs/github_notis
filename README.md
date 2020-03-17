@@ -40,7 +40,7 @@ Enjoy! <https://github-notis.herokuapp.com/>
 
 
 ### Future addings/fixes
- Stuff to add inte the neares future.
+ **Functionally related stuff to add inte the neares future.**
 
 1. Add _delete_ webhook functionality.
 
@@ -55,5 +55,9 @@ Enjoy! <https://github-notis.herokuapp.com/>
 5. Beautify the Slack notification message. Example here: https://api.slack.com/messaging/composing/layouts#attachments
 
 6. Prettify: Make the alert slowly slide away (without jQuery)......Bye bye.
+
+**Architectual fixes.**
+
+..Nothing yet.
 
 
