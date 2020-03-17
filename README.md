@@ -40,7 +40,7 @@ Enjoy! <https://github-notis.herokuapp.com/>
 
 
 ### Future addings/fixes
- **Functionally related stuff to add inte the neares future.**
+ **Functionality related stuff to add in the nearest future.**
 
 1. Add _delete_ webhook functionality.
 
