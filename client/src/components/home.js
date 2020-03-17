@@ -1,6 +1,6 @@
 import React from 'react'
-import Mac from './mac'
 import githubIcon from '../images/github.png'
+import Mac from './mac.js'
 
 const github = {
   name: 'Github',
@@ -13,20 +13,14 @@ const Home = () => {
   return (
     <div>
       <div
-        className='page' style={{ textAlign: 'center' }}
+        className='page'
+        style={{ textAlign: 'center' }}
       >
         <p
           className='page-title'>
           Github Notifications
         </p>
-        <p>
-          <span>
-            Login:
-          </span>
-        </p>
-
         <Mac />
-
         <div
           className='card-g'
           onClick={() => window.location = github.href}
