@@ -1,10 +1,10 @@
 const axios = require('axios')
 const crypto = require('crypto')
-const nodemailer = require('nodemailer')
 const request = require('request-promise')
 const secureCompare = require('secure-compare')
 const getUserToken = require('../config/passport_setup').getUserToken
 const getProfileInformation = require('../config/passport_setup').getProfileInformation
+const here = require('./helper.js')
 
 
 const getData = async (url, token) => {
@@ -35,7 +35,6 @@ module.exports.getOrganizationPropertyContent = (url) => {
 }
 
 
-const code = ''
 const ngrokURL = 'http://fa137571.ngrok.io/gitprofile/payload/'
 const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload/'
 
@@ -105,6 +104,39 @@ const validateIncomingPayload = async (req) => {
 
   if (secureCompare(signature, hashad)) {
     console.log('Payload came from git')
+  }
+}
+
+module.exports.evaluateSettings = (hook, req, url) => {
+
+  switch (typeOfEvent) {
+    case 'push':
+      if (hook.push === false) {
+        return
+      } else {
+        here.slackNotification(req, url)
+      }
+      break;
+    case 'reposetory':
+      if (hook.repo === false) {
+        return
+      } else {
+        here.slackNotification(req, url)
+      }
+    case 'issues':
+      if (hook.issue === false) {
+        return
+      } else {
+        here.slackNotification(req, url)
+      }
+    case 'issue_comment':
+      if (hook.comment === false) {
+        return
+      } else {
+        here.slackNotification(req, url)
+      }
+    default:
+      break;
   }
 }
 

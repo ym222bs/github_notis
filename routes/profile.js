@@ -12,7 +12,7 @@ const authCheck = (req, res, next) => {
 }
 
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
   res.status(200).send(req.user)
 })
@@ -24,21 +24,21 @@ router.get('/orgs', authCheck, async (req, res, next) => {
 })
 
 
-router.post('/events', authCheck, async (req, res) => {
+router.post('/events', authCheck, async (req, res, next) => {
   const { githubUrl } = req.body.data
   const data = await helper.getOrganizationPropertyContent(githubUrl)
   res.status(200).send({ ...data })
 })
 
 
-router.post('/repos', authCheck, async (req, res) => {
+router.post('/repos', authCheck, async (req, res, next) => {
   const { githubUrl } = req.body.data
   const data = await helper.getOrganizationPropertyContent(githubUrl)
   res.status(200).send({ ...data })
 })
 
 
-router.get('/webhook', authCheck, async (req, res) => {
+router.get('/webhook', authCheck, async (req, res, next) => {
   try {
     const { id } = getProfileInformation()
     const webhooks = await Hook.find({ git_id: id }).select('-_id')
@@ -80,7 +80,7 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 
 // need to be posting without auth here, only Github validation 
 // will save this route.
-router.post('/payload', async (req, res) => {
+router.post('/payload', async (req, res, next) => {
 
   const typeOfEvent = req.headers['x-github-event']
   const org = req.body.organization.login
@@ -91,40 +91,12 @@ router.post('/payload', async (req, res) => {
   const slackHookKey = hook.webhook
   const url = `https://hooks.slack.com/services/${slackHookKey}`
 
-  switch (typeOfEvent) {
-    case 'push':
-      if (hook.push === false) {
-        return
-      } else {
-        helper.slackNotification(req, url)
-      }
-      break;
-    case 'reposetory':
-      if (hook.repo === false) {
-        return
-      } else {
-        helper.slackNotification(req, url)
-      }
-    case 'issues':
-      if (hook.issue === false) {
-        return
-      } else {
-        helper.slackNotification(req, url)
-      }
-    case 'issue_comment':
-      if (hook.comment === false) {
-        return
-      } else {
-        helper.slackNotification(req, url)
-      }
-    default:
-      break;
-  }
+  helper.evaluateSettings(hook, req, url)
   res.status(200).send('Payload ok')
 })
 
 
-router.post('/settings', authCheck, async (req, res) => {
+router.post('/settings', authCheck, async (req, res, next) => {
   try {
     const { org } = req.body.data
     const { id } = getProfileInformation()
@@ -132,10 +104,11 @@ router.post('/settings', authCheck, async (req, res) => {
     res.send(findHook)
   } catch (error) {
     console.log('POST settings: ', err)
+    next(err)
   }
 })
 
-router.put('/settings', async (req, res) => {
+router.put('/settings', async (req, res, next) => {
   const { id } = getProfileInformation()
   const { type, state, org } = req.body.data
   const findHook = await Hook.findOne({ git_id: id, organization: org })
