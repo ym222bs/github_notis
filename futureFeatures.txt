@@ -7,6 +7,8 @@
 
 4. Return an Alert if a webhook is duplicated, when created. 
 
+5. Beautify the Slack notificationmessage. Example here: https://api.slack.com/messaging/composing/layouts#attachments
+
 
 
 ## Random information:
