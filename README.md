@@ -39,3 +39,21 @@ Enjoy! <https://github-notis.herokuapp.com/>
 
 
 
+### Future addings/fixes
+ Stuff to add inte the neares future.
+
+1. Add _delete_ webhook functionality.
+
+2. Somehow check if the organization is still active (existing),
+    if not, remove from the database. This can be done by compairing the database with the 
+    logged in user return (organization) object.
+
+3. SOCKET EVERYWHERE! But mostly when updating settings and receiving new events.
+
+4. Return an Alert if a webhook is duplicated, when created. 
+
+5. Beautify the Slack notification message. Example here: https://api.slack.com/messaging/composing/layouts#attachments
+
+6. Prettify: Make the alert slowly slide away (without jQuery)......Bye bye.
+
+

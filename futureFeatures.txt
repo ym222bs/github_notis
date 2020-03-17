@@ -1,13 +1,13 @@
 1. Add delete webhook functionality.
 
 2. Somehow check if the organization is still active (existing),
-    if not, remove from database.
+    if not, remove from the database.
 
 3. SOCKET EVERYWHERE! but mostly when updating settings and receiving new events.
 
 4. Return an Alert if a webhook is duplicated, when created. 
 
-5. Beautify the Slack notificationmessage. Example here: https://api.slack.com/messaging/composing/layouts#attachments
+5. Beautify the Slack notification message. Example here: https://api.slack.com/messaging/composing/layouts#attachments
 
 
 
