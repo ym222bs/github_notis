@@ -18,3 +18,18 @@ If so, the application should be able to show information that is new since the 
 A Github OAuth 2.0 application, using Passport.js and React + Bootstrap  :v:
 
 Enjoy! <https://github-notis.herokuapp.com/>
+
+
+
+## To start the app locally:
+
+#### Prerequisites:
+  * MongoDB
+  * NodeJS
+  * Registered Github OAuth App :arrow_right: [Getting started](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/).
+
+  The registration provides you with the key and secret, that should later be used in your **.env** file.
+
+1. Add your environment variables in an **.env** file in the **root** of the project. (Example in **enx.txt**).
+2. Run `npm install` in the **root**, do the same in the **client** directory.
+3. Run `npm start` in both **root** and **client** directory. (If you use nodemon instead, then do `npm run dev` in root).
