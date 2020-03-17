@@ -107,7 +107,7 @@ const validateIncomingPayload = async (req) => {
   }
 }
 
-module.exports.evaluateSettings = (hook, req, url) => {
+module.exports.evaluateSettings = (typeOfEvent, hook, req, url) => {
 
   switch (typeOfEvent) {
     case 'push':
