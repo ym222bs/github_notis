@@ -20,7 +20,6 @@ const Profile = () => {
       <h2 className='display-4'>
         {text}
       </h2>
-
       {
         _.isEmpty(userData) &&
         <a
