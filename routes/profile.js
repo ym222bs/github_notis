@@ -17,6 +17,11 @@ router.get('/', (req, res, next) => {
   res.status(200).send(req.user)
 })
 
+router.get('/getevents', async (req, res, next) => {
+  const allEvents = await helper.getAllOrganizationEvents()
+  res.status(200).send({ ...allEvents })
+})
+
 
 router.get('/orgs', authCheck, async (req, res, next) => {
   const orgs = await helper.getOrganizationsFromGithub(req)
@@ -105,7 +110,7 @@ router.post('/settings', authCheck, async (req, res, next) => {
     const { id } = getProfileInformation()
     const findHook = await Hook.find({ git_id: id, organization: org })
     res.send(findHook)
-  } catch (error) {
+  } catch (err) {
     next(err)
   }
 })

@@ -21,6 +21,13 @@ const getData = async (url, token) => {
   }
 }
 
+module.exports.getAllOrganizationEvents = async () => {
+  const githubUserToken = getUserToken()
+  const { login } = getProfileInformation()
+  const url = `https://api.github.com/users/${login}/events`
+  return getData(url, githubUserToken)
+}
+
 
 module.exports.getOrganizationsFromGithub = () => {
   const githubUserToken = getUserToken()
@@ -103,7 +110,7 @@ const validateIncomingPayload = async (req) => {
   const hashad = 'sha1=' + hmac.digest('hex')
 
   if (secureCompare(signature, hashad)) {
-    console.log('Payload came from git')
+    console.log('Payload ok, came from git')
   }
 }
 

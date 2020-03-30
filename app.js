@@ -17,6 +17,7 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
 const secret = process.env.COOKIE_SECRET
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,
@@ -45,8 +46,6 @@ app.use((err, req, res, next) => {
 })
 
 
-// If application is running from Heroku then build React to 
-// static files and serve from relative path:
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
   app.get('*', (req, res) => {

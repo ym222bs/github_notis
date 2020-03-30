@@ -3,6 +3,7 @@ import axios from 'axios'
 import CardOfEvents from './cardOfEvents.js'
 import CardOfRepos from './cardOfRepos.js'
 import CreateWebhook from './createWebhook.js'
+import FrontEvents from './frontEvents.js'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 import Settings from './settings.js'
 
@@ -18,8 +19,6 @@ const Content = ({ avatar }) => {
   const [repo, setRepo] = useState(null)
   const [controller, setController] = useState(null)
   const userOrganizations = useContext(OrgsProvider.context)
-
-  console.log('User orgs: ', userOrganizations)
 
 
   const cleanValue = () => {
@@ -67,7 +66,7 @@ const Content = ({ avatar }) => {
     }
   }
 
-  // Simply request data based on selected menu button
+  // Request data based on selected menu button
   useEffect(() => {
     const fetchData = async () => {
       const url = `gitprofile/${apiUrl}`
@@ -82,13 +81,13 @@ const Content = ({ avatar }) => {
           'Content-Type': 'application/json'
         },
       })
-      console.log('PROPERTYDATA: ', propertyData.data)
       apiUrl === 'events'
         ? await setEvent(propertyData.data)
         : await setRepo(propertyData.data)
     }
     fetchData()
   }, [githubUrl])
+
 
   const fetchSettings = async () => {
     const url = '/gitprofile/settings'
@@ -103,7 +102,7 @@ const Content = ({ avatar }) => {
     await setSettings(settingsData.data)
   }
 
-  // Fecth all webhooks and show them
+
   const fetchWebhooks = async () => {
     const url = '/gitprofile/webhook'
     const webhooks = await axios.get(url)
@@ -114,8 +113,7 @@ const Content = ({ avatar }) => {
   // TODO: clean up this mess
   return (
     <Fragment>
-      <div
-        className='card'>
+      <div className='card'>
         <img
           alt='profile avatar'
           style={{ width: '18rem' }}
@@ -155,6 +153,7 @@ const Content = ({ avatar }) => {
           }
         </ul>
       </div>
+
       <div className='child'>
         <>
           {
@@ -207,9 +206,7 @@ const Content = ({ avatar }) => {
                 }
                 {
                   controller === 'hook' && webhooks &&
-                  <>
-                    <CreateWebhook hookUrl={hooks_url} org={selectedOrg.login} />
-                  </>
+                  <CreateWebhook hookUrl={hooks_url} org={selectedOrg.login} />
                 }
                 {
                   controller === 'settings' && settings &&
@@ -224,7 +221,7 @@ const Content = ({ avatar }) => {
   )
 }
 
-
+// TODO: future feature
 const WebhooksList = ({ webhooksList }) => {
   console.log(webhooksList)
   return (

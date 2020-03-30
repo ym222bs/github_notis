@@ -1,4 +1,4 @@
-# GithubNotis
+# GithubNotis 
 
 This app was created to exercise and implement the below features and plan the appropriate architecture for the assignment. 
 
