@@ -3,30 +3,35 @@ import axios from 'axios'
 
 const CreateWebhook = ({ hookUrl, org }) => {
   const [webhook, setWebhook] = useState('')
-  const [success, setSuccess] = useState(false)
+  const [success, setSuccess] = useState('')
+
 
   const fetchData = async () => {
-    const url = 'gitprofile/webhook'
-    const propertyData = await axios.post(url, {
-      data: {
-        githubUrl: hookUrl,
-        orgname: org
-          ? org
-          : null,
-        webhook: webhook
-      },
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    if (propertyData.status === 201) {
-      setSuccess(true)
+    if (webhook === '') {
+      setSuccess('bad')
+    } else {
+      const url = 'gitprofile/webhook'
+      const propertyData = await axios.post(url, {
+        data: {
+          githubUrl: hookUrl,
+          orgname: org
+            ? org
+            : null,
+          webhook: webhook
+        },
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      if (propertyData.status === 201) {
+        setSuccess('good')
+      }
     }
   }
 
 
   useEffect(() => {
-    const timer = setTimeout(() => setSuccess(false), 4000)
+    const timer = setTimeout(() => setSuccess(''), 4000)
     return () => clearTimeout(timer)
   }, [success])
 
@@ -34,9 +39,10 @@ const CreateWebhook = ({ hookUrl, org }) => {
   return (
     <>
       {
-        success &&
-        <SuccessAlert />
+        success !== '' &&
+        <SuccessAlert validation={success} />
       }
+
       <div
         className='container'
         style={{
@@ -76,12 +82,23 @@ const CreateWebhook = ({ hookUrl, org }) => {
   )
 }
 
-const SuccessAlert = () => {
-  return (
-    <div className="alert alert-success" role="alert">
-      New webhook was created!
-    </div>
-  )
+const SuccessAlert = ({ validation }) => {
+  switch (validation) {
+    case 'good':
+      return (
+        <div className="alert alert-success" role="alert">
+          New webhook was created !
+        </div>
+      )
+      break;
+    case 'bad':
+      return (
+        <div className="alert alert-warning" role="alert">
+          The field is empty
+        </div>
+      )
+      break;
+  }
 }
 
 export default CreateWebhook

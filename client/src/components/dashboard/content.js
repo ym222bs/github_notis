@@ -83,9 +83,9 @@ const Content = ({ avatar }) => {
         },
       })
       console.log('PROPERTYDATA: ', propertyData.data)
-      apiUrl === 'events' ?
-        await setEvent(propertyData.data) :
-        await setRepo(propertyData.data)
+      apiUrl === 'events'
+        ? await setEvent(propertyData.data)
+        : await setRepo(propertyData.data)
     }
     fetchData()
   }, [githubUrl])
