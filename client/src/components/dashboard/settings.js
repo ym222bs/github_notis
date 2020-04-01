@@ -3,7 +3,6 @@ import axios from 'axios'
 import _ from 'lodash'
 
 const Settings = ({ org, settingsArray }) => {
-  console.log(settingsArray)
   if (!_.isEmpty(settingsArray)) {
     return (
       <SettingsComponent organization={org} settingsList={settingsArray} />

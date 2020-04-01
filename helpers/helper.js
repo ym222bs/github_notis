@@ -21,6 +21,7 @@ const getData = async (url, token) => {
   }
 }
 
+
 module.exports.getAllOrganizationEvents = async () => {
   const githubUserToken = getUserToken()
   const { login } = getProfileInformation()
@@ -42,9 +43,8 @@ module.exports.getOrganizationPropertyContent = (url) => {
 }
 
 
-const ngrokURL = 'http://fa137571.ngrok.io/gitprofile/payload/'
+const ngrokURL = 'http://945c4f6a.ngrok.io/gitprofile/payload/'
 const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload/'
-
 
 //  ALARMING INSTRUCTIONS: ALWAYS USE '/' at the end of the webhook url, 
 //  otherwise the browser will give 302
@@ -78,9 +78,7 @@ module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
 
 module.exports.slackNotification = async (req, url) => {
   try {
-    const slackHookKey = process.env.SLACK_HOOK
     const typeOfEvent = req.headers['x-github-event']
-
     validateIncomingPayload(req)
 
     const result = await request({
@@ -96,7 +94,6 @@ module.exports.slackNotification = async (req, url) => {
     console.log('slackNotification: ', err)
   }
 }
-
 
 const validateIncomingPayload = async (req) => {
   const payload = await JSON.stringify(req.body)
@@ -117,28 +114,20 @@ const validateIncomingPayload = async (req) => {
 module.exports.evaluateSettings = (typeOfEvent, hook, req, url) => {
   switch (typeOfEvent) {
     case 'push':
-      if (hook.push === false) {
-        return
-      } else {
+      if (hook.push !== false) {
         here.slackNotification(req, url)
       }
       break;
-    case 'reposetory':
-      if (hook.repo === false) {
-        return
-      } else {
+    case 'repository':
+      if (hook.repo !== false) {
         here.slackNotification(req, url)
       }
     case 'issues':
-      if (hook.issue === false) {
-        return
-      } else {
+      if (hook.issue !== false) {
         here.slackNotification(req, url)
       }
     case 'issue_comment':
-      if (hook.comment === false) {
-        return
-      } else {
+      if (hook.comment !== false) {
         here.slackNotification(req, url)
       }
     default:

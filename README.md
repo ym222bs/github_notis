@@ -58,6 +58,6 @@ Enjoy! <https://github-notis.herokuapp.com/>
 
 **Architectual fixes.**
 
-..Nothing yet.
+1. Break up JSX in content.js file.
 
 

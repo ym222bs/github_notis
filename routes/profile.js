@@ -86,6 +86,7 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 // will save this route.
 router.post('/payload', async (req, res, next) => {
   try {
+    console.log(req.body)
     const typeOfEvent = req.headers['x-github-event']
     const org = req.body.organization.login
     const sender = req.body.sender.id
