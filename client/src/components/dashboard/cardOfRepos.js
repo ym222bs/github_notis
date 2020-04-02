@@ -8,25 +8,27 @@ const CardOfRepos = ({ repos }) => {
 
     return (
       <Fragment>
-        {
-          newArrayOfObjects.map(property =>
-            <div className='list-group' key={count++}>
-              <div className='list-group-item overflow-auto' style={{ marginBottom: '1rem' }}>
-                <div
-                  style={{ fontSize: 'medium' }}>
-                  {property.full_name}
-                </div>
-                <a
-                  href={property.html_url}
-                  style={{ fontSize: 'small' }}
-                >
-                  {property.html_url}
-                </a>
+        <div className='overflow-auto'>
+          {
+            newArrayOfObjects.map(property =>
+              <div className='list-group' key={count++}>
+                <div className='list-group-item' style={{ marginBottom: '1rem' }}>
+                  <div
+                    style={{ fontSize: 'medium' }}>
+                    {property.full_name}
+                  </div>
+                  <a
+                    href={property.html_url}
+                    style={{ fontSize: 'small' }}
+                  >
+                    {property.html_url}
+                  </a>
 
+                </div>
               </div>
-            </div>
-          )
-        }
+            )
+          }
+        </div>
       </Fragment>
     )
   } else {
