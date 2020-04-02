@@ -1,4 +1,5 @@
 const axios = require('axios')
+const bcrypt = require('bcrypt')
 const crypto = require('crypto')
 const request = require('request-promise')
 const secureCompare = require('secure-compare')

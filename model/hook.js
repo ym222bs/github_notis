@@ -1,4 +1,6 @@
+const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
+const saltRounds = 10
 
 const urlmatch = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
 
@@ -44,6 +46,7 @@ const hookSchema = new mongoose.Schema({
     default: Date.now
   }
 })
+
 
 const Hook = mongoose.model('hook_information', hookSchema)
 

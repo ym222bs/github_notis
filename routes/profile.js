@@ -90,8 +90,11 @@ router.post('/payload', async (req, res, next) => {
     const typeOfEvent = req.headers['x-github-event']
     const org = req.body.organization.login
     const sender = req.body.sender.id
+
+
     const hook = await Hook.findOne({ git_id: sender, organization: org })
       .catch(err => console.log('POST payload ', err))
+
 
     const slackHookKey = hook.webhook
     const url = `https://hooks.slack.com/services/${slackHookKey}`
