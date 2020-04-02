@@ -1,6 +1,6 @@
 # GithubNotis 
 
-This app was created to exercise and implement the below features and plan the appropriate architecture for the assignment. 
+This app was created to exercise and implement the below features and plan the appropriate architecture for the assignment of creating a Github Notification handler. 
 
 ## Application requirements
 
@@ -20,7 +20,8 @@ If so, the application should be able to show information that is new since the 
 
 A Github OAuth 2.0 application, using Passport.js and React + Bootstrap  :v:
 
-Enjoy! <https://github-notis.herokuapp.com/>
+
+Enjoy!  <https://github-notis.herokuapp.com/>
 
 
 
@@ -31,7 +32,7 @@ Enjoy! <https://github-notis.herokuapp.com/>
   * NodeJS
   * Registered Github OAuth App :arrow_right:  [Getting started guide](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/).
 
-  The registration provides you with the key and secret, that should later be used in your **.env** file.
+  The Github OAuth App registration provides you with the key and secret, that should later be used in your **.env** file.
 
 1. Add your environment variables in a **.env** file in the **root** of the project. (Example in **env.txt**).
 2. Run `npm install` in the **root**, do the same in the **client** directory.
@@ -44,20 +45,23 @@ Enjoy! <https://github-notis.herokuapp.com/>
 
 1. Add _delete_ webhook functionality.
 
-2. Somehow check if the organization is still active (existing),
-    if not, remove from the database. This can be done by compairing the database with the 
-    logged in user return (organization) object.
+2. Add SOCKET, mostly when updating settings and receiving new events.
 
-3. SOCKET EVERYWHERE! But mostly when updating settings and receiving new events.
+3. Return an Alert message if a webhook is duplicated when created. 
 
-4. Return an Alert if a webhook is duplicated, when created. 
-
-5. Beautify the Slack notification message. Example here: https://api.slack.com/messaging/composing/layouts#attachments
-
-6. Prettify: Make the alert slowly slide away (without jQuery)......Bye bye.
+4. Beautify the Slack notification message. Example here: https://api.slack.com/messaging/composing/layouts#attachments
 
 **Architectual fixes.**
 
-1. Break up JSX in content.js file.
+1. Clean JSX in content.js file.
+
+
+#### Useful information
+
+React has input sanitization, helps to prevent injection attacks [Doc](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) .
+
+How to create a Slack-incoming-webhook-key to reveive webhooks to your personal Slack [Doc](https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack) .
+
+
 
 

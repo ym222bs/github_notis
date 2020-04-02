@@ -2,7 +2,6 @@
     --primary-gray: #ffffff;
     --main-border-radius: 2px; 
     --shadow: 2px 1px 4px 1px rgba(0,0,0,0.2);
-
 }
 
 body {
@@ -10,16 +9,7 @@ body {
     -webkit-font-smoothing: antialiased;
     color: #292f33;
     background-image: url('./images/kladd.jpg');
-    /* background-image: url('./images/lightmarble.jpg'); */
     background-repeat: no-repeat, repeat;
-}
-
-pre {
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    white-space: break-word;
 }
 
 .card-g {
@@ -38,19 +28,16 @@ pre {
 
 .jumbotron {
     background-color: #f8f8f8;
-    /* opacity: 0.90; */
     border-radius: var(--main-border-radius);
 }
 
 .container {
   box-shadow: var(--shadow);
-  /* background-color: var(--primary-gray); */
 }
 
 .empty-message {
   background-color: var(--primary-gray);
 }
-
 
 .gridparent {
     display: flex;
@@ -72,10 +59,6 @@ pre {
     box-shadow: var(--shadow);
     
 }
-
-/* navbar button {
-  color: #292f33;
-} */
 
 .navbar a:hover {
     background-color: #17a2b8;
@@ -177,11 +160,4 @@ img {
     border-radius: var(--main-border-radius);
     margin-right: 10px;
     margin-bottom: 10px;
-}
-
-.footer {
-    padding: 10px;
-    border: 1px solid #d4d7dd;
-    background-color: #eae9e9;
-    color: #45454d;
 }

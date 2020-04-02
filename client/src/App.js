@@ -8,7 +8,6 @@ import UserProvider from './contexts/UserProvider'
 
 
 function App() {
-
   return (
     <Router history={history}>
       <UserProvider>

@@ -98,7 +98,7 @@ router.post('/payload', async (req, res, next) => {
 
     helper.evaluateSettings(typeOfEvent, hook, req, url)
 
-    res.status(200).send('Payload ok')
+    res.status(200).send('Payload validated')
   } catch (err) {
     next(err)
   }
@@ -116,7 +116,7 @@ router.post('/settings', authCheck, async (req, res, next) => {
   }
 })
 
-router.put('/settings', async (req, res, next) => {
+router.put('/settings', authCheck, async (req, res, next) => {
   try {
     const { id } = getProfileInformation()
     const { type, state, org } = req.body.data

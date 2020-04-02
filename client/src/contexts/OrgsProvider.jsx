@@ -9,7 +9,7 @@ const OrgsProvider = ({ children }) => {
       .then(res => res.json())
       .then(res => setOrgs(res))
       .catch(err => {
-        console.log(err)
+        console.log('OrgsProvider: ', err)
       })
   }, [])
 

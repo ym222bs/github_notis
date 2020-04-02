@@ -9,9 +9,9 @@ const CardOfRepos = ({ repos }) => {
     return (
       <Fragment>
         {
-          newArrayOfObjects.slice(0, 5).map(property =>
+          newArrayOfObjects.map(property =>
             <div className='list-group' key={count++}>
-              <div className='list-group-item' style={{ marginBottom: '1rem' }}>
+              <div className='list-group-item overflow-auto' style={{ marginBottom: '1rem' }}>
                 <div
                   style={{ fontSize: 'medium' }}>
                   {property.full_name}

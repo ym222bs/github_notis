@@ -25,7 +25,7 @@ const Home = () => {
           className='card-g'
           onClick={() => window.location = github.href}
           style={{
-            border: `1xp solid`,
+            border: '1xp solid',
             borderRadius: 2
           }}
         >
