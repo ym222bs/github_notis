@@ -8,7 +8,7 @@ const CardOfRepos = ({ repos }) => {
 
     return (
       <Fragment>
-        <div className='overflow-auto'>
+        <div className='overflow-scroll'>
           {
             newArrayOfObjects.map(property =>
               <div className='list-group' key={count++}>
