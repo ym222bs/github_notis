@@ -6,6 +6,7 @@ const CreateWebhook = ({ hookUrl, org }) => {
   const [success, setSuccess] = useState('')
 
 
+
   const fetchData = async () => {
     if (webhook === '') {
       setSuccess('bad')
@@ -14,9 +15,7 @@ const CreateWebhook = ({ hookUrl, org }) => {
       const propertyData = await axios.post(url, {
         data: {
           githubUrl: hookUrl,
-          orgname: org
-            ? org
-            : null,
+          orgname: org,
           webhook: webhook
         },
         headers: {
