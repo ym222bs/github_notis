@@ -20,6 +20,7 @@ const Content = ({ avatar }) => {
   const [controller, setController] = useState(null)
   const userOrganizations = useContext(OrgsProvider.context)
 
+  console.log('selectedOrg: ', selectedOrg)
 
   const cleanValue = () => {
     if (

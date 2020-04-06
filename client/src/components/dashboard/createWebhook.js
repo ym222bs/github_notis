@@ -7,7 +7,8 @@ const CreateWebhook = ({ hookUrl, org }) => {
 
 
 
-  const fetchData = async () => {
+  const fetchData = async (e) => {
+    e.preventDefault()
     if (webhook === '') {
       setSuccess('bad')
     } else {
@@ -41,7 +42,6 @@ const CreateWebhook = ({ hookUrl, org }) => {
         success !== '' &&
         <SuccessAlert validation={success} />
       }
-
       <div
         className='container'
         style={{
@@ -64,7 +64,8 @@ const CreateWebhook = ({ hookUrl, org }) => {
               className='btn btn-info'
               type='submit'
               style={{ marginTop: '1rem', float: 'right' }}
-            >Create Webhook
+            >
+              Create Webhook
           </button>
           </div>
         </form>

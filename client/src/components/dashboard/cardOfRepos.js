@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import _ from 'lodash'
 
 const CardOfRepos = ({ repos }) => {
@@ -7,9 +7,9 @@ const CardOfRepos = ({ repos }) => {
     let count = 0
 
     return (
-      <Fragment>
+      <div style={{ overflow: 'auto', height: '628px', display: 'block' }}>
         {
-          newArrayOfObjects.slice(0, 8).map(property =>
+          newArrayOfObjects.map(property =>
             <div className='list-group' key={count++}>
               <div className='list-group-item' style={{ marginBottom: '1rem' }}>
                 <div
@@ -27,7 +27,7 @@ const CardOfRepos = ({ repos }) => {
             </div>
           )
         }
-      </Fragment>
+      </div>
     )
   } else {
     return (

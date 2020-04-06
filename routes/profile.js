@@ -18,12 +18,14 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/getevents', async (req, res, next) => {
-  const allEvents = await helper.getAllOrganizationEvents()
+  const username = req['user'].username
+  const allEvents = await helper.getAllOrganizationEvents(username)
   res.status(200).send({ ...allEvents })
 })
 
 
 router.get('/orgs', authCheck, async (req, res, next) => {
+  // console.log('Signed Cookies: ', req.signedCookies)
   const orgs = await helper.getOrganizationsFromGithub(req)
   res.status(200).send({ ...orgs })
 })
@@ -45,8 +47,7 @@ router.post('/repos', authCheck, async (req, res, next) => {
 
 router.get('/webhook', authCheck, async (req, res, next) => {
   try {
-    const { id } = getProfileInformation()
-    const webhooks = await Hook.find({ git_id: id }).select('-_id')
+    const webhooks = await Hook.find({ git_id: req['user'].git_id }).select('-_id')
     return res.status(200).send({ webhooks })
   } catch (err) {
     next(err)
@@ -57,10 +58,11 @@ router.get('/webhook', authCheck, async (req, res, next) => {
 router.post('/webhook', authCheck, async (req, res, next) => {
   try {
     const { githubUrl, orgname, webhook } = req.body.data
-    const { login, id } = getProfileInformation()
+
+    //TODO: get this from db
     const githubUserToken = getUserToken()
 
-    const existsingHook = await Hook.findOne({ git_id: id })
+    const existsingHook = await Hook.findOne({ git_id: req['user'].git_id })
 
     // Save to database if the hook does not exists yet
     if (!existsingHook) {
@@ -68,8 +70,8 @@ router.post('/webhook', authCheck, async (req, res, next) => {
         url: githubUrl,
         webhook: webhook,
         organization: orgname,
-        username: login,
-        git_id: id
+        username: req['user'].username,
+        git_id: req['user'].git_id
       })
       await newHook.save()
       helper.createWebhook(orgname, githubUserToken)

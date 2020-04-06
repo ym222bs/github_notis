@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import _ from 'lodash'
 
 const CardOfEvents = ({ events }) => {
@@ -8,9 +8,9 @@ const CardOfEvents = ({ events }) => {
     let count = 0
 
     return (
-      <Fragment>
+      <div style={{ overflow: 'auto', height: '628px', display: 'block' }}>
         {
-          newArrayOfObjects.slice(0, 5).map(property =>
+          newArrayOfObjects.map(property =>
             <div key={count++}>
               <div className="card" style={{ width: '100%', marginBottom: '1rem' }}>
                 <div className="card-body">
@@ -22,7 +22,7 @@ const CardOfEvents = ({ events }) => {
             </div>
           )
         }
-      </Fragment>
+      </div>
     )
   } else {
     return (

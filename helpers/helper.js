@@ -23,12 +23,11 @@ const getData = async (url, token) => {
 }
 
 
-module.exports.getAllOrganizationEvents = async () => {
-  const githubUserToken = getUserToken()
-  const { login } = getProfileInformation()
-  const url = `https://api.github.com/users/${login}/events`
-  return getData(url, githubUserToken)
-}
+// module.exports.getAllOrganizationEvents = async (username) => {
+//   const githubUserToken = getUserToken()
+//   const url = `https://api.github.com/users/${username}/events`
+//   return getData(url, githubUserToken)
+// }
 
 
 module.exports.getOrganizationsFromGithub = () => {
@@ -44,7 +43,7 @@ module.exports.getOrganizationPropertyContent = (url) => {
 }
 
 
-const ngrokURL = 'http://945c4f6a.ngrok.io/gitprofile/payload/'
+const ngrokURL = 'http://dc0528de.ngrok.io/gitprofile/payload/'
 const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload/'
 
 //  ALARMING INSTRUCTIONS: ALWAYS USE '/' at the end of the webhook url, 
@@ -90,6 +89,7 @@ module.exports.slackNotification = async (req, url) => {
         json: true
       })
     })
+
     return result
   } catch (err) {
     console.log('slackNotification: ', err)
