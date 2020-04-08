@@ -11,8 +11,9 @@ https://stackoverflow.com/questions/49848884/github-webhook-with-jenkins-return-
 
 
 IF build does not work with heroku and react, then run command:
+From server:
 
-git rm -r --cached (something like that)
+git rm -r --cached client 
 
 
 

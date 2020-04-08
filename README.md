@@ -41,7 +41,7 @@ Enjoy!  <https://github-notis.herokuapp.com/>
 
 
 ### Future addings/fixes
- **Functionality related stuff to add in the nearest future.**
+ **Functionality related stuff to add in the nearest future:**
 
 1. Add _delete_ webhook functionality.
 
@@ -51,19 +51,27 @@ Enjoy!  <https://github-notis.herokuapp.com/>
 
 4. Beautify the Slack notification message. Example here: https://api.slack.com/messaging/composing/layouts#attachments
 
-**Architectual fixes.**
+**Architectual fixes:**
 
 1. Clean JSX in content.js file.
 
 
-#### Useful information
 
-React has input sanitization, helps to prevent injection attacks [Doc](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) .
+#### Useful information:
 
-How to create a Slack-incoming-webhook-key to reveive webhooks to your personal Slack [Doc](https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack) .
+  React has input sanitization, helps to prevent injection attacks [Doc](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks).
 
-OAuth tips on security [Doc](https://auth0.com/docs/tokens/guides/store-tokens)
+  How to create a Slack-incoming-webhook-key to reveive webhooks to your personal Slack [Doc](https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack).
+
+  OAuth tips on security [Doc](https://auth0.com/docs/tokens/guides/store-tokens)
 
 
 
+ 
+##### If build does not work with heroku and React, then run command:
+From server:
 
+```bash
+git rm -r --cached client
+```
+and commit all changes.
