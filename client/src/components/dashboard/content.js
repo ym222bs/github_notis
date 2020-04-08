@@ -1,9 +1,11 @@
 import React, { Fragment, useEffect, useContext, useState } from 'react'
 import axios from 'axios'
+import io from 'socket.io-client'
+
+import AllEvents from './AllEvents.js'
 import CardOfEvents from './cardOfEvents.js'
 import CardOfRepos from './cardOfRepos.js'
 import CreateWebhook from './createWebhook.js'
-import FrontEvents from './frontEvents.js'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 import Settings from './settings.js'
 
@@ -17,6 +19,7 @@ const Content = ({ avatar }) => {
   const [webhooks, setWebhooks] = useState(null)
   const [event, setEvent] = useState(null)
   const [repo, setRepo] = useState(null)
+  const [allEvents, setAllEvents] = useState(null)
   const [controller, setController] = useState(null)
   const userOrganizations = useContext(OrgsProvider.context)
 
@@ -111,6 +114,29 @@ const Content = ({ avatar }) => {
     await setWebhooks(webhooks.data.webhooks)
   }
 
+
+  // Socket for events
+  useEffect(() => {
+    // socket = io('http://localhost:8000')
+    // socket.on('event', function (data) {
+    //   console.log('EVENT fron socket: ', data)
+    // })
+
+
+
+    const getAllEvents = async () => {
+      const url = '/gitprofile/getevents'
+      const allEvents = await axios.get(url)
+        .catch(err => console.log('fetchWebhooks: ', err))
+
+      console.log(allEvents.data)
+      setAllEvents(Object.values(allEvents.data))
+    }
+    getAllEvents()
+  }, [])
+
+
+
   // TODO: clean up this mess
   return (
     <Fragment>
@@ -156,6 +182,7 @@ const Content = ({ avatar }) => {
       </div>
 
       <div className='child'>
+        <AllEvents eventList={allEvents} />
         <>
           {
             selectedOrg &&
