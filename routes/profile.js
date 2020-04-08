@@ -18,7 +18,9 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/getevents', async (req, res, next) => {
-  const username = req['user'].username
+  console.log('user req', req['user'])
+  console.log('req.user: ', req.user)
+  const username = req['user'].login
   const allEvents = await helper.getAllOrganizationEvents(username)
   res.status(200).send({ ...allEvents })
 })
@@ -113,8 +115,8 @@ router.post('/payload', async (req, res, next) => {
 router.post('/settings', authCheck, async (req, res, next) => {
   try {
     const { org } = req.body.data
-    const { id } = getProfileInformation()
-    const findHook = await Hook.find({ git_id: id, organization: org })
+
+    const findHook = await Hook.find({ git_id: req['user'].id, organization: org })
     res.send(findHook)
   } catch (err) {
     next(err)
@@ -125,7 +127,7 @@ router.put('/settings', authCheck, async (req, res, next) => {
   try {
     const { id } = getProfileInformation()
     const { type, state, org } = req.body.data
-    const findHook = await Hook.findOne({ git_id: id, organization: org })
+    const findHook = await Hook.findOne({ git_id: req['user'].id, organization: org })
       .catch(err => console.log('PUT settings ', err))
 
     const query = {}

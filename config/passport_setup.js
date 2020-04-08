@@ -11,11 +11,10 @@ const clientID = process.env.GITHUB_CLIENT_ID
 const clientSecret = process.env.GITHUB_CLIENT_SECRET
 
 passport.serializeUser((user, cb) => {
-  console.log('userid: ', user.id)
   cb(null, user)
 })
 passport.deserializeUser((user, cb) => {
-  console.log('userdeserialize: ', user)
+  // console.log('userdeserialize: ', user)
   cb(null, user)
 })
 
@@ -39,7 +38,6 @@ passport.use(new GitHubStrategy({
       const user = await User.findOne({ git_id: githubID })
       if (user) {
         console.log('user already exists')
-        done(null, user)
       } else {
         const newUser = new User({
           name: profile._json.name,
@@ -48,7 +46,7 @@ passport.use(new GitHubStrategy({
           avatar_url: profile._json.avatar_url
         })
         const saveduser = await newUser.save()
-        console.log(saveduser)
+        // console.log(saveduser)
       }
       return done(null, { ...profile._json })
     } catch (error) {
