@@ -62,6 +62,8 @@ React has input sanitization, helps to prevent injection attacks [Doc](https://r
 
 How to create a Slack-incoming-webhook-key to reveive webhooks to your personal Slack [Doc](https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack) .
 
+OAuth tips on security [Doc](https://auth0.com/docs/tokens/guides/store-tokens)
+
 
 
 

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useContext, useState } from 'react'
 import axios from 'axios'
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 
 import AllEvents from './AllEvents.js'
 import CardOfEvents from './cardOfEvents.js'

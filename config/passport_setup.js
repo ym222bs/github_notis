@@ -11,7 +11,6 @@ passport.serializeUser((user, cb) => {
   cb(null, user)
 })
 passport.deserializeUser((user, cb) => {
-  // console.log('userdeserialize: ', user)
   cb(null, user)
 })
 
@@ -26,25 +25,24 @@ passport.use(new GitHubStrategy({
     : '/auth/github/callback'
 },
   async (token, refreshToken, profile, done) => {
-
     try {
-      //   const githubID = profile._json.id
-      //   const user = await User.findOne({ git_id: githubID })
-      //   if (user) {
-      //     const query = {}
-      //     query.token = token
-      //     await User.updateOne({ git_id: githubID }, { $set: query })
-      //     console.log('user already exists')
-      //   } else {
-      //     const newUser = new User({
-      //       name: profile._json.name,
-      //       username: profile._json.login,
-      //       git_id: profile._json.id,
-      //       avatar_url: profile._json.avatar_url,
-      //       token: token
-      //     })
-      //     const saveduser = await newUser.save()
-      //   }
+      // const githubID = profile._json.id
+      // const user = await User.findOne({ git_id: githubID })
+      // if (user) {
+      //   const query = {}
+      //   query.token = token
+      //   await User.updateOne({ git_id: githubID }, { $set: query })
+      //   console.log('user already exists')
+      // } else {
+      //   const newUser = new User({
+      //     name: profile._json.name,
+      //     username: profile._json.login,
+      //     git_id: profile._json.id,
+      //     avatar_url: profile._json.avatar_url,
+      //     token: token
+      //   })
+      //   const saveduser = await newUser.save()
+      // }
       saveProfileToDB(token, profile._json)   // Save new profile to database
       return done(null, { ...profile._json })
     } catch (error) {
@@ -54,13 +52,13 @@ passport.use(new GitHubStrategy({
 ))
 
 
-const saveProfileToDB = async (token, profile) => {
+const saveProfileToDB = async (githubToken, profile) => {
   try {
     const githubID = profile.id
     const user = await User.findOne({ git_id: githubID })
     if (user) {
       const query = {}
-      query.token = token
+      query.token = githubToken
       await User.updateOne({ git_id: githubID }, { $set: query })
       console.log('user already exists')
     } else {
@@ -69,7 +67,7 @@ const saveProfileToDB = async (token, profile) => {
         username: profile.login,
         git_id: profile.id,
         avatar_url: profile.avatar_url,
-        token: token
+        token: githubToken
       })
       const savedUser = await newUser.save()
       console.log(savedUser)
