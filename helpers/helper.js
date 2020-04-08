@@ -43,7 +43,7 @@ module.exports.getOrganizationPropertyContent = (url) => {
 }
 
 
-const ngrokURL = 'http://dc0528de.ngrok.io/gitprofile/payload/'
+const ngrokURL = 'http://e1b4da5c.ngrok.io/gitprofile/payload/'
 const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload/'
 
 //  ALARMING INSTRUCTIONS: ALWAYS USE '/' at the end of the webhook url, 

@@ -18,8 +18,6 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/getevents', async (req, res, next) => {
-  console.log('user req', req['user'])
-  console.log('req.user: ', req.user)
   const username = req['user'].login
   const allEvents = await helper.getAllOrganizationEvents(username)
   res.status(200).send({ ...allEvents })
@@ -49,7 +47,7 @@ router.post('/repos', authCheck, async (req, res, next) => {
 
 router.get('/webhook', authCheck, async (req, res, next) => {
   try {
-    const webhooks = await Hook.find({ git_id: req['user'].git_id }).select('-_id')
+    const webhooks = await Hook.find({ git_id: req.user.id }).select('-_id')
     return res.status(200).send({ webhooks })
   } catch (err) {
     next(err)
@@ -64,7 +62,7 @@ router.post('/webhook', authCheck, async (req, res, next) => {
     //TODO: get this from db
     const githubUserToken = getUserToken()
 
-    const existsingHook = await Hook.findOne({ git_id: req['user'].git_id })
+    const existsingHook = await Hook.findOne({ git_id: req.user.id })
 
     // Save to database if the hook does not exists yet
     if (!existsingHook) {
@@ -72,8 +70,8 @@ router.post('/webhook', authCheck, async (req, res, next) => {
         url: githubUrl,
         webhook: webhook,
         organization: orgname,
-        username: req['user'].username,
-        git_id: req['user'].git_id
+        username: req.user.login,
+        git_id: req.user.id
       })
       await newHook.save()
       helper.createWebhook(orgname, githubUserToken)
@@ -94,11 +92,20 @@ router.post('/payload', async (req, res, next) => {
     const typeOfEvent = req.headers['x-github-event']
     const org = req.body.organization.login
     const sender = req.body.sender.id
-
+    const io = req.app.get('socketio')
+    let socketid = []
 
     const hook = await Hook.findOne({ git_id: sender, organization: org })
       .catch(err => console.log('POST payload ', err))
 
+    // Or Send to client
+    io.on('connection', socket => {
+      console.log('socket id: ', socket.id)
+      socketid.push(socket.id)
+      console.log('HELLOOOOOOOOOOOO')
+      // if (socketid[0] === socket.id) { }
+
+    })
 
     const slackHookKey = hook.webhook
     const url = `https://hooks.slack.com/services/${slackHookKey}`
@@ -116,7 +123,7 @@ router.post('/settings', authCheck, async (req, res, next) => {
   try {
     const { org } = req.body.data
 
-    const findHook = await Hook.find({ git_id: req['user'].id, organization: org })
+    const findHook = await Hook.find({ git_id: req.user.id, organization: org })
     res.send(findHook)
   } catch (err) {
     next(err)
@@ -127,7 +134,7 @@ router.put('/settings', authCheck, async (req, res, next) => {
   try {
     const { id } = getProfileInformation()
     const { type, state, org } = req.body.data
-    const findHook = await Hook.findOne({ git_id: req['user'].id, organization: org })
+    const findHook = await Hook.findOne({ git_id: req.user.id, organization: org })
       .catch(err => console.log('PUT settings ', err))
 
     const query = {}

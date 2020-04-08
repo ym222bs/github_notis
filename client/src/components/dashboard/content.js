@@ -24,7 +24,7 @@ const Content = ({ avatar }) => {
   const userOrganizations = useContext(OrgsProvider.context)
 
   console.log('selectedOrg: ', selectedOrg)
-
+  // let socket
   const cleanValue = () => {
     if (
       event !== null ||
@@ -122,7 +122,12 @@ const Content = ({ avatar }) => {
     //   console.log('EVENT fron socket: ', data)
     // })
 
+    const socketURL = 'http://localhost:8000' // whatever your socket port
+    const socket = io(socketURL)
 
+    socket.on("connection", data => {
+      console.log(`I can now do something with ${data}`)
+    })
 
     const getAllEvents = async () => {
       const url = '/gitprofile/getevents'

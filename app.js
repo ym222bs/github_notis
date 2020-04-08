@@ -26,9 +26,12 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(allowHeaders)
 
+
+
+app.use(cors())
+
 // Initialize MongoDB
 DBconnect()
-
 
 app.use('/auth', authRoutes)
 app.use('/gitprofile', profileRoutes)
@@ -56,6 +59,11 @@ if (process.env.NODE_ENV === 'production') {
 
 const port = process.env.PORT || 8000
 
-app.listen(port, () => {
+let server = app.listen(port, () => {
   console.log(`Hello port ${port}.`)
 })
+const io = require('socket.io')(server)
+// io.on('connection', socket => {
+//   console.log('socket: ', socket.id)
+// })
+app.set('socketio', io)
