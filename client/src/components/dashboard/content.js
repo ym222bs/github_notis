@@ -24,7 +24,7 @@ const Content = ({ avatar }) => {
   const userOrganizations = useContext(OrgsProvider.context)
 
   console.log('selectedOrg: ', selectedOrg)
-  let socket
+
   const cleanValue = () => {
     if (
       event !== null ||
@@ -39,7 +39,7 @@ const Content = ({ avatar }) => {
       setRepo(null)
     }
   }
-
+  let socket
   if (selectedOrg) {
     var { events_url, repos_url, hooks_url } = selectedOrg
   }
@@ -66,7 +66,7 @@ const Content = ({ avatar }) => {
         fetchSettings()
         break
       default:
-        return null
+        return ''
     }
   }
 
@@ -79,7 +79,7 @@ const Content = ({ avatar }) => {
           githubUrl: githubUrl,
           orgname: selectedOrg
             ? selectedOrg.login
-            : null,
+            : '/NO',
         },
         headers: {
           'Content-Type': 'application/json'
@@ -117,22 +117,6 @@ const Content = ({ avatar }) => {
 
   // Socket for events
   useEffect(() => {
-    socket = io('/payload')
-
-    console.log(socket)
-
-
-    // socket.on('event', function (data) {
-    //   console.log('EVENT fron socket: ', data)
-    // })
-
-    // const socketURL = 'http://localhost:8000' // whatever your socket port
-    // const socket = io(socketURL)
-
-    // socket.on("connection", data => {
-    //   console.log(`I can now do something with ${data}`)
-    // })
-    // socket.on('message', item => console.log('ITEMM: ', item))
 
     const getAllEvents = async () => {
       const url = '/gitprofile/getevents'
@@ -192,7 +176,6 @@ const Content = ({ avatar }) => {
       </div>
 
       <div className='child'>
-        <AllEvents eventList={allEvents} />
         <>
           {
             selectedOrg &&

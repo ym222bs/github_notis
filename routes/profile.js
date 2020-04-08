@@ -1,11 +1,14 @@
 require('dotenv').config()
 const crypto = require('crypto')
 const router = require('express').Router()
-const getUserToken = require('../config/passport_setup').getUserToken
-const getProfileInformation = require('../config/passport_setup').getProfileInformation
 const helper = require('../helpers/helper.js')
 const Hook = require('../model/hook.js')
+const User = require('../model/user.js')
 
+
+// io.sockets.connected[req.user.id].emit(notification)
+
+// TODO: Save token to mongoDB Use it later in all routes and helpers
 
 const authCheck = (req, res, next) => {
   !req.user ? res.redirect('/') : next()
@@ -18,22 +21,27 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/getevents', async (req, res, next) => {
-  const username = req['user'].login
-  const allEvents = await helper.getAllOrganizationEvents(username)
+  const username = req.user.login
+  const user = await User.findOne({ git_id: req.user.id })
+  const token = user.token
+  const allEvents = await helper.getAllOrganizationEvents(token, username)
   res.status(200).send({ ...allEvents })
 })
 
 
 router.get('/orgs', authCheck, async (req, res, next) => {
-  // console.log('Signed Cookies: ', req.signedCookies)
-  const orgs = await helper.getOrganizationsFromGithub(req)
+  const user = await User.findOne({ git_id: req.user.id })
+  const token = user.token
+  const orgs = await helper.getOrganizationsFromGithub(token)
   res.status(200).send({ ...orgs })
 })
 
 
 router.post('/events', authCheck, async (req, res, next) => {
   const { githubUrl } = req.body.data
-  const data = await helper.getOrganizationPropertyContent(githubUrl)
+  const user = await User.findOne({ git_id: req.user.id })
+  const token = user.token
+  const data = await helper.getOrganizationPropertyContent(token, githubUrl)
   res.status(200).send({ ...data })
 })
 
@@ -59,8 +67,8 @@ router.post('/webhook', authCheck, async (req, res, next) => {
   try {
     const { githubUrl, orgname, webhook } = req.body.data
 
-    //TODO: get this from db
-    const githubUserToken = getUserToken()
+    const user = await User.findOne({ git_id: req.user.id })
+    const token = user.token
 
     const existsingHook = await Hook.findOne({ git_id: req.user.id })
 
@@ -74,7 +82,7 @@ router.post('/webhook', authCheck, async (req, res, next) => {
         git_id: req.user.id
       })
       await newHook.save()
-      helper.createWebhook(orgname, githubUserToken)
+      helper.createWebhook(orgname, token)
     }
     res.status(201).send({
       msg: 'Webhook url saved.'
@@ -99,13 +107,13 @@ router.post('/payload', async (req, res, next) => {
       .catch(err => console.log('POST payload ', err))
 
     // Send to client
-    io.on('connection', socket => {
-      console.log('socket id: ', socket.id)
-      socket.username = req.user.login
-      socketid.push(socket.id)
-      // if (socketid[0] === socket.id) { }
-      io.socket.emit('message', typeOfEvent)
-    })
+    // io.on('connection', socket => {
+    //   console.log('socket id: ', socket.id)
+    //   socket.username = req.user.login
+    //   socketid.push(socket.id)
+    //   // if (socketid[0] === socket.id) { }
+    //   socket.emit('message', 'typeOfEvent')
+    // })
 
     const slackHookKey = hook.webhook
     const url = `https://hooks.slack.com/services/${slackHookKey}`
@@ -132,7 +140,6 @@ router.post('/settings', authCheck, async (req, res, next) => {
 
 router.put('/settings', authCheck, async (req, res, next) => {
   try {
-    const { id } = getProfileInformation()
     const { type, state, org } = req.body.data
     const findHook = await Hook.findOne({ git_id: req.user.id, organization: org })
       .catch(err => console.log('PUT settings ', err))

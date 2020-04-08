@@ -17,6 +17,11 @@ const userSchema = new mongoose.Schema({
   avatar_url: {
     type: String
   },
+  token: {
+    type: String,
+    required: true,
+    unique: true
+  },
   createdAt: {
     type: Date,
     default: Date.now

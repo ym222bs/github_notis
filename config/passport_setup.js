@@ -4,9 +4,6 @@ const User = require('../model/user.js')
 
 require('dotenv').config()
 
-let returnObject = {}
-let accessToken = ''
-
 const clientID = process.env.GITHUB_CLIENT_ID
 const clientSecret = process.env.GITHUB_CLIENT_SECRET
 
@@ -29,47 +26,55 @@ passport.use(new GitHubStrategy({
     : '/auth/github/callback'
 },
   async (token, refreshToken, profile, done) => {
-    console.log('accesstoken: ', token)
 
-    returnObject = profile._json
-    accessToken = token
     try {
-      const githubID = profile._json.id
-      const user = await User.findOne({ git_id: githubID })
-      if (user) {
-        console.log('user already exists')
-      } else {
-        const newUser = new User({
-          name: profile._json.name,
-          username: profile._json.login,
-          git_id: profile._json.id,
-          avatar_url: profile._json.avatar_url
-        })
-        const saveduser = await newUser.save()
-        // console.log(saveduser)
-      }
+      //   const githubID = profile._json.id
+      //   const user = await User.findOne({ git_id: githubID })
+      //   if (user) {
+      //     const query = {}
+      //     query.token = token
+      //     await User.updateOne({ git_id: githubID }, { $set: query })
+      //     console.log('user already exists')
+      //   } else {
+      //     const newUser = new User({
+      //       name: profile._json.name,
+      //       username: profile._json.login,
+      //       git_id: profile._json.id,
+      //       avatar_url: profile._json.avatar_url,
+      //       token: token
+      //     })
+      //     const saveduser = await newUser.save()
+      //   }
+      saveProfileToDB(token, profile._json)   // Save new profile to database
       return done(null, { ...profile._json })
     } catch (error) {
       console.log('saveProfileToDB: ', error)
     }
-
-
-
-
-    // saveProfileToDB(profile._json)   // Save new profile to database
   }
 ))
 
 
-const saveProfileToDB = async (profile) => {
-
-}
-
-
-module.exports.getProfileInformation = () => {
-  return returnObject
-}
-
-module.exports.getUserToken = () => {
-  return accessToken
+const saveProfileToDB = async (token, profile) => {
+  try {
+    const githubID = profile.id
+    const user = await User.findOne({ git_id: githubID })
+    if (user) {
+      const query = {}
+      query.token = token
+      await User.updateOne({ git_id: githubID }, { $set: query })
+      console.log('user already exists')
+    } else {
+      const newUser = new User({
+        name: profile.name,
+        username: profile.login,
+        git_id: profile.id,
+        avatar_url: profile.avatar_url,
+        token: token
+      })
+      const savedUser = await newUser.save()
+      console.log(savedUser)
+    }
+  } catch (error) {
+    console.log('saveProfileToDB: ', error)
+  }
 }

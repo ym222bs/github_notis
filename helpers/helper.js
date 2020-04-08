@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt')
 const crypto = require('crypto')
 const request = require('request-promise')
 const secureCompare = require('secure-compare')
-const getUserToken = require('../config/passport_setup').getUserToken
-const getProfileInformation = require('../config/passport_setup').getProfileInformation
 const here = require('./helper.js')
 
 
@@ -23,32 +21,28 @@ const getData = async (url, token) => {
 }
 
 
-module.exports.getAllOrganizationEvents = async (username) => {
-  const githubUserToken = getUserToken()
+module.exports.getAllOrganizationEvents = async (userToken, username) => {
   const url = `https://api.github.com/users/${username}/events`
-  return getData(url, githubUserToken)
+  return getData(url, userToken)
 }
 
 
-module.exports.getOrganizationsFromGithub = () => {
-  const githubUserToken = getUserToken()
+module.exports.getOrganizationsFromGithub = (userToken) => {
   const url = 'https://api.github.com/user/orgs'
-  return getData(url, githubUserToken)
+  return getData(url, userToken)
 }
 
 
-module.exports.getOrganizationPropertyContent = (url) => {
-  const githubUserToken = getUserToken()
-  return getData(url, githubUserToken)
+module.exports.getOrganizationPropertyContent = (userToken, url) => {
+  return getData(url, userToken)
 }
 
-
-const ngrokURL = 'http://e1b4da5c.ngrok.io/gitprofile/payload/'
-const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload/'
 
 //  ALARMING INSTRUCTIONS: ALWAYS USE '/' at the end of the webhook url, 
 //  otherwise the browser will give 302
 module.exports.createWebhook = async (nameOfOrganization, githubUserToken) => {
+  const ngrokURL = 'http://e1b4da5c.ngrok.io/gitprofile/payload/'
+  const herokuURL = 'https://github-notis.herokuapp.com/gitprofile/payload/'
   try {
     const createHookHeader = await axios({
       method: 'POST',
