@@ -1,13 +1,10 @@
 import React, { Fragment, useContext } from 'react'
 import _ from 'lodash'
 import Content from './content.js'
-import FrontEvents from './frontEvents.js'
 import UserProvider from '../../contexts/UserProvider.jsx'
 
 const loginMsg = 'You have to log in to see info! 🤖 '
 const description = 'Your notofication app for the good old GitHub..'
-
-// Ultimate userdata Data from server:
 
 
 const Profile = () => {
@@ -36,10 +33,17 @@ const Profile = () => {
           <a
             href={'/auth/logout'}
             style={{ float: "right" }}
-            className='btn btn-outline-dark'>
+            className='btn btn-outline-dark'
+          >
             Logout
 					</a>
-
+          <a
+            href={'/profile'}
+            style={{ float: 'right', marginRight: '5px' }}
+            className='btn btn-outline-info'
+          >
+            Home
+					</a>
           <div className='lead'>
             {description}
 

@@ -98,13 +98,13 @@ router.post('/payload', async (req, res, next) => {
     const hook = await Hook.findOne({ git_id: sender, organization: org })
       .catch(err => console.log('POST payload ', err))
 
-    // Or Send to client
+    // Send to client
     io.on('connection', socket => {
       console.log('socket id: ', socket.id)
+      socket.username = req.user.login
       socketid.push(socket.id)
-      console.log('HELLOOOOOOOOOOOO')
       // if (socketid[0] === socket.id) { }
-
+      io.socket.emit('message', typeOfEvent)
     })
 
     const slackHookKey = hook.webhook
