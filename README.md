@@ -51,6 +51,9 @@ Enjoy!  <https://github-notis.herokuapp.com/>
 
 4. Beautify the Slack notification message. Example here: https://api.slack.com/messaging/composing/layouts#attachments
 
+**Architectual fixes:**
+
+1. Clean JSX in content.js file.
 
 
 
