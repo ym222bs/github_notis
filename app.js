@@ -45,9 +45,9 @@ app.use((err, req, res, next) => {
   })
 })
 
-app.get('/', (req, res) => {
-  res.send('Home')
-})
+// app.get('/', (req, res) => {
+//   res.send('Home')
+// })
 
 
 if (process.env.NODE_ENV === 'production') {
