@@ -130,8 +130,6 @@ const Content = ({ avatar }) => {
   }, [])
 
 
-
-  // TODO: clean up this mess
   return (
     <Fragment>
       <div className='card'>

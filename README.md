@@ -45,7 +45,7 @@ Enjoy!  <https://github-notis.herokuapp.com/>
 
 1. Add _delete_ webhook functionality.
 
-2. Add SOCKET, mostly when updating settings and receiving new events.
+2. Add SOCKET, mostly for when updating settings and receiving new events.
 
 3. Return an Alert message if a webhook is duplicated when created. 
 
