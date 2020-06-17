@@ -3,7 +3,7 @@ import axios from 'axios'
 // import io from 'socket.io-client'
 
 import CardOfEvents from './CardOfEvents.js'
-import CardOfRepos from './cardOfRepos.js'
+import CardOfRepos from './CardOfRepos.js'
 import CreateWebhook from './CreateWebhook.js'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 import Settings from './Settings.js'
