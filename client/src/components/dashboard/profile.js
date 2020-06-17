@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from 'react'
 import _ from 'lodash'
-import Content from './content.js'
+import Content from './Content.js'
 import UserProvider from '../../contexts/UserProvider.jsx'
 
 const loginMsg = 'You have to log in to see info! 🤖 '

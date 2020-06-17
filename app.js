@@ -10,7 +10,7 @@ const allowHeaders = require('./allowHeaders.js')
 const authRoutes = require('./routes/auth.js')
 const DBconnect = require('./config/db_config.js')
 const passportSetup = require('./config/passport_setup.js') // Initiating passportStrategy (runs Automatically)
-const profileRoutes = require('./routes/profile.js')
+const profileRoutes = require('./routes/Profile.js')
 
 const app = express()
 
@@ -59,6 +59,10 @@ if (process.env.NODE_ENV === 'production') {
 const port = process.env.PORT || 8000
 
 const server = app.listen(port, () => console.log(`Hello on port ${port}.`))
+
+
+
+
 // const io = require('socket.io')(server)
 
 // io.on('connection', (socket) => {

@@ -69,10 +69,8 @@ router.post('/webhook', authCheck, async (req, res, next) => {
 
     const user = await User.findOne({ git_id: req.user.id })
     const token = user.token
-
     const existsingHook = await Hook.findOne({ git_id: req.user.id })
 
-    // Save to database if the hook does not exists yet
     if (!existsingHook) {
       const newHook = new Hook({
         url: githubUrl,

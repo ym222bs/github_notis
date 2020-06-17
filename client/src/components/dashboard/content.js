@@ -2,12 +2,11 @@ import React, { Fragment, useEffect, useContext, useState } from 'react'
 import axios from 'axios'
 // import io from 'socket.io-client'
 
-import AllEvents from './AllEvents.js'
-import CardOfEvents from './cardOfEvents.js'
+import CardOfEvents from './CardOfEvents.js'
 import CardOfRepos from './cardOfRepos.js'
-import CreateWebhook from './createWebhook.js'
+import CreateWebhook from './CreateWebhook.js'
 import OrgsProvider from '../../contexts/OrgsProvider.jsx'
-import Settings from './settings.js'
+import Settings from './Settings.js'
 
 
 const Content = ({ avatar }) => {
