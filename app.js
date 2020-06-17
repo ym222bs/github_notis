@@ -10,7 +10,7 @@ const allowHeaders = require('./allowHeaders.js')
 const authRoutes = require('./routes/auth.js')
 const DBconnect = require('./config/db_config.js')
 const passportSetup = require('./config/passport_setup.js') // Initiating passportStrategy (runs Automatically)
-const profileRoutes = require('./routes/Profile.js')
+const profileRoutes = require('./routes/profile.js')
 
 const app = express()
 
