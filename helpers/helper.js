@@ -21,13 +21,13 @@ const getData = async (url, token) => {
 }
 
 
-module.exports.getAllOrganizationEvents = async (userToken, username) => {
+module.exports.getAllOrganizationEvents = (userToken, username) => {
   const url = `https://api.github.com/users/${username}/events`
   return getData(url, userToken)
 }
 
 
-module.exports.getOrganizationsFromGithub = (userToken) => {
+module.exports.getOrganizationsFromGithub = async (userToken) => {
   const url = 'https://api.github.com/user/orgs'
   return getData(url, userToken)
 }

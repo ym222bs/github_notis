@@ -32,6 +32,7 @@ router.get('/orgs', authCheck, async (req, res, next) => {
   const user = await User.findOne({ git_id: req.user.id })
   const token = user.token
   const orgs = await helper.getOrganizationsFromGithub(token)
+  console.log(orgs)
   res.status(200).send({ ...orgs })
 })
 
@@ -41,6 +42,7 @@ router.post('/events', authCheck, async (req, res, next) => {
   const user = await User.findOne({ git_id: req.user.id })
   const token = user.token
   const data = await helper.getOrganizationPropertyContent(token, githubUrl)
+  console.log('repos: ', data)
   res.status(200).send({ ...data })
 })
 
