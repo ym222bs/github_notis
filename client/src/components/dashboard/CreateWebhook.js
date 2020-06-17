@@ -23,7 +23,6 @@ const CreateWebhook = ({ hookUrl, org }) => {
           'Content-Type': 'application/json'
         },
       })
-      setWebhook('')
       if (propertyData.status === 201) {
         setSuccess('good')
       }
@@ -59,6 +58,7 @@ const CreateWebhook = ({ hookUrl, org }) => {
               onFocus={(e) => e.target.placeholder = ''}
               onChange={e => setWebhook(e.target.value)}
               placeholder='e.g. TUCNGMA2Y/BUM57BJEA/d7LMEPXoqbsGNVX43xk6Sarq'
+              defaultValue='Reset'
               style={{ fontSize: '12px' }}>
             </input>
             <button
