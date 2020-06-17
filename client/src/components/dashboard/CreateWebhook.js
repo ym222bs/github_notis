@@ -58,7 +58,7 @@ const CreateWebhook = ({ hookUrl, org }) => {
               onFocus={(e) => e.target.placeholder = ''}
               onChange={e => setWebhook(e.target.value)}
               placeholder='e.g. TUCNGMA2Y/BUM57BJEA/d7LMEPXoqbsGNVX43xk6Sarq'
-              defaultValue='Reset'
+              defaultValue=''
               style={{ fontSize: '12px' }}>
             </input>
             <button
