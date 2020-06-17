@@ -1,4 +1,5 @@
 require('dotenv').config()
+
 const router = require('express').Router()
 const helper = require('../helpers/helper.js')
 const Hook = require('../models/hook.js')
@@ -32,7 +33,6 @@ router.get('/orgs', authCheck, async (req, res, next) => {
   const user = await User.findOne({ git_id: req.user.id })
   const token = user.token
   const orgs = await helper.getOrganizationsFromGithub(token)
-  console.log(orgs)
   res.status(200).send({ ...orgs })
 })
 
@@ -42,14 +42,18 @@ router.post('/events', authCheck, async (req, res, next) => {
   const user = await User.findOne({ git_id: req.user.id })
   const token = user.token
   const data = await helper.getOrganizationPropertyContent(token, githubUrl)
-  console.log('repos: ', data)
+  console.log('events:', data)
   res.status(200).send({ ...data })
 })
 
 
 router.post('/repos', authCheck, async (req, res, next) => {
   const { githubUrl } = req.body.data
-  const data = await helper.getOrganizationPropertyContent(githubUrl)
+  console.log('url:', githubUrl)
+  const user = await User.findOne({ git_id: req.user.id })
+  const token = user.token
+  const data = await helper.getOrganizationPropertyContent(token, githubUrl)
+  console.log('repos: ', data)
   res.status(200).send({ ...data })
 })
 
@@ -66,22 +70,26 @@ router.get('/webhook', authCheck, async (req, res, next) => {
 
 router.post('/webhook', authCheck, async (req, res, next) => {
   try {
-    const { githubUrl, orgName, webhook } = req.body.data
+    console.log(req.body.data)
+    const { githubUrl, orgname, webhook } = req.body.data
+
+    console.log(githubUrl, orgname, webhook)
 
     const user = await User.findOne({ git_id: req.user.id })
+    console.log(user)
     const token = user.token
-    const existsingHook = await Hook.findOne({ git_id: req.user.id, organization: orgName })
+    const existsingHook = await Hook.findOne({ git_id: req.user.id })
 
     if (!existsingHook) {
       const newHook = new Hook({
         url: githubUrl,
         webhook: webhook,
-        organization: orgName,
+        organization: orgname,
         username: req.user.login,
         git_id: req.user.id
       })
       await newHook.save()
-      helper.createWebhook(orgName, token)
+      helper.createWebhook(orgname, token)
     }
     res.status(201).send({
       msg: 'Webhook url saved.'

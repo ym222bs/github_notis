@@ -16,25 +16,28 @@ const getData = async (url, token) => {
     })
     return res.data
   } catch (err) {
-    console.log('getOrganizationsFromGithub: ', err)
+    console.log('getData: ', err)
   }
 }
 
 
-module.exports.getAllOrganizationEvents = (userToken, username) => {
+module.exports.getAllOrganizationEvents = async (userToken, username) => {
   const url = `https://api.github.com/users/${username}/events`
-  return getData(url, userToken)
+  const data = await getData(url, userToken)
+  return data
 }
 
 
 module.exports.getOrganizationsFromGithub = async (userToken) => {
-  const url = 'https://api.github.com/user/orgs'
-  return getData(url, userToken)
+  const url = `https://api.github.com/user/orgs`
+  const data = await getData(url, userToken)
+  return data
 }
 
 
-module.exports.getOrganizationPropertyContent = (userToken, url) => {
-  return getData(url, userToken)
+module.exports.getOrganizationPropertyContent = async (userToken, url) => {
+  const data = await getData(url, userToken)
+  return data
 }
 
 
