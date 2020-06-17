@@ -1,6 +1,6 @@
 const GitHubStrategy = require('passport-github2')
 const passport = require('passport')
-const User = require('../model/user.js')
+const User = require('../models/user.js')
 
 require('dotenv').config()
 

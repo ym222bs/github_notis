@@ -1,8 +1,7 @@
 require('dotenv').config()
-const crypto = require('crypto')
 const router = require('express').Router()
 const helper = require('../helpers/helper.js')
-const Hook = require('../models/hook.js.js')
+const Hook = require('../models/hook.js')
 const User = require('../models/user.js')
 
 

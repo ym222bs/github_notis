@@ -21,7 +21,6 @@ function App() {
       <Route path='/' exact component={Login}></Route>
     </Router>
   )
-
 }
 
 
