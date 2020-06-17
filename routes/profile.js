@@ -137,9 +137,10 @@ router.post('/payload', async (req, res, next) => {
 router.post('/settings', authCheck, async (req, res, next) => {
   try {
     const { org } = req.body.data
-
     const findHook = await Hook.find({ git_id: req.user.id, organization: org })
+
     res.send(findHook)
+
   } catch (err) {
     next(err)
   }
