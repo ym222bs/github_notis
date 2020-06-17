@@ -2,8 +2,8 @@ require('dotenv').config()
 const crypto = require('crypto')
 const router = require('express').Router()
 const helper = require('../helpers/helper.js')
-const Hook = require('../model/hook.js')
-const User = require('../model/user.js')
+const Hook = require('../models/hook.js.js')
+const User = require('../models/user.js')
 
 
 // io.sockets.connected[req.user.id].emit(notification)
@@ -65,22 +65,22 @@ router.get('/webhook', authCheck, async (req, res, next) => {
 
 router.post('/webhook', authCheck, async (req, res, next) => {
   try {
-    const { githubUrl, orgname, webhook } = req.body.data
+    const { githubUrl, orgName, webhook } = req.body.data
 
     const user = await User.findOne({ git_id: req.user.id })
     const token = user.token
-    const existsingHook = await Hook.findOne({ git_id: req.user.id })
+    const existsingHook = await Hook.findOne({ git_id: req.user.id, organization: orgName })
 
     if (!existsingHook) {
       const newHook = new Hook({
         url: githubUrl,
         webhook: webhook,
-        organization: orgname,
+        organization: orgName,
         username: req.user.login,
         git_id: req.user.id
       })
       await newHook.save()
-      helper.createWebhook(orgname, token)
+      helper.createWebhook(orgName, token)
     }
     res.status(201).send({
       msg: 'Webhook url saved.'

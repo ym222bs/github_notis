@@ -38,7 +38,7 @@ const Content = ({ avatar }) => {
       setRepo(null)
     }
   }
-  let socket
+
   if (selectedOrg) {
     var { events_url, repos_url, hooks_url } = selectedOrg
   }
