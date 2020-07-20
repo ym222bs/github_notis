@@ -4,7 +4,7 @@ import Content from './Content.js'
 import UserProvider from '../../contexts/UserProvider.jsx'
 
 const loginMsg = 'You have to log in to see info! 🤖 '
-const description = 'Your notofication app for the good old GitHub..'
+const description = 'Your notification app for the good old GitHub..'
 
 
 const Profile = () => {

@@ -4,7 +4,7 @@ import _ from 'lodash'
 const CardOfEvents = ({ events }) => {
     if (!_.isEmpty(events)) {
         const newArrayOfObjects = Object.entries(events).map((e) => e[1])
-        console.log('arrayofobjects: ', newArrayOfObjects)
+        // console.log('arrayofobjects: ', newArrayOfObjects)
 
         let count = 0
 
