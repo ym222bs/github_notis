@@ -36,7 +36,7 @@ Enjoy!  <https://github-notis.herokuapp.com/>
 
 1. Add your environment variables in a **.env** file in the **root** of the project. (Example in **env.txt**).
 2. Run `npm install` in the **root**, do the same in the **client** directory.
-3. Run `npm start` in both **root** and **client** directory. (If you use **nodemon** instead, then do `npm run dev` in root).
+3. Run `npm start` in both **root** and **client** directory. (Or use **nodemon** instead).
 
 
 
@@ -45,7 +45,7 @@ Enjoy!  <https://github-notis.herokuapp.com/>
 
 1. Add _delete_ webhook functionality.
 
-2. Add SOCKET, mostly for when updating settings and receiving new events.
+2. Add SOCKET, mostly for when updating settings and get new events.
 
 3. Return an Alert message if a webhook is duplicated when created. 
 
@@ -59,11 +59,11 @@ Enjoy!  <https://github-notis.herokuapp.com/>
 
 #### Useful information:
 
-  React has input sanitization, helps to prevent injection attacks [Doc](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks).
+  React has input sanitization, helps to prevent injection attacks, [Doc](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks).
 
-  How to create a Slack-incoming-webhook-key to reveive webhooks to your personal Slack [Doc](https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack).
+  How to create a Slack-incoming-webhook-key to receive webhooks to your personal Slack, [Doc](https://slack.com/intl/en-se/help/articles/115005265063-Incoming-Webhooks-for-Slack).
 
-  OAuth tips on security [Doc](https://auth0.com/docs/tokens/guides/store-tokens)
+  OAuth tips on security, [Doc](https://auth0.com/docs/tokens/guides/store-tokens).
 
 
 

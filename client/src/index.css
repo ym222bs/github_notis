@@ -1,7 +1,7 @@
 :root {
     --primary-gray: #ffffff;
-    --main-border-radius: 2px; 
-    --shadow: 2px 1px 4px 1px rgba(0,0,0,0.2);
+    --main-border-radius: 2px;
+    --shadow: 2px 1px 4px 1px rgba(0, 0, 0, 0.2);
 }
 
 body {
@@ -18,7 +18,7 @@ body {
     display: inline-block;
     margin-right: 2em;
     margin-top: 30px;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px, rgba(0, 0, 0, 0.22);
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px, rgba(0, 0, 0, 0.22);
     transition: all ease-in-out 0.6s;
 }
 
@@ -32,11 +32,11 @@ body {
 }
 
 .container {
-  box-shadow: var(--shadow);
+    box-shadow: var(--shadow);
 }
 
 .empty-message {
-  background-color: var(--primary-gray);
+    background-color: var(--primary-gray);
 }
 
 .gridparent {
@@ -57,10 +57,9 @@ body {
     background-color: var(--primary-gray);
     border-radius: var(--main-border-radius);
     box-shadow: var(--shadow);
-    
 }
 
-.navbar a:hover {
+.navbar button:hover {
     background-color: #17a2b8;
 }
 
@@ -79,25 +78,25 @@ body {
 }
 
 .toggle {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .toggle:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /*Inline settings and toggle*/
 .element1 {
-  font-size: 15px;
-  display:inline-block;
-  margin-right:5rem; 
-  width:20rem;
-} 
+    font-size: 15px;
+    display: inline-block;
+    margin-right: 5rem;
+    width: 20rem;
+}
 
 .element2 {
-  display:inline-block; 
-  width:5rem; 
-} 
+    display: inline-block;
+    width: 5rem;
+}
 
 .page {
     width: 50%;
@@ -138,13 +137,12 @@ body {
     border-radius: var(--main-border-radius);
 }
 .content {
-  background-color: #EEEEEE;
-  padding: 20px 10px;
-  border-bottom-left-radius: var(--main-border-radius);
-  border-bottom-right-radius: var(--main-border-radius);
+    background-color: #eeeeee;
+    padding: 20px 10px;
+    border-bottom-left-radius: var(--main-border-radius);
+    border-bottom-right-radius: var(--main-border-radius);
 }
 /*END: Mac window style*/
-
 
 img {
     border-top-left-radius: var(--main-border-radius);

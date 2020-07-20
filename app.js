@@ -17,17 +17,16 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 const secret = process.env.COOKIE_SECRET
-app.use(cookieSession({
-  maxAge: 24 * 60 * 60 * 1000,
-  keys: [secret]
-}))
+app.use(
+    cookieSession({
+        maxAge: 24 * 60 * 60 * 1000,
+        keys: [secret],
+    })
+)
 
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(allowHeaders)
-
-
-
 
 app.use(cors())
 
@@ -37,34 +36,27 @@ DBconnect()
 app.use('/auth', authRoutes)
 app.use('/gitprofile', profileRoutes)
 
-
-app.use((err, req, res, next) => {
-  res.status(err.status || 500)
-  res.json({
-    error: {
-      message: err.message
-    }
-  })
+app.use((error, req, res, next) => {
+    res.status(error.status || 500)
+    res.json({
+        error: {
+            message: error.message,
+        },
+    })
 })
 
-
-
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  })
+    app.use(express.static('client/build'))
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
 }
 
 const port = process.env.PORT || 8000
 
 const server = app.listen(port, () => console.log(`Hello on port ${port}.`))
 
-
-
-
 // const io = require('socket.io')(server)
-
 // io.on('connection', (socket) => {
 //   console.log('Connected')
 
@@ -72,5 +64,4 @@ const server = app.listen(port, () => console.log(`Hello on port ${port}.`))
 //     console.log('Disconnected')
 //   })
 // })
-
 // app.set('socketio', io)
