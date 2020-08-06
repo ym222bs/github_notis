@@ -2,7 +2,7 @@ import React from 'react'
 import githubIcon from '../images/github.png'
 
 const github = {
-    name: 'Github',
+    name: 'Login with Github',
     img: githubIcon,
     href: '/auth/github',
     color: '#24292e',
@@ -11,17 +11,21 @@ const github = {
 const Home = () => {
     return (
         <div>
-            <div className='page'>
-                <p className='page-title' style={{ textAlign: 'left' }}>
-                    + GithubNotis
-                </p>
-                <div
-                    className='page-info jumbotron'
-                    style={{ padding: '5rem' }}
+            <div className='page jumbotron'>
+                <p
+                    className='page-title'
+                    style={{ textAlign: 'left', fontWeight: 'bold' }}
                 >
+                    <i className='far fa-bell'></i> GithubNotis
+                </p>
+                <div className='page-info ' style={{ padding: '5rem' }}>
                     <div>
                         <p className='lead' style={{ fontWeight: 'bold' }}>
-                            Keep track, get notified !
+                            A notification hub for Github users{' '}
+                            <i
+                                className='fab fa-github-alt'
+                                style={{ fontSize: '30px' }}
+                            ></i>
                         </p>
                         <p>
                             GithubNotis lets you customize what type of event or
@@ -34,7 +38,7 @@ const Home = () => {
                             <strong>username: just-check1ng </strong> and
                             <br />
                             <strong>password: xyz123!"#</strong> to login with a
-                            test account and check it out.
+                            test account to check it out.
                         </p>
                     </div>
 
