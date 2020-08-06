@@ -1,6 +1,6 @@
 :root {
     --primary-gray: #ffffff;
-    --main-border-radius: 2px;
+    --main-border-radius: 3px;
     --shadow: 2px 1px 4px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -13,13 +13,13 @@ body {
 }
 
 .card-g {
-    background: white;
-    border-radius: var(--main-border-radius);
+    background: #24292e;
+    border-radius: 25px;
     display: inline-block;
-    margin-right: 2em;
-    margin-top: 30px;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px, rgba(0, 0, 0, 0.22);
-    transition: all ease-in-out 0.6s;
+    -webkit-box-shadow: 10px 9px 11px -1px rgba(0, 0, 0, 0.57);
+    -moz-box-shadow: 10px 9px 11px -1px rgba(0, 0, 0, 0.57);
+    box-shadow: 10px 9px 11px -1px rgba(0, 0, 0, 0.57);
+    transition: all ease-in-out 0.4s;
 }
 
 .card-g:hover {
@@ -27,8 +27,49 @@ body {
 }
 
 .jumbotron {
-    background-color: #f8f8f8;
+    /* background-color: #f8f8f8; */
+    background: rgba(255, 255, 255, 1);
+    background: -moz-linear-gradient(
+        top,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(246, 246, 246, 1) 47%,
+        rgba(237, 237, 237, 1) 100%
+    );
+    background: -webkit-gradient(
+        left top,
+        left bottom,
+        color-stop(0%, rgba(255, 255, 255, 1)),
+        color-stop(47%, rgba(246, 246, 246, 1)),
+        color-stop(100%, rgba(237, 237, 237, 1))
+    );
+    background: -webkit-linear-gradient(
+        top,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(246, 246, 246, 1) 47%,
+        rgba(237, 237, 237, 1) 100%
+    );
+    background: -o-linear-gradient(
+        top,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(246, 246, 246, 1) 47%,
+        rgba(237, 237, 237, 1) 100%
+    );
+    background: -ms-linear-gradient(
+        top,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(246, 246, 246, 1) 47%,
+        rgba(237, 237, 237, 1) 100%
+    );
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(246, 246, 246, 1) 47%,
+        rgba(237, 237, 237, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0 );
+
     border-radius: var(--main-border-radius);
+    box-shadow: var(--shadow);
 }
 
 .container {
@@ -66,7 +107,6 @@ body {
 .card {
     font-size: small;
     background: white;
-    border-radius: 2px;
     display: inline-block;
     margin-right: 2em;
     border-top-left-radius: var(--main-border-radius);
@@ -108,46 +148,15 @@ body {
     font-size: 35px;
 }
 
-/*Mac window style*/
-.window {
-    width: 80%;
-    margin: 0 auto;
-    background: white;
-    border-radius: var(--main-border-radius);
+.page-info {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 2em;
 }
-.title-bar {
-    background-color: white;
-    border-top-right-radius: var(--main-border-radius);
-    border-top-left-radius: var(--main-border-radius);
-    color: #4d494d;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-.buttons {
-    float: left;
-    padding-left: 8px;
-    padding-top: 3px;
-    line-height: 0;
-}
-.mac-btn {
-    font-size: 9px;
-    width: 11px;
-    height: 11px;
-    display: inline-block;
-    border-radius: var(--main-border-radius);
-}
-.content {
-    background-color: #eeeeee;
-    padding: 20px 10px;
-    border-bottom-left-radius: var(--main-border-radius);
-    border-bottom-right-radius: var(--main-border-radius);
-}
-/*END: Mac window style*/
 
-img {
+.avatar {
     border-top-left-radius: var(--main-border-radius);
     border-top-right-radius: var(--main-border-radius);
-    width: 18rem;
 }
 
 .tag {
