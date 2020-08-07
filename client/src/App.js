@@ -7,21 +7,23 @@ import OrgsProvider from './contexts/OrgsProvider.jsx'
 import Profile from './components/dashboard/Profile.js'
 import UserProvider from './contexts/UserProvider.jsx'
 
-
 function App() {
-  return (
-    <Router history={history}>
-      <UserProvider>
-        <EventsProvider>
-          <OrgsProvider>
-            <Route path='/profile' exact component={Profile}></Route>
-          </OrgsProvider>
-        </EventsProvider>
-      </UserProvider>
-      <Route path='/' exact component={Login}></Route>
-    </Router>
-  )
+    return (
+        <Router history={history}>
+            <Route path='/' exact component={Login}></Route>
+            <UserProvider>
+                <EventsProvider>
+                    <OrgsProvider>
+                        <Route
+                            path='/profile'
+                            exact
+                            component={Profile}
+                        ></Route>
+                    </OrgsProvider>
+                </EventsProvider>
+            </UserProvider>
+        </Router>
+    )
 }
-
 
 export default App

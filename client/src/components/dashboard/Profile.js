@@ -1,15 +1,17 @@
-import React, { Fragment, useContext } from 'react'
+import React, { useContext } from 'react'
 import _ from 'lodash'
 import Content from './Content.js'
 import UserProvider from '../../contexts/UserProvider.jsx'
 
-const loginMsg = 'You have to login to see your info! 🤖 '
-const description = 'Your notification app for the good old GitHub..'
+const loginMsg = 'You have to log in to see info! 🤖 '
+const description = 'Your notofication app for the good old GitHub..'
 
 const Profile = () => {
     const userData = useContext(UserProvider.context)
     const { avatar_url } = userData
-    const text = _.isEmpty(userData) ? loginMsg : 'Explore Your Orgs 😎 💬 '
+    const text = _.isEmpty(userData)
+        ? loginMsg
+        : 'Explore Your Organizations 😎 💬 '
     const image = !_.isEmpty(userData) ? avatar_url : 'Image'
 
     return (
@@ -25,7 +27,7 @@ const Profile = () => {
                 </a>
             )}
             {!_.isEmpty(userData) && (
-                <Fragment>
+                <>
                     <a
                         href={'/auth/logout'}
                         style={{ float: 'right' }}
@@ -42,6 +44,7 @@ const Profile = () => {
                     </a>
                     <div className='lead'>
                         {description}
+
                         <hr
                             className='my-4'
                             style={{
@@ -49,13 +52,14 @@ const Profile = () => {
                                 height: 2,
                             }}
                         />
+
                         <div className='gridparent'>
                             <Content avatar={image} />
                         </div>
                     </div>
 
                     <div style={{ marginBottom: 20 }} />
-                </Fragment>
+                </>
             )}
         </div>
     )
