@@ -40,23 +40,6 @@ Enjoy!  <https://github-notis.herokuapp.com/>
 
 
 
-### Future addings/fixes
- **Functionality related stuff to add in the nearest future:**
-
-1. Add _delete_ webhook functionality.
-
-2. Add SOCKET, mostly for when updating settings and get new events.
-
-3. Return an Alert message if a webhook is duplicated when created. 
-
-4. Beautify the Slack notification message. Example here: https://api.slack.com/messaging/composing/layouts#attachments
-
-**Architectual fixes:**
-
-1. Clean JSX in content.js file.
-
-
-
 #### Useful information:
 
   React has input sanitization, helps to prevent injection attacks, [Doc](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks).
