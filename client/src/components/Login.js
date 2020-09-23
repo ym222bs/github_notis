@@ -10,7 +10,7 @@ const github = {
 
 const Home = () => {
     return (
-        <div>
+        <>
             <div className='page jumbotron'>
                 <p
                     className='page-title'
@@ -45,9 +45,6 @@ const Home = () => {
                     <div
                         className='card-g'
                         onClick={() => (window.location = github.href)}
-                        style={{
-                            border: '1xp solid',
-                        }}
                     >
                         <div>
                             <p
@@ -70,7 +67,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
