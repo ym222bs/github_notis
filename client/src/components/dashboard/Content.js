@@ -9,8 +9,7 @@ import OrgsProvider from '../../contexts/OrgsProvider.jsx'
 import Settings from './Settings.js'
 
 const Content = ({ avatar }) => {
-    const userOrganizations = useContext(OrgsProvider.context)
-    console.log('userorgs context: ', userOrganizations)
+    const userOrganizations = useContext(OrgsProvider?.context)
 
     const [selectedOrg, setSelectedOrg] = useState(null)
     const [githubUrl, setGithubUrl] = useState(null)
@@ -136,34 +135,40 @@ const Content = ({ avatar }) => {
                 />
                 <div className='card-header'>Organizations:</div>
                 <ul className='list-group list-group-flush' key='orgs-list'>
-                    {Object.keys(userOrganizations).map((key) => {
-                        return (
-                            <li
-                                onClick={cleanValue}
-                                className='list-group-item'
-                                key={userOrganizations[key].login}
-                            >
-                                <a
-                                    href='#orgs'
-                                    className='card-link'
+                    {userOrganizations &&
+                        Object.keys(userOrganizations).map((key) => {
+                            return (
+                                <li
+                                    onClick={cleanValue}
+                                    className='list-group-item'
                                     key={userOrganizations[key].login}
-                                    onClick={() =>
-                                        setSelectedOrg(userOrganizations[key])
-                                    }
                                 >
-                                    <img
-                                        alt='organization avatar'
-                                        style={{
-                                            width: '2rem',
-                                            marginRight: '5px',
-                                        }}
-                                        src={userOrganizations[key].avatar_url}
-                                    />
-                                    {userOrganizations[key].login}
-                                </a>
-                            </li>
-                        )
-                    })}
+                                    <a
+                                        href='#orgs'
+                                        className='card-link'
+                                        key={userOrganizations[key].login}
+                                        onClick={() =>
+                                            setSelectedOrg(
+                                                userOrganizations[key]
+                                            )
+                                        }
+                                    >
+                                        <img
+                                            alt='organization avatar'
+                                            style={{
+                                                width: '2rem',
+                                                marginRight: '5px',
+                                            }}
+                                            src={
+                                                userOrganizations[key]
+                                                    .avatar_url
+                                            }
+                                        />
+                                        {userOrganizations[key].login}
+                                    </a>
+                                </li>
+                            )
+                        })}
                 </ul>
             </div>
             <div className='child'>
