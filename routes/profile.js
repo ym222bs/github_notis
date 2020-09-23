@@ -19,9 +19,9 @@ router.get('/', (req, res) => {
 router.get('/getevents', async (req, res, next) => {
     try {
         const user = await User.findOne({ git_id: req.user.id })
-        const token = user.token
+        // const token = user.token
         const allEvents = await helper.getAllOrganizationEvents(
-            token,
+            user.token,
             req.user.login
         )
         res.status(200).send({ ...allEvents })
@@ -33,8 +33,8 @@ router.get('/getevents', async (req, res, next) => {
 router.get('/orgs', authCheck, async (req, res, next) => {
     try {
         const user = await User.findOne({ git_id: req.user.id })
-        const token = user.token
-        const orgs = await helper.getOrganizationsFromGithub(token)
+        // const token = user.token
+        const orgs = await helper.getOrganizationsFromGithub(user.token)
         res.status(200).send({ ...orgs })
     } catch (err) {
         next(err)
@@ -43,6 +43,7 @@ router.get('/orgs', authCheck, async (req, res, next) => {
 
 router.post('/events', authCheck, async (req, res, next) => {
     try {
+        console.log('korv')
         const { githubUrl } = req.body.data
         const user = await User.findOne({ git_id: req.user.id })
         const token = user.token

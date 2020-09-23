@@ -10,7 +10,6 @@ import Settings from './Settings.js'
 
 const Content = ({ avatar }) => {
     const userOrganizations = useContext(OrgsProvider?.context)
-
     const [selectedOrg, setSelectedOrg] = useState(null)
     const [githubUrl, setGithubUrl] = useState(null)
     const [apiUrl, setApiUrl] = useState(null)
@@ -21,9 +20,7 @@ const Content = ({ avatar }) => {
     const [repo, setRepo] = useState(null)
     const [controller, setController] = useState(null)
 
-    // EVERY time klick on new organization:
     const cleanValue = () => {
-        console.log('clean value')
         if (
             event !== null ||
             repo !== null ||
@@ -74,8 +71,8 @@ const Content = ({ avatar }) => {
             const url = `gitprofile/${apiUrl}`
             const propertyData = await axios.post(url, {
                 data: {
-                    githubUrl: githubUrl,
-                    orgname: selectedOrg ? selectedOrg.login : '/NO',
+                    githubUrl,
+                    orgname: selectedOrg?.login,
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,7 +83,7 @@ const Content = ({ avatar }) => {
                 : await setRepo(propertyData.data)
         }
         fetchData()
-    }, [githubUrl])
+    }, [githubUrl, apiUrl, selectedOrg])
 
     const fetchSettings = async () => {
         const url = '/gitprofile/settings'
