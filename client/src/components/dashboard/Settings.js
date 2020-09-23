@@ -74,8 +74,8 @@ const SettingsComponent = ({ organization, settingsList }) => {
             style={{ backgroundColor: 'white', padding: '20px' }}
         >
             <h5 onClick={() => toggle('push')}>
-                <p className='element1'>Get new 'Push' events?</p>
-                <div className='toggle element2'>
+                <p className='event-type'>Get new 'Push' events?</p>
+                <div className='toggle thumb'>
                     {push ? (
                         <span role='img' aria-label='thumb'>
                             Yes 👍
@@ -88,8 +88,8 @@ const SettingsComponent = ({ organization, settingsList }) => {
                 </div>
             </h5>
             <h5 onClick={() => toggle('repo')}>
-                <p className='element1'>Get new 'Reposetory' events?</p>
-                <div className='toggle element2'>
+                <p className='event-type'>Get new 'Reposetory' events?</p>
+                <div className='toggle thumb'>
                     {repo ? (
                         <span role='img' aria-label='thumb'>
                             Yes 👍
@@ -102,8 +102,8 @@ const SettingsComponent = ({ organization, settingsList }) => {
                 </div>
             </h5>
             <h5 onClick={() => toggle('issue')}>
-                <p className='element1'>Get 'Issue' events?</p>
-                <div className='toggle element2'>
+                <p className='event-type'>Get 'Issue' events?</p>
+                <div className='toggle thumb'>
                     {issue ? (
                         <span role='img' aria-label='thumb'>
                             Yes 👍
@@ -116,8 +116,8 @@ const SettingsComponent = ({ organization, settingsList }) => {
                 </div>
             </h5>
             <h5 onClick={() => toggle('comment')}>
-                <p className='element1'>Get 'Issue comment' events?</p>
-                <div className='toggle element2'>
+                <p className='event-type'>Get 'Issue comment' events?</p>
+                <div className='toggle thumb'>
                     {comment ? (
                         <span role='img' aria-label='thumb'>
                             Yes 👍

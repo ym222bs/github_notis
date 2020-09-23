@@ -13,7 +13,12 @@ body {
 }
 
 .card-g {
-    background: #24292e;
+    /* background: #24292e; */
+    cursor: pointer;
+    background: linear-gradient(180deg, #24292e, #24292e);
+    border: 2px solid #bdbdbd;
+    border-radius: 10px;
+
     border-radius: 25px;
     display: inline-block;
     -webkit-box-shadow: 10px 9px 11px -1px rgba(0, 0, 0, 0.57);
@@ -126,14 +131,14 @@ body {
 }
 
 /*Inline settings and toggle*/
-.element1 {
+.event-type {
     font-size: 15px;
     display: inline-block;
     margin-right: 5rem;
     width: 20rem;
 }
 
-.element2 {
+.thumb {
     display: inline-block;
     width: 5rem;
 }

@@ -236,15 +236,4 @@ const Content = ({ avatar }) => {
     )
 }
 
-// future feature
-const WebhooksList = ({ webhooksList }) => {
-    console.log(webhooksList)
-    return (
-        <div>
-            Your current registered webhooks:
-            {/* {webhooksList.} */}
-        </div>
-    )
-}
-
 export default Content
