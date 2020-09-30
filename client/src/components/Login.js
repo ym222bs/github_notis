@@ -4,7 +4,10 @@ import githubIcon from '../images/github.png'
 const github = {
   name: ['Login with Github', 'Register a Github Account'],
   img: githubIcon,
-  href: '/auth/github',
+  href: [
+    '/auth/github',
+    'https://github.com/join?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home',
+  ],
   color: '#24292e',
 }
 
@@ -39,7 +42,7 @@ const Home = () => {
           <div>
             <div
               className='card-g'
-              onClick={() => (window.location = github.href)}
+              onClick={() => (window.location = github.href[0])}
             >
               <div>
                 <p>{github.name[0]}</p>
@@ -47,7 +50,7 @@ const Home = () => {
             </div>
             <div
               className='card-g'
-              onClick={() => (window.location = github.href)}
+              onClick={() => window.open(github.href[1], '_blank')}
             >
               <div>
                 <p>{github.name[1]}</p>
