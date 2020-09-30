@@ -154,15 +154,15 @@ body {
   margin-top: 5%;
 }
 
-.page-title {
-  font-weight: 400;
-  font-size: 35px;
-}
-
 .page-info {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 2em;
+}
+
+.page-title {
+  font-weight: 400;
+  font-size: 35px;
 }
 
 .avatar {
@@ -178,4 +178,13 @@ body {
   border-radius: var(--main-border-radius);
   margin-right: 10px;
   margin-bottom: 10px;
+}
+@media screen and (max-width: 900px) {
+  .jumbotron {
+    background: rgba(255, 255, 255, 0.918) !important;
+    box-shadow: none;
+  }
+  .page-info {
+    display: block;
+  }
 }
