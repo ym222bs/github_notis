@@ -9,7 +9,7 @@ const UserProvider = ({ children }) => {
             .then((res) => res.json())
             .then((res) => setUser(res))
             .catch((err) => {
-                console.log('UserProvider: ', err)
+                console.error(err)
             })
     }, [])
 

@@ -9,12 +9,12 @@ const connectToDatabase = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
     })
     console.log('connected to db')
   } catch (err) {
-    console.log(err.message)
+      console.log(err.message)
   }
 }
 
-module.exports = connectToDatabase 
+module.exports = connectToDatabase

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import _ from 'lodash'
-import Content from './Content.js'
-import UserProvider from '../../contexts/UserProvider.jsx'
+import Content from './Content'
+import UserProvider from '../../contexts/UserProvider'
 
 const loginMsg = 'You have to log in to see info! 🤖 '
 const description = 'Your notofication app for the good old GitHub..'
