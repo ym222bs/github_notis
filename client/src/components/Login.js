@@ -1,13 +1,14 @@
 import React from 'react'
 import githubIcon from '../images/github.png'
 
+const githubSignupUrl =
+  'https://github.com/join?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home'
+const localRoute = '/auth/github'
+
 const github = {
   name: ['Login with Github', 'Register a Github Account'],
   img: githubIcon,
-  href: [
-    '/auth/github',
-    'https://github.com/join?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home',
-  ],
+  href: [localRoute, githubSignupUrl],
   color: '#24292e',
 }
 
