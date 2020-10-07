@@ -124,6 +124,10 @@ body {
 }
 
 .page-title {
+  /* background: linear-gradient(to right, #77a1d3 0%, #79cbca 51%, #77a1d3 100%); */
+  background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: 400;
   font-size: 35px;
 }
