@@ -34,10 +34,10 @@ const Home = () => {
             </p>
             <p>
               You can either login with your Github account OR use <br />
-              <strong>username: just-check1ng </strong> and
+              username:<strong> notis-hub </strong> and
               <br />
-              <strong>password: xyz123!"#</strong> to login with a test account
-              to check it out.
+              password:<strong> just-testing0</strong> to login with a test
+              account to check it out.
             </p>
           </div>
           <div>
