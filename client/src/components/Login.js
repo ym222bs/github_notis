@@ -34,9 +34,9 @@ const Home = () => {
             </p>
             <p>
               You can either login with your Github account OR use <br />
-              username:<strong> notis-hub </strong> and
+              Username: <strong>notis-hub</strong> and
               <br />
-              password:<strong> just-testing0</strong> to login with a test
+              Password: <strong>just-testing0</strong> to login with a test
               account to check it out.
             </p>
           </div>
