@@ -16,14 +16,15 @@ body {
 .card-g {
   background-image: linear-gradient(
     to right,
-    #757f9a 0%,
-    #d7dde8 51%,
-    #757f9a 100%
+    #77a1d3 0%,
+    #79cbca 51%,
+    #77a1d3 100%
   );
+  text-align: center;
+
   margin: 10px;
   padding: 7px 20px;
-  text-align: center;
-  transition: 0.5s;
+  transition: 1s;
   background-size: 200% auto;
   color: white;
   box-shadow: var(--shadow);
