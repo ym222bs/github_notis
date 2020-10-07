@@ -30,6 +30,7 @@ body {
   box-shadow: var(--shadow);
   border-radius: 10px;
   display: block;
+  cursor: pointer;
 }
 
 .card-g:hover {
