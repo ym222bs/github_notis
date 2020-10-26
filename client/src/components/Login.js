@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   .btn-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
   }
   .btn-home {
     background-image: linear-gradient(
@@ -54,8 +54,10 @@ const Wrapper = styled.div`
     color: white;
     box-shadow: var(--shadow);
     border-radius: 3px;
-    display: block;
     cursor: pointer;
+    padding: 13px 20px;
+    font-size: 13px;
+    width: 100%;
   }
 
   .btn-home:hover {
@@ -69,7 +71,7 @@ const githubSignupUrl =
 const localRoute = '/auth/github'
 
 const github = {
-  name: ['Login with Github', 'Register a Github Account'],
+  name: ['Login with Github', 'Register a Github account'],
   img: githubIcon,
   href: [localRoute, githubSignupUrl],
   color: '#24292e',
