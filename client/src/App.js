@@ -9,19 +9,21 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <div className='page-container'>
-      <div className='content-wrap'>
-        <Router history={history}>
-          <Route path='/' exact component={Login}></Route>
-          <UserProvider>
-            <OrgsProvider>
-              <Route path='/profile' exact component={Profile}></Route>
-            </OrgsProvider>
-          </UserProvider>
-        </Router>
+    <>
+      <div className='page-container'>
+        <div className='content-wrap'>
+          <Router history={history}>
+            <Route path='/' exact component={Login}></Route>
+            <UserProvider>
+              <OrgsProvider>
+                <Route path='/profile' exact component={Profile}></Route>
+              </OrgsProvider>
+            </UserProvider>
+          </Router>
+        </div>
       </div>
       <Footer />
-    </div>
+    </>
   )
 }
 

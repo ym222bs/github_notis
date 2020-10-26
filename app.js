@@ -55,13 +55,3 @@ if (process.env.NODE_ENV === 'production') {
 const port = process.env.PORT || 8000
 
 const server = app.listen(port, () => console.log(`Hello on port ${port}.`))
-
-// const io = require('socket.io')(server)
-// io.on('connection', (socket) => {
-//   console.log('Connected')
-
-//   socket.on('disconnect', () => {
-//     console.log('Disconnected')
-//   })
-// })
-// app.set('socketio', io)

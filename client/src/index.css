@@ -1,49 +1,16 @@
 :root {
   --primary-gray: #ffffff;
   --main-border-radius: 3px;
-  --shadow: 2px 1px 4px 1px rgba(0, 0, 0, 0.2);
+  --shadow: 2px 1px 4px 1px rgba(0, 0, 0, 0.3);
 }
 
 body {
   font-family: 'Nunito';
   -webkit-font-smoothing: antialiased;
   color: #292f33;
-  background-image: url('./images/kladd.jpg');
+  background-image: url('./images/lightmarble.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.card-g {
-  background-image: linear-gradient(
-    to right,
-    #77a1d3 0%,
-    #79cbca 51%,
-    #77a1d3 100%
-  );
-  text-align: center;
-
-  margin: 10px;
-  padding: 7px 20px;
-  transition: 1s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: var(--shadow);
-  border-radius: 10px;
-  display: block;
-  cursor: pointer;
-}
-
-.card-g:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-}
-
-.jumbotron {
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-
-  border-radius: var(--main-border-radius);
-  box-shadow: var(--shadow);
 }
 
 .container {
@@ -112,28 +79,6 @@ body {
   width: 5rem;
 }
 
-.page {
-  width: 50%;
-  margin: 0 auto;
-  margin-top: 5%;
-}
-
-.page-info {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 2em;
-}
-
-.page-title {
-  /* background: linear-gradient(to right, #77a1d3 0%, #79cbca 51%, #77a1d3 100%); */
-  background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  /* font-weight: 800; */
-  font-size: 40px;
-  text-shadow: 2px 2px 0px rgba(57, 84, 207, 0.171);
-}
-
 .avatar {
   border-top-left-radius: var(--main-border-radius);
   border-top-right-radius: var(--main-border-radius);
@@ -148,7 +93,7 @@ body {
   margin-right: 10px;
   margin-bottom: 10px;
 }
-.page-container {
+.home-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -165,14 +110,14 @@ body {
 }
 @media screen and (max-width: 900px) {
   .jumbotron {
-    position: fixed;
+    /* position: fixed; */
     background: rgba(255, 255, 255, 0.918) !important;
     box-shadow: none;
   }
-  .page {
+  .home {
     width: 100%;
   }
-  .page-info {
+  .home-info {
     display: block;
   }
 }
