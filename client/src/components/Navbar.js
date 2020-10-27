@@ -64,7 +64,7 @@ const Wrapper = styled.div`
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 40px;
+    font-size: 31px;
     text-shadow: 2px 2px 0px rgba(57, 84, 207, 0.171);
   }
 `
@@ -72,7 +72,6 @@ const Navbar = () => {
   return (
     <Wrapper>
       <div className='nav-login'>
-        {/* <div className='logo'>GithubNotis</div> */}
         <p className='logo page-title'>
           <i className='far fa-bell'></i> GithubNotis
         </p>
