@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   .jumbotron {
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    /* background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); */
     border-radius: var(--main-border-radius);
     box-shadow: var(--shadow);
   }

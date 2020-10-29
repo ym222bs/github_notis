@@ -27,7 +27,11 @@ body {
   box-shadow: var(--shadow);
 }
 .jumbotron {
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  background-image: linear-gradient(
+    120deg,
+    #fdfbfb 0%,
+    #ebedee 100%
+  ) !important;
 }
 
 .empty-message {
