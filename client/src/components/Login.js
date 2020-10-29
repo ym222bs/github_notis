@@ -17,7 +17,7 @@ const Wrapper = styled.div`
     margin-top: 5%;
   }
   .home-title {
-    background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+    background: linear-ent(to right, #30cfd0 0%, #330867 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

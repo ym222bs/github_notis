@@ -26,6 +26,9 @@ body {
 .container {
   box-shadow: var(--shadow);
 }
+.jumbotron {
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
 
 .empty-message {
   background-color: var(--primary-gray);
@@ -125,7 +128,6 @@ body {
 @media screen and (max-width: 900px) {
   .jumbotron {
     /* position: fixed; */
-    background: rgba(255, 255, 255, 0.918) !important;
     box-shadow: none;
   }
   .home .jumbotron {
