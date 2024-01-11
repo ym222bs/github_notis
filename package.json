@@ -4,7 +4,7 @@
   "description": "Testing to maybe go expressJS on this B!",
   "main": "app.js",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^1.6.5",
     "bcrypt": "^4.0.1",
     "concurrently": "^5.1.0",
     "cookie-session": "^1.4.0",
